@@ -16,23 +16,27 @@ public class PlayerCameraController : MonoBehaviour
     {
         //MOBA style camera
 
-        //Move the actual position of the camera if the player touches the edges of the screen
-        if(Input.mousePosition.y >= Screen.height - borderThickness)
+        //Check if the application is actually focused, so you can't Alt+Tab and still move the camera 
+        if (Application.isFocused)
         {
-            transform.Translate(Vector3.forward * Time.deltaTime * moveSpeed, Space.World);
-        }
-        if (Input.mousePosition.y <= 0 + borderThickness)
-        {
-            transform.Translate(Vector3.back * Time.deltaTime * moveSpeed, Space.World);
-        }
-        if (Input.mousePosition.x >= Screen.width - borderThickness)
-        {
-            transform.Translate(Vector3.right * Time.deltaTime * moveSpeed, Space.World);
-        }
-        if (Input.mousePosition.x <= 0 + borderThickness)
-        {
-            transform.Translate(Vector3.left * Time.deltaTime * moveSpeed, Space.World);
-        }
+            //Move the actual position of the camera if the player touches the edges of the screen
+            if (Input.mousePosition.y >= Screen.height - borderThickness)
+            {
+                transform.Translate(Vector3.forward * Time.deltaTime * moveSpeed, Space.World);
+            }
+            if (Input.mousePosition.y <= 0 + borderThickness)
+            {
+                transform.Translate(Vector3.back * Time.deltaTime * moveSpeed, Space.World);
+            }
+            if (Input.mousePosition.x >= Screen.width - borderThickness)
+            {
+                transform.Translate(Vector3.right * Time.deltaTime * moveSpeed, Space.World);
+            }
+            if (Input.mousePosition.x <= 0 + borderThickness)
+            {
+                transform.Translate(Vector3.left * Time.deltaTime * moveSpeed, Space.World);
+            }
 
+        }
     }
 }
