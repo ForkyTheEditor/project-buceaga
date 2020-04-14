@@ -3,10 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Networking;
 
+[RequireComponent(typeof(NetworkIdentity))]
 //Forces the GameObject to attach a NavMeshAgent component
 [RequireComponent(typeof(NavMeshAgent))]
-public class PlayerController : MonoBehaviour
+public class PlayerController : NetworkBehaviour
 {
     //An reference to the main camera 
     Camera cam;
@@ -24,6 +26,14 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Check if the client running this code has authority over this gameobject
+        if (!hasAuthority)
+        {
+            //You do not have authority. Get the hell out of here
+            return;
+        }
+
+
         //If the player right clicks somewhere on the map, start moving towards that point
         if (Input.GetMouseButtonDown(1))
         {
