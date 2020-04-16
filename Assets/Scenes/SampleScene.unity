@@ -226,9 +226,10 @@ GameObject:
   - component: {fileID: 30486698}
   - component: {fileID: 30486697}
   - component: {fileID: 30486696}
-  m_Layer: 0
+  - component: {fileID: 30486699}
+  m_Layer: 8
   m_Name: Resource Vein
-  m_TagString: Untagged
+  m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
@@ -307,6 +308,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 30486694}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &30486699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 30486694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 442ddc224e38e244e8066358e4c2d280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _resourceType: 0
 --- !u!1 &37335097
 GameObject:
   m_ObjectHideFlags: 0
@@ -319,9 +333,10 @@ GameObject:
   - component: {fileID: 37335101}
   - component: {fileID: 37335100}
   - component: {fileID: 37335099}
-  m_Layer: 0
+  - component: {fileID: 37335102}
+  m_Layer: 8
   m_Name: Resource Vein
-  m_TagString: Untagged
+  m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
@@ -400,6 +415,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 37335097}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &37335102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 37335097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 442ddc224e38e244e8066358e4c2d280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _resourceType: 0
 --- !u!1 &49209735
 GameObject:
   m_ObjectHideFlags: 0
@@ -505,9 +533,10 @@ GameObject:
   - component: {fileID: 112818568}
   - component: {fileID: 112818567}
   - component: {fileID: 112818566}
-  m_Layer: 0
+  - component: {fileID: 112818569}
+  m_Layer: 8
   m_Name: Resource Vein
-  m_TagString: Untagged
+  m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
@@ -586,6 +615,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 112818564}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &112818569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 112818564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 442ddc224e38e244e8066358e4c2d280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _resourceType: 0
 --- !u!1 &115084948
 GameObject:
   m_ObjectHideFlags: 0
@@ -598,9 +640,10 @@ GameObject:
   - component: {fileID: 115084952}
   - component: {fileID: 115084951}
   - component: {fileID: 115084950}
-  m_Layer: 0
+  - component: {fileID: 115084953}
+  m_Layer: 8
   m_Name: Resource Vein
-  m_TagString: Untagged
+  m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
@@ -679,6 +722,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 115084948}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &115084953
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 115084948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 442ddc224e38e244e8066358e4c2d280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _resourceType: 0
 --- !u!1 &122224719
 GameObject:
   m_ObjectHideFlags: 0
@@ -691,9 +747,10 @@ GameObject:
   - component: {fileID: 122224723}
   - component: {fileID: 122224722}
   - component: {fileID: 122224721}
-  m_Layer: 0
+  - component: {fileID: 122224724}
+  m_Layer: 8
   m_Name: Resource Vein
-  m_TagString: Untagged
+  m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
@@ -772,6 +829,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 122224719}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &122224724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 122224719}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 442ddc224e38e244e8066358e4c2d280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _resourceType: 0
 --- !u!1 &133518032
 GameObject:
   m_ObjectHideFlags: 0
@@ -784,9 +854,10 @@ GameObject:
   - component: {fileID: 133518036}
   - component: {fileID: 133518035}
   - component: {fileID: 133518034}
-  m_Layer: 0
+  - component: {fileID: 133518037}
+  m_Layer: 8
   m_Name: Resource Vein
-  m_TagString: Untagged
+  m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
@@ -865,6 +936,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 133518032}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &133518037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 133518032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 442ddc224e38e244e8066358e4c2d280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _resourceType: 0
 --- !u!1 &139762110
 GameObject:
   m_ObjectHideFlags: 0
@@ -877,9 +961,10 @@ GameObject:
   - component: {fileID: 139762114}
   - component: {fileID: 139762113}
   - component: {fileID: 139762112}
-  m_Layer: 0
+  - component: {fileID: 139762115}
+  m_Layer: 8
   m_Name: Resource Vein
-  m_TagString: Untagged
+  m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
@@ -958,6 +1043,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 139762110}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &139762115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 139762110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 442ddc224e38e244e8066358e4c2d280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _resourceType: 0
 --- !u!1 &144619080
 GameObject:
   m_ObjectHideFlags: 0
@@ -1063,9 +1161,10 @@ GameObject:
   - component: {fileID: 186646741}
   - component: {fileID: 186646740}
   - component: {fileID: 186646739}
-  m_Layer: 0
+  - component: {fileID: 186646742}
+  m_Layer: 8
   m_Name: Resource Vein
-  m_TagString: Untagged
+  m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
@@ -1144,6 +1243,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 186646737}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &186646742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 186646737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 442ddc224e38e244e8066358e4c2d280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _resourceType: 0
 --- !u!1 &187748232
 GameObject:
   m_ObjectHideFlags: 0
@@ -1194,9 +1306,10 @@ GameObject:
   - component: {fileID: 194231503}
   - component: {fileID: 194231502}
   - component: {fileID: 194231501}
-  m_Layer: 0
+  - component: {fileID: 194231504}
+  m_Layer: 8
   m_Name: Resource Vein
-  m_TagString: Untagged
+  m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
@@ -1275,6 +1388,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 194231499}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &194231504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 194231499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 442ddc224e38e244e8066358e4c2d280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _resourceType: 0
 --- !u!1 &269117628
 GameObject:
   m_ObjectHideFlags: 0
@@ -1473,9 +1599,10 @@ GameObject:
   - component: {fileID: 315567217}
   - component: {fileID: 315567216}
   - component: {fileID: 315567215}
-  m_Layer: 0
+  - component: {fileID: 315567218}
+  m_Layer: 8
   m_Name: Resource Vein
-  m_TagString: Untagged
+  m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
@@ -1554,6 +1681,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 315567213}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &315567218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 315567213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 442ddc224e38e244e8066358e4c2d280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _resourceType: 0
 --- !u!1 &395442164
 GameObject:
   m_ObjectHideFlags: 0
@@ -1938,9 +2078,10 @@ GameObject:
   - component: {fileID: 476555259}
   - component: {fileID: 476555258}
   - component: {fileID: 476555257}
-  m_Layer: 0
+  - component: {fileID: 476555260}
+  m_Layer: 8
   m_Name: Resource Vein
-  m_TagString: Untagged
+  m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
@@ -2019,6 +2160,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 476555255}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &476555260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 476555255}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 442ddc224e38e244e8066358e4c2d280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _resourceType: 0
 --- !u!1 &478413517
 GameObject:
   m_ObjectHideFlags: 0
@@ -2031,9 +2185,10 @@ GameObject:
   - component: {fileID: 478413521}
   - component: {fileID: 478413520}
   - component: {fileID: 478413519}
-  m_Layer: 0
+  - component: {fileID: 478413522}
+  m_Layer: 8
   m_Name: Resource Vein
-  m_TagString: Untagged
+  m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
@@ -2112,6 +2267,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 478413517}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &478413522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 478413517}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 442ddc224e38e244e8066358e4c2d280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _resourceType: 0
 --- !u!1 &528758296
 GameObject:
   m_ObjectHideFlags: 0
@@ -2124,9 +2292,10 @@ GameObject:
   - component: {fileID: 528758300}
   - component: {fileID: 528758299}
   - component: {fileID: 528758298}
-  m_Layer: 0
+  - component: {fileID: 528758301}
+  m_Layer: 8
   m_Name: Resource Vein
-  m_TagString: Untagged
+  m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
@@ -2205,6 +2374,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 528758296}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &528758301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 528758296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 442ddc224e38e244e8066358e4c2d280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _resourceType: 0
 --- !u!1 &544884273
 GameObject:
   m_ObjectHideFlags: 0
@@ -2217,9 +2399,10 @@ GameObject:
   - component: {fileID: 544884277}
   - component: {fileID: 544884276}
   - component: {fileID: 544884275}
-  m_Layer: 0
+  - component: {fileID: 544884278}
+  m_Layer: 8
   m_Name: Resource Vein
-  m_TagString: Untagged
+  m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
@@ -2298,6 +2481,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 544884273}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &544884278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 544884273}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 442ddc224e38e244e8066358e4c2d280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _resourceType: 0
 --- !u!1 &567028631
 GameObject:
   m_ObjectHideFlags: 0
@@ -2310,9 +2506,10 @@ GameObject:
   - component: {fileID: 567028635}
   - component: {fileID: 567028634}
   - component: {fileID: 567028633}
-  m_Layer: 0
+  - component: {fileID: 567028636}
+  m_Layer: 8
   m_Name: Resource Vein
-  m_TagString: Untagged
+  m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
@@ -2391,6 +2588,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 567028631}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &567028636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 567028631}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 442ddc224e38e244e8066358e4c2d280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _resourceType: 0
 --- !u!1 &617554119
 GameObject:
   m_ObjectHideFlags: 0
@@ -2535,9 +2745,10 @@ GameObject:
   - component: {fileID: 656091250}
   - component: {fileID: 656091249}
   - component: {fileID: 656091248}
-  m_Layer: 0
+  - component: {fileID: 656091251}
+  m_Layer: 8
   m_Name: Resource Vein
-  m_TagString: Untagged
+  m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
@@ -2616,6 +2827,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 656091246}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &656091251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 656091246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 442ddc224e38e244e8066358e4c2d280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _resourceType: 0
 --- !u!1 &673888050
 GameObject:
   m_ObjectHideFlags: 0
@@ -2628,9 +2852,10 @@ GameObject:
   - component: {fileID: 673888054}
   - component: {fileID: 673888053}
   - component: {fileID: 673888052}
-  m_Layer: 0
+  - component: {fileID: 673888055}
+  m_Layer: 8
   m_Name: Resource Vein
-  m_TagString: Untagged
+  m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
@@ -2709,6 +2934,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 673888050}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &673888055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 673888050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 442ddc224e38e244e8066358e4c2d280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _resourceType: 0
 --- !u!1 &694175594
 GameObject:
   m_ObjectHideFlags: 0
@@ -2906,9 +3144,10 @@ GameObject:
   - component: {fileID: 707655784}
   - component: {fileID: 707655783}
   - component: {fileID: 707655782}
-  m_Layer: 0
+  - component: {fileID: 707655785}
+  m_Layer: 8
   m_Name: Resource Vein
-  m_TagString: Untagged
+  m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
@@ -2987,6 +3226,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 707655780}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &707655785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 707655780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 442ddc224e38e244e8066358e4c2d280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _resourceType: 0
 --- !u!1 &728316761
 GameObject:
   m_ObjectHideFlags: 0
@@ -3092,9 +3344,10 @@ GameObject:
   - component: {fileID: 764283649}
   - component: {fileID: 764283648}
   - component: {fileID: 764283647}
-  m_Layer: 0
+  - component: {fileID: 764283650}
+  m_Layer: 8
   m_Name: Resource Vein
-  m_TagString: Untagged
+  m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
@@ -3173,6 +3426,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 764283645}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &764283650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 764283645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 442ddc224e38e244e8066358e4c2d280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _resourceType: 0
 --- !u!1 &838486929
 GameObject:
   m_ObjectHideFlags: 0
@@ -3278,9 +3544,10 @@ GameObject:
   - component: {fileID: 916938754}
   - component: {fileID: 916938753}
   - component: {fileID: 916938752}
-  m_Layer: 0
+  - component: {fileID: 916938755}
+  m_Layer: 8
   m_Name: Resource Vein
-  m_TagString: Untagged
+  m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
@@ -3359,6 +3626,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 916938750}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &916938755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 916938750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 442ddc224e38e244e8066358e4c2d280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _resourceType: 0
 --- !u!1 &946641892
 GameObject:
   m_ObjectHideFlags: 0
@@ -3371,9 +3651,10 @@ GameObject:
   - component: {fileID: 946641896}
   - component: {fileID: 946641895}
   - component: {fileID: 946641894}
-  m_Layer: 0
+  - component: {fileID: 946641897}
+  m_Layer: 8
   m_Name: Resource Vein
-  m_TagString: Untagged
+  m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
@@ -3452,6 +3733,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 946641892}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &946641897
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 946641892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 442ddc224e38e244e8066358e4c2d280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _resourceType: 0
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -3562,9 +3856,10 @@ GameObject:
   - component: {fileID: 989921463}
   - component: {fileID: 989921462}
   - component: {fileID: 989921461}
-  m_Layer: 0
+  - component: {fileID: 989921464}
+  m_Layer: 8
   m_Name: Resource Vein
-  m_TagString: Untagged
+  m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
@@ -3643,6 +3938,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 989921459}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &989921464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 989921459}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 442ddc224e38e244e8066358e4c2d280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _resourceType: 0
 --- !u!1 &1012432581
 GameObject:
   m_ObjectHideFlags: 0
@@ -3748,9 +4056,10 @@ GameObject:
   - component: {fileID: 1022424150}
   - component: {fileID: 1022424149}
   - component: {fileID: 1022424148}
-  m_Layer: 0
+  - component: {fileID: 1022424151}
+  m_Layer: 8
   m_Name: Resource Vein
-  m_TagString: Untagged
+  m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
@@ -3829,6 +4138,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1022424146}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1022424151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1022424146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 442ddc224e38e244e8066358e4c2d280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _resourceType: 0
 --- !u!1 &1033775177
 GameObject:
   m_ObjectHideFlags: 0
@@ -4027,9 +4349,10 @@ GameObject:
   - component: {fileID: 1064389453}
   - component: {fileID: 1064389452}
   - component: {fileID: 1064389451}
-  m_Layer: 0
+  - component: {fileID: 1064389454}
+  m_Layer: 8
   m_Name: Resource Vein
-  m_TagString: Untagged
+  m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
@@ -4108,6 +4431,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1064389449}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1064389454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1064389449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 442ddc224e38e244e8066358e4c2d280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _resourceType: 0
 --- !u!1 &1083367413
 GameObject:
   m_ObjectHideFlags: 0
@@ -4120,9 +4456,10 @@ GameObject:
   - component: {fileID: 1083367417}
   - component: {fileID: 1083367416}
   - component: {fileID: 1083367415}
-  m_Layer: 0
+  - component: {fileID: 1083367418}
+  m_Layer: 8
   m_Name: Resource Vein
-  m_TagString: Untagged
+  m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
@@ -4201,6 +4538,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1083367413}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1083367418
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1083367413}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 442ddc224e38e244e8066358e4c2d280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _resourceType: 0
 --- !u!1 &1090052659
 GameObject:
   m_ObjectHideFlags: 0
@@ -4213,9 +4563,10 @@ GameObject:
   - component: {fileID: 1090052663}
   - component: {fileID: 1090052662}
   - component: {fileID: 1090052661}
-  m_Layer: 0
+  - component: {fileID: 1090052664}
+  m_Layer: 8
   m_Name: Resource Vein
-  m_TagString: Untagged
+  m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
@@ -4294,6 +4645,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1090052659}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1090052664
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1090052659}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 442ddc224e38e244e8066358e4c2d280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _resourceType: 0
 --- !u!1 &1094059277
 GameObject:
   m_ObjectHideFlags: 0
@@ -4397,9 +4761,10 @@ GameObject:
   - component: {fileID: 1205787567}
   - component: {fileID: 1205787566}
   - component: {fileID: 1205787565}
-  m_Layer: 0
+  - component: {fileID: 1205787568}
+  m_Layer: 8
   m_Name: Resource Vein
-  m_TagString: Untagged
+  m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
@@ -4478,6 +4843,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1205787563}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1205787568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1205787563}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 442ddc224e38e244e8066358e4c2d280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _resourceType: 0
 --- !u!1 &1237190486
 GameObject:
   m_ObjectHideFlags: 0
@@ -4490,9 +4868,10 @@ GameObject:
   - component: {fileID: 1237190490}
   - component: {fileID: 1237190489}
   - component: {fileID: 1237190488}
-  m_Layer: 0
+  - component: {fileID: 1237190491}
+  m_Layer: 8
   m_Name: Resource Vein
-  m_TagString: Untagged
+  m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
@@ -4571,6 +4950,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1237190486}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1237190491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1237190486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 442ddc224e38e244e8066358e4c2d280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _resourceType: 0
 --- !u!1 &1258693415
 GameObject:
   m_ObjectHideFlags: 0
@@ -4583,9 +4975,10 @@ GameObject:
   - component: {fileID: 1258693419}
   - component: {fileID: 1258693418}
   - component: {fileID: 1258693417}
-  m_Layer: 0
+  - component: {fileID: 1258693420}
+  m_Layer: 8
   m_Name: Resource Vein
-  m_TagString: Untagged
+  m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
@@ -4664,6 +5057,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1258693415}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1258693420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1258693415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 442ddc224e38e244e8066358e4c2d280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _resourceType: 0
 --- !u!1 &1269274510
 GameObject:
   m_ObjectHideFlags: 0
@@ -4676,9 +5082,10 @@ GameObject:
   - component: {fileID: 1269274514}
   - component: {fileID: 1269274513}
   - component: {fileID: 1269274512}
-  m_Layer: 0
+  - component: {fileID: 1269274515}
+  m_Layer: 8
   m_Name: Resource Vein
-  m_TagString: Untagged
+  m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
@@ -4757,6 +5164,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1269274510}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1269274515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1269274510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 442ddc224e38e244e8066358e4c2d280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _resourceType: 0
 --- !u!1 &1291088667
 GameObject:
   m_ObjectHideFlags: 0
@@ -5048,9 +5468,10 @@ GameObject:
   - component: {fileID: 1303007302}
   - component: {fileID: 1303007301}
   - component: {fileID: 1303007300}
-  m_Layer: 0
+  - component: {fileID: 1303007303}
+  m_Layer: 8
   m_Name: Resource Vein
-  m_TagString: Untagged
+  m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
@@ -5129,6 +5550,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1303007298}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1303007303
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1303007298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 442ddc224e38e244e8066358e4c2d280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _resourceType: 0
 --- !u!1 &1334833558
 GameObject:
   m_ObjectHideFlags: 0
@@ -5141,9 +5575,10 @@ GameObject:
   - component: {fileID: 1334833562}
   - component: {fileID: 1334833561}
   - component: {fileID: 1334833560}
-  m_Layer: 0
+  - component: {fileID: 1334833563}
+  m_Layer: 8
   m_Name: Resource Vein
-  m_TagString: Untagged
+  m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
@@ -5222,6 +5657,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1334833558}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1334833563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1334833558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 442ddc224e38e244e8066358e4c2d280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _resourceType: 0
 --- !u!1 &1344827326
 GameObject:
   m_ObjectHideFlags: 0
@@ -5234,9 +5682,10 @@ GameObject:
   - component: {fileID: 1344827330}
   - component: {fileID: 1344827329}
   - component: {fileID: 1344827328}
-  m_Layer: 0
+  - component: {fileID: 1344827331}
+  m_Layer: 8
   m_Name: Resource Vein
-  m_TagString: Untagged
+  m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
@@ -5315,6 +5764,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1344827326}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1344827331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1344827326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 442ddc224e38e244e8066358e4c2d280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _resourceType: 0
 --- !u!1 &1345707414
 GameObject:
   m_ObjectHideFlags: 0
@@ -5327,9 +5789,10 @@ GameObject:
   - component: {fileID: 1345707418}
   - component: {fileID: 1345707417}
   - component: {fileID: 1345707416}
-  m_Layer: 0
+  - component: {fileID: 1345707419}
+  m_Layer: 8
   m_Name: Resource Vein
-  m_TagString: Untagged
+  m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
@@ -5408,6 +5871,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1345707414}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1345707419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1345707414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 442ddc224e38e244e8066358e4c2d280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _resourceType: 0
 --- !u!1 &1350847262
 GameObject:
   m_ObjectHideFlags: 0
@@ -5420,9 +5896,10 @@ GameObject:
   - component: {fileID: 1350847266}
   - component: {fileID: 1350847265}
   - component: {fileID: 1350847264}
-  m_Layer: 0
+  - component: {fileID: 1350847267}
+  m_Layer: 8
   m_Name: Resource Vein
-  m_TagString: Untagged
+  m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
@@ -5501,6 +5978,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1350847262}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1350847267
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1350847262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 442ddc224e38e244e8066358e4c2d280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _resourceType: 0
 --- !u!1 &1389012922
 GameObject:
   m_ObjectHideFlags: 0
@@ -5513,9 +6003,10 @@ GameObject:
   - component: {fileID: 1389012926}
   - component: {fileID: 1389012925}
   - component: {fileID: 1389012924}
-  m_Layer: 0
+  - component: {fileID: 1389012927}
+  m_Layer: 8
   m_Name: Resource Vein
-  m_TagString: Untagged
+  m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
@@ -5594,6 +6085,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1389012922}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1389012927
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1389012922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 442ddc224e38e244e8066358e4c2d280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _resourceType: 0
 --- !u!1 &1427482206
 GameObject:
   m_ObjectHideFlags: 0
@@ -5606,9 +6110,10 @@ GameObject:
   - component: {fileID: 1427482210}
   - component: {fileID: 1427482209}
   - component: {fileID: 1427482208}
-  m_Layer: 0
+  - component: {fileID: 1427482211}
+  m_Layer: 8
   m_Name: Resource Vein
-  m_TagString: Untagged
+  m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
@@ -5687,6 +6192,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1427482206}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1427482211
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1427482206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 442ddc224e38e244e8066358e4c2d280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _resourceType: 0
 --- !u!1 &1436212326
 GameObject:
   m_ObjectHideFlags: 0
@@ -5699,9 +6217,10 @@ GameObject:
   - component: {fileID: 1436212330}
   - component: {fileID: 1436212329}
   - component: {fileID: 1436212328}
-  m_Layer: 0
+  - component: {fileID: 1436212331}
+  m_Layer: 8
   m_Name: Resource Vein
-  m_TagString: Untagged
+  m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
@@ -5780,6 +6299,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1436212326}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1436212331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1436212326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 442ddc224e38e244e8066358e4c2d280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _resourceType: 0
 --- !u!1 &1443351743
 GameObject:
   m_ObjectHideFlags: 0
@@ -5792,9 +6324,10 @@ GameObject:
   - component: {fileID: 1443351747}
   - component: {fileID: 1443351746}
   - component: {fileID: 1443351745}
-  m_Layer: 0
+  - component: {fileID: 1443351748}
+  m_Layer: 8
   m_Name: Resource Vein
-  m_TagString: Untagged
+  m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
@@ -5873,6 +6406,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1443351743}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1443351748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1443351743}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 442ddc224e38e244e8066358e4c2d280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _resourceType: 0
 --- !u!1 &1448288909
 GameObject:
   m_ObjectHideFlags: 0
@@ -5978,9 +6524,10 @@ GameObject:
   - component: {fileID: 1462718149}
   - component: {fileID: 1462718148}
   - component: {fileID: 1462718147}
-  m_Layer: 0
+  - component: {fileID: 1462718150}
+  m_Layer: 8
   m_Name: Resource Vein
-  m_TagString: Untagged
+  m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
@@ -6059,6 +6606,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1462718145}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1462718150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1462718145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 442ddc224e38e244e8066358e4c2d280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _resourceType: 0
 --- !u!1 &1464345721
 GameObject:
   m_ObjectHideFlags: 0
@@ -6071,9 +6631,10 @@ GameObject:
   - component: {fileID: 1464345725}
   - component: {fileID: 1464345724}
   - component: {fileID: 1464345723}
-  m_Layer: 0
+  - component: {fileID: 1464345726}
+  m_Layer: 8
   m_Name: Resource Vein
-  m_TagString: Untagged
+  m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
@@ -6152,6 +6713,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1464345721}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1464345726
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1464345721}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 442ddc224e38e244e8066358e4c2d280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _resourceType: 0
 --- !u!1 &1567871720
 GameObject:
   m_ObjectHideFlags: 0
@@ -6296,9 +6870,10 @@ GameObject:
   - component: {fileID: 1620785157}
   - component: {fileID: 1620785156}
   - component: {fileID: 1620785155}
-  m_Layer: 0
+  - component: {fileID: 1620785158}
+  m_Layer: 8
   m_Name: Resource Vein
-  m_TagString: Untagged
+  m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
@@ -6377,6 +6952,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1620785153}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1620785158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1620785153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 442ddc224e38e244e8066358e4c2d280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _resourceType: 0
 --- !u!1 &1625727688
 GameObject:
   m_ObjectHideFlags: 0
@@ -6389,9 +6977,10 @@ GameObject:
   - component: {fileID: 1625727692}
   - component: {fileID: 1625727691}
   - component: {fileID: 1625727690}
-  m_Layer: 0
+  - component: {fileID: 1625727693}
+  m_Layer: 8
   m_Name: Resource Vein
-  m_TagString: Untagged
+  m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
@@ -6470,6 +7059,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1625727688}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1625727693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1625727688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 442ddc224e38e244e8066358e4c2d280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _resourceType: 0
 --- !u!1 &1678980579
 GameObject:
   m_ObjectHideFlags: 0
@@ -6614,9 +7216,10 @@ GameObject:
   - component: {fileID: 1693108130}
   - component: {fileID: 1693108129}
   - component: {fileID: 1693108128}
-  m_Layer: 0
+  - component: {fileID: 1693108131}
+  m_Layer: 8
   m_Name: Resource Vein
-  m_TagString: Untagged
+  m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
@@ -6695,6 +7298,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1693108126}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1693108131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1693108126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 442ddc224e38e244e8066358e4c2d280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _resourceType: 0
 --- !u!1 &1703991480
 GameObject:
   m_ObjectHideFlags: 0
@@ -6707,9 +7323,10 @@ GameObject:
   - component: {fileID: 1703991484}
   - component: {fileID: 1703991483}
   - component: {fileID: 1703991482}
-  m_Layer: 0
+  - component: {fileID: 1703991485}
+  m_Layer: 8
   m_Name: Resource Vein
-  m_TagString: Untagged
+  m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
@@ -6788,6 +7405,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1703991480}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1703991485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1703991480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 442ddc224e38e244e8066358e4c2d280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _resourceType: 0
 --- !u!1 &1775796936
 GameObject:
   m_ObjectHideFlags: 0
@@ -6800,9 +7430,10 @@ GameObject:
   - component: {fileID: 1775796940}
   - component: {fileID: 1775796939}
   - component: {fileID: 1775796938}
-  m_Layer: 0
+  - component: {fileID: 1775796941}
+  m_Layer: 8
   m_Name: Resource Vein
-  m_TagString: Untagged
+  m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
@@ -6881,6 +7512,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1775796936}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1775796941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1775796936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 442ddc224e38e244e8066358e4c2d280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _resourceType: 0
 --- !u!1 &1820033410
 GameObject:
   m_ObjectHideFlags: 0
@@ -6893,9 +7537,10 @@ GameObject:
   - component: {fileID: 1820033414}
   - component: {fileID: 1820033413}
   - component: {fileID: 1820033412}
-  m_Layer: 0
+  - component: {fileID: 1820033415}
+  m_Layer: 8
   m_Name: Resource Vein
-  m_TagString: Untagged
+  m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
@@ -6974,6 +7619,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1820033410}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1820033415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1820033410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 442ddc224e38e244e8066358e4c2d280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _resourceType: 0
 --- !u!1 &1830049405
 GameObject:
   m_ObjectHideFlags: 0
@@ -6986,9 +7644,10 @@ GameObject:
   - component: {fileID: 1830049409}
   - component: {fileID: 1830049408}
   - component: {fileID: 1830049407}
-  m_Layer: 0
+  - component: {fileID: 1830049410}
+  m_Layer: 8
   m_Name: Resource Vein
-  m_TagString: Untagged
+  m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
@@ -7067,6 +7726,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1830049405}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1830049410
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1830049405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 442ddc224e38e244e8066358e4c2d280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _resourceType: 0
 --- !u!1 &1869119482
 GameObject:
   m_ObjectHideFlags: 0
@@ -7079,9 +7751,10 @@ GameObject:
   - component: {fileID: 1869119486}
   - component: {fileID: 1869119485}
   - component: {fileID: 1869119484}
-  m_Layer: 0
+  - component: {fileID: 1869119487}
+  m_Layer: 8
   m_Name: Resource Vein
-  m_TagString: Untagged
+  m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
@@ -7160,6 +7833,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1869119482}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1869119487
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1869119482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 442ddc224e38e244e8066358e4c2d280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _resourceType: 0
 --- !u!1 &1901663038
 GameObject:
   m_ObjectHideFlags: 0
@@ -7172,9 +7858,10 @@ GameObject:
   - component: {fileID: 1901663042}
   - component: {fileID: 1901663041}
   - component: {fileID: 1901663040}
-  m_Layer: 0
+  - component: {fileID: 1901663043}
+  m_Layer: 8
   m_Name: Resource Vein
-  m_TagString: Untagged
+  m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
@@ -7253,6 +7940,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1901663038}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1901663043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1901663038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 442ddc224e38e244e8066358e4c2d280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _resourceType: 0
 --- !u!1 &1907674396
 GameObject:
   m_ObjectHideFlags: 0
@@ -7358,9 +8058,10 @@ GameObject:
   - component: {fileID: 1927149643}
   - component: {fileID: 1927149642}
   - component: {fileID: 1927149641}
-  m_Layer: 0
+  - component: {fileID: 1927149644}
+  m_Layer: 8
   m_Name: Resource Vein
-  m_TagString: Untagged
+  m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
@@ -7439,6 +8140,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1927149639}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1927149644
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1927149639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 442ddc224e38e244e8066358e4c2d280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _resourceType: 0
 --- !u!1 &1958555170
 GameObject:
   m_ObjectHideFlags: 0
@@ -7451,9 +8165,10 @@ GameObject:
   - component: {fileID: 1958555174}
   - component: {fileID: 1958555173}
   - component: {fileID: 1958555172}
-  m_Layer: 0
+  - component: {fileID: 1958555175}
+  m_Layer: 8
   m_Name: Resource Vein
-  m_TagString: Untagged
+  m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
@@ -7532,6 +8247,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1958555170}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1958555175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1958555170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 442ddc224e38e244e8066358e4c2d280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _resourceType: 0
 --- !u!1 &1963695769
 GameObject:
   m_ObjectHideFlags: 0
@@ -7544,9 +8272,10 @@ GameObject:
   - component: {fileID: 1963695773}
   - component: {fileID: 1963695772}
   - component: {fileID: 1963695771}
-  m_Layer: 0
+  - component: {fileID: 1963695774}
+  m_Layer: 8
   m_Name: Resource Vein
-  m_TagString: Untagged
+  m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
@@ -7625,6 +8354,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1963695769}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1963695774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1963695769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 442ddc224e38e244e8066358e4c2d280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _resourceType: 0
 --- !u!1 &1966449230
 GameObject:
   m_ObjectHideFlags: 0
@@ -7637,9 +8379,10 @@ GameObject:
   - component: {fileID: 1966449234}
   - component: {fileID: 1966449233}
   - component: {fileID: 1966449232}
-  m_Layer: 0
+  - component: {fileID: 1966449235}
+  m_Layer: 8
   m_Name: Resource Vein
-  m_TagString: Untagged
+  m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
@@ -7718,6 +8461,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1966449230}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1966449235
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1966449230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 442ddc224e38e244e8066358e4c2d280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _resourceType: 0
 --- !u!1 &1969356319
 GameObject:
   m_ObjectHideFlags: 0
@@ -7823,9 +8579,10 @@ GameObject:
   - component: {fileID: 1975497675}
   - component: {fileID: 1975497674}
   - component: {fileID: 1975497673}
-  m_Layer: 0
+  - component: {fileID: 1975497676}
+  m_Layer: 8
   m_Name: Resource Vein
-  m_TagString: Untagged
+  m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
@@ -7904,6 +8661,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1975497671}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1975497676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1975497671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 442ddc224e38e244e8066358e4c2d280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _resourceType: 0
 --- !u!1 &1980308822
 GameObject:
   m_ObjectHideFlags: 0
@@ -7916,9 +8686,10 @@ GameObject:
   - component: {fileID: 1980308826}
   - component: {fileID: 1980308825}
   - component: {fileID: 1980308824}
-  m_Layer: 0
+  - component: {fileID: 1980308827}
+  m_Layer: 8
   m_Name: Resource Vein
-  m_TagString: Untagged
+  m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
@@ -7997,6 +8768,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1980308822}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1980308827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1980308822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 442ddc224e38e244e8066358e4c2d280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _resourceType: 0
 --- !u!1 &1984951970
 GameObject:
   m_ObjectHideFlags: 0
@@ -8009,9 +8793,10 @@ GameObject:
   - component: {fileID: 1984951974}
   - component: {fileID: 1984951973}
   - component: {fileID: 1984951972}
-  m_Layer: 0
+  - component: {fileID: 1984951975}
+  m_Layer: 8
   m_Name: Resource Vein
-  m_TagString: Untagged
+  m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
@@ -8090,6 +8875,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1984951970}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1984951975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1984951970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 442ddc224e38e244e8066358e4c2d280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _resourceType: 0
 --- !u!1 &2000722144
 GameObject:
   m_ObjectHideFlags: 0
@@ -8197,7 +8995,7 @@ GameObject:
   - component: {fileID: 2013282602}
   m_Layer: 0
   m_Name: Ground
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -8289,9 +9087,10 @@ GameObject:
   - component: {fileID: 2058584788}
   - component: {fileID: 2058584787}
   - component: {fileID: 2058584786}
-  m_Layer: 0
+  - component: {fileID: 2058584789}
+  m_Layer: 8
   m_Name: Resource Vein
-  m_TagString: Untagged
+  m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
@@ -8370,6 +9169,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2058584784}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &2058584789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2058584784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 442ddc224e38e244e8066358e4c2d280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _resourceType: 0
 --- !u!1 &2070729944
 GameObject:
   m_ObjectHideFlags: 0
@@ -8382,9 +9194,10 @@ GameObject:
   - component: {fileID: 2070729948}
   - component: {fileID: 2070729947}
   - component: {fileID: 2070729946}
-  m_Layer: 0
+  - component: {fileID: 2070729949}
+  m_Layer: 8
   m_Name: Resource Vein
-  m_TagString: Untagged
+  m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
@@ -8463,6 +9276,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2070729944}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &2070729949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2070729944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 442ddc224e38e244e8066358e4c2d280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _resourceType: 0
 --- !u!1 &2079956650
 GameObject:
   m_ObjectHideFlags: 0
@@ -8475,9 +9301,10 @@ GameObject:
   - component: {fileID: 2079956654}
   - component: {fileID: 2079956653}
   - component: {fileID: 2079956652}
-  m_Layer: 0
+  - component: {fileID: 2079956655}
+  m_Layer: 8
   m_Name: Resource Vein
-  m_TagString: Untagged
+  m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
@@ -8556,6 +9383,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2079956650}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &2079956655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2079956650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 442ddc224e38e244e8066358e4c2d280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _resourceType: 0
 --- !u!1 &2106412778
 GameObject:
   m_ObjectHideFlags: 0
@@ -8568,9 +9408,10 @@ GameObject:
   - component: {fileID: 2106412782}
   - component: {fileID: 2106412781}
   - component: {fileID: 2106412780}
-  m_Layer: 0
+  - component: {fileID: 2106412783}
+  m_Layer: 8
   m_Name: Resource Vein
-  m_TagString: Untagged
+  m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
@@ -8649,6 +9490,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2106412778}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &2106412783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2106412778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 442ddc224e38e244e8066358e4c2d280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _resourceType: 0
 --- !u!1 &2138986598
 GameObject:
   m_ObjectHideFlags: 0

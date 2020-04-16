@@ -14,13 +14,29 @@ public class PlayerController : NetworkBehaviour
     Camera cam;
     //A reference to the NavMeshAgent
     NavMeshAgent navAgent;
+    
+    //The object the Player is currently focusing (the object the Player last clicked on)
+    [SerializeField]
+    private IInteractable currentFocus;
+   
+    [SerializeField]
+    //The range the player needs to be in to be able to mine the resource
+    private float miningRange = 0.5f;
+
+    //A LayerMask that ignores everything besides the current focus
+    private LayerMask currentMask;
+
+    //The range that the player actually needs to have in order to do the current action (e.g. if the current action is mining
+    //relevantRange will be equal to miningRange)
+    private float relevantRange = 0;
 
     // Start is called before the first frame update
     void Start()
     {
+        
         cam = Camera.main;
         navAgent = this.GetComponent<NavMeshAgent>();
-
+        
     }
 
     // Update is called once per frame
@@ -33,7 +49,9 @@ public class PlayerController : NetworkBehaviour
             return;
         }
 
-
+        //Perform the relevant action according to the focus
+        ActOnTheFocus();
+        
         //If the player right clicks somewhere on the map, start moving towards that point
         if (Input.GetMouseButtonDown(1))
         {
@@ -43,10 +61,59 @@ public class PlayerController : NetworkBehaviour
 
             if (Physics.Raycast(ray, out hitInfo))
             {
-                //Very basic movement for now
+                //Move towards the click either way
+                //If the object isn't interactable, then the focus will be null
                 navAgent.SetDestination(hitInfo.point);
+                SetFocus(hitInfo.collider.GetComponent<IInteractable>());
 
             }
         }
+    }
+
+    //Sets the current focus of the player to the given Interactable object
+    void SetFocus(IInteractable newFocus)
+    {
+        currentFocus = newFocus;
+    }
+
+    //Performs the relevant action depending on the focus
+    void ActOnTheFocus()
+    {
+        //Check if there is a current action (otherwise the player is either just walking or idling)
+        if (currentFocus != null)
+        {
+            Ray ray = new Ray(transform.position, currentFocus.GO.transform.position - transform.position);
+            RaycastHit hitInfo;
+            currentMask = LayerMask.GetMask(LayerMask.LayerToName(currentFocus.GO.layer));
+
+            //Check which is the current relevant range
+            if (currentFocus.GO.tag == "Resource")
+            {
+                relevantRange = miningRange;
+            }
+
+            //Check if the player is within relevant range
+            if (Physics.Raycast(ray, out hitInfo, relevantRange, currentMask.value))
+            {
+                
+                //Check if it is the same gameobject that the player clicked on
+                if (GameObject.ReferenceEquals(hitInfo.collider.gameObject,currentFocus.GO))
+                {
+                    //The player is in interaction range with the current focus
+                    //Stop the player from moving towards the target (it's already within interaction range
+                    navAgent.ResetPath();
+                    //Interact with it
+                    currentFocus.DefaultInteract();
+
+                }
+            }
+        }
+        else
+        {
+            //There is no current focus
+            relevantRange = 0;
+            currentMask = 0;
+        }
+
     }
 }

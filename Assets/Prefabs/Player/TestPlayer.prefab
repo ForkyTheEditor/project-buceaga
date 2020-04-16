@@ -10,9 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4301772548717874680}
   - component: {fileID: -2896553651325067225}
+  - component: {fileID: 5977878256031008828}
   - component: {fileID: 4301772548717874681}
   - component: {fileID: 4301772548717874682}
-  - component: {fileID: 5977878256031008828}
+  - component: {fileID: 2985469844163237414}
   m_Layer: 0
   m_Name: TestPlayer
   m_TagString: Untagged
@@ -57,6 +58,39 @@ MonoBehaviour:
   m_SnapThreshold: 5
   m_InterpolateRotation: 1
   m_InterpolateMovement: 1
+--- !u!114 &5977878256031008828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4301772548717874683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8258ea15b8f74c4889ce485d21cbbb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 0
+    i1: 0
+    i2: 0
+    i3: 0
+    i4: 0
+    i5: 0
+    i6: 0
+    i7: 0
+    i8: 0
+    i9: 0
+    i10: 0
+    i11: 0
+    i12: 0
+    i13: 0
+    i14: 0
+    i15: 0
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 1
 --- !u!195 &4301772548717874681
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -91,39 +125,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4f30bb1b5d347645ba9864fe3f00e31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &5977878256031008828
-MonoBehaviour:
+  miningRange: 3.5
+--- !u!136 &2985469844163237414
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4301772548717874683}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8258ea15b8f74c4889ce485d21cbbb1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 0
-    i1: 0
-    i2: 0
-    i3: 0
-    i4: 0
-    i5: 0
-    i6: 0
-    i7: 0
-    i8: 0
-    i9: 0
-    i10: 0
-    i11: 0
-    i12: 0
-    i13: 0
-    i14: 0
-    i15: 0
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 1
+  m_Radius: 0.5
+  m_Height: 2.0067759
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.996264, z: 0}
 --- !u!1 &4301772549261814169
 GameObject:
   m_ObjectHideFlags: 0
@@ -135,7 +151,6 @@ GameObject:
   - component: {fileID: 4301772549261814168}
   - component: {fileID: 4301772549261814173}
   - component: {fileID: 4301772549261814174}
-  - component: {fileID: 4301772549261814175}
   m_Layer: 0
   m_Name: Graphics
   m_TagString: Untagged
@@ -204,17 +219,3 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!136 &4301772549261814175
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4301772549261814169}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
