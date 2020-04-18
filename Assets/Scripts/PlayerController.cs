@@ -17,7 +17,7 @@ public class PlayerController : NetworkBehaviour
     
     //The object the Player is currently focusing (the object the Player last clicked on)
     [SerializeField]
-    private IInteractable currentFocus;
+    private Interactable currentFocus;
    
     [SerializeField]
     //The range the player needs to be in to be able to mine the resource
@@ -51,7 +51,75 @@ public class PlayerController : NetworkBehaviour
 
         //Perform the relevant action according to the focus
         ActOnTheFocus();
-        
+
+        //Check if the player pressed the right mouse button 
+        //The right mouse button is the "Default Interaction" button
+        CheckRightMouseClick();
+    }
+
+
+
+    //Sets the current focus of the player to the given Interactable object
+    void SetFocus(Interactable newFocus)
+    {
+        currentFocus = newFocus;
+    }
+
+    //Performs the relevant action depending on the focus
+    void ActOnTheFocus()
+    {
+        //Check if there is a current action (otherwise the player is either just walking or idling)
+        if (currentFocus != null)
+        {
+            Ray ray = new Ray(transform.position, currentFocus.gameObject.transform.position - transform.position);
+            RaycastHit hitInfo;
+            currentMask = LayerMask.GetMask(LayerMask.LayerToName(currentFocus.gameObject.layer));
+
+            //Check which is the current relevant range
+            if (currentFocus.gameObject.tag == "Resource")
+            {
+                relevantRange = miningRange;
+            }
+
+            //Check if the player is within relevant range
+            if (Physics.Raycast(ray, out hitInfo, relevantRange, currentMask.value))
+            {
+                
+                //TODO: Separate the kinds of interaction based on the player input
+
+                //Check if it is the same gameobject that the player clicked on
+                if (GameObject.ReferenceEquals(hitInfo.collider.gameObject,currentFocus.gameObject))
+                {
+                    //The player is in interaction range with the current focus
+                    //Stop the player from moving towards the target (it's already within interaction range)
+                    navAgent.ResetPath();
+                    
+                    //Check if the object is available to interact with
+                    if (currentFocus.isAvailable)
+                    {
+                        //Interact with it
+                        currentFocus.DefaultInteract();
+
+                    }
+
+                }
+            }
+        }
+        else
+        {
+            //There is no current focus
+            //The relevant range must be cleared
+            relevantRange = 0;
+            //The current layer mask should be cleared
+            currentMask = 0;
+        }
+
+    }
+
+
+
+    void CheckRightMouseClick()
+    {
         //If the player right clicks somewhere on the map, start moving towards that point
         if (Input.GetMouseButtonDown(1))
         {
@@ -64,56 +132,11 @@ public class PlayerController : NetworkBehaviour
                 //Move towards the click either way
                 //If the object isn't interactable, then the focus will be null
                 navAgent.SetDestination(hitInfo.point);
-                SetFocus(hitInfo.collider.GetComponent<IInteractable>());
+                SetFocus(hitInfo.collider.GetComponent<Interactable>());
 
             }
         }
-    }
-
-    //Sets the current focus of the player to the given Interactable object
-    void SetFocus(IInteractable newFocus)
-    {
-        currentFocus = newFocus;
-    }
-
-    //Performs the relevant action depending on the focus
-    void ActOnTheFocus()
-    {
-        //Check if there is a current action (otherwise the player is either just walking or idling)
-        if (currentFocus != null)
-        {
-            Ray ray = new Ray(transform.position, currentFocus.GO.transform.position - transform.position);
-            RaycastHit hitInfo;
-            currentMask = LayerMask.GetMask(LayerMask.LayerToName(currentFocus.GO.layer));
-
-            //Check which is the current relevant range
-            if (currentFocus.GO.tag == "Resource")
-            {
-                relevantRange = miningRange;
-            }
-
-            //Check if the player is within relevant range
-            if (Physics.Raycast(ray, out hitInfo, relevantRange, currentMask.value))
-            {
-                
-                //Check if it is the same gameobject that the player clicked on
-                if (GameObject.ReferenceEquals(hitInfo.collider.gameObject,currentFocus.GO))
-                {
-                    //The player is in interaction range with the current focus
-                    //Stop the player from moving towards the target (it's already within interaction range
-                    navAgent.ResetPath();
-                    //Interact with it
-                    currentFocus.DefaultInteract();
-
-                }
-            }
-        }
-        else
-        {
-            //There is no current focus
-            relevantRange = 0;
-            currentMask = 0;
-        }
 
     }
+
 }
