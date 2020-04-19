@@ -3,24 +3,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum ResourceTypes { Energy }
+
 [RequireComponent(typeof(Interactable))]
 public class ResourceVein : MonoBehaviour
 {
-    public enum ResourceTypes { Energy }
 
     [SerializeField]
     private ResourceTypes _resourceType;
 
     public ResourceTypes resourceType { get { return _resourceType; } }
 
+    //A reference to the Interactable component of this GameObject
+    private Interactable interactComponent;
+
+    
+      
 
     private void Awake()
     {
+        interactComponent = this.GetComponent<Interactable>();
 
-        if(this.GetComponent<Interactable>() != null)
+        if(interactComponent != null)
         {
             //Subscribe to the Interacted event
-            this.GetComponent<Interactable>().Interacted += OnDefaultInteract;
+            interactComponent.Interacted += OnDefaultInteract;
         }
 
     }

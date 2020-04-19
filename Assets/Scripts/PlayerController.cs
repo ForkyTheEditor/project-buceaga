@@ -65,7 +65,9 @@ public class PlayerController : NetworkBehaviour
         currentFocus = newFocus;
     }
 
-    //Performs the relevant action depending on the focus
+    /// <summary>
+    ///Performs the relevant action depending on the focus
+    /// </summary>
     void ActOnTheFocus()
     {
         //Check if there is a current action (otherwise the player is either just walking or idling)
