@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -37,13 +38,18 @@ public class Interactable : NetworkBehaviour
        
         if (isAvailable)
         {
-            if()    
+            
+            if(interactingObjects.Contains(source))    
 
             if (Interacted != null)
             {
-                Interacted(this, EventArgs.Empty);
+                Interacted(source, EventArgs.Empty);
 
             }
+        }
+        else
+        {
+            Debug.Log(this.gameObject.name + " is not available for interaction!");
         }
 
        

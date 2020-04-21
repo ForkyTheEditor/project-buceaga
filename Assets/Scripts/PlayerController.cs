@@ -113,12 +113,12 @@ public class PlayerController : NetworkBehaviour
             currentMask = 0;
         }
 
-        if(!GameObject.ReferenceEquals(previousFocus.gameObject,currentFocus.gameObject))
-        {
+        //if(!GameObject.ReferenceEquals(previousFocus.gameObject,currentFocus.gameObject))
+        //{
 
 
 
-        }
+        //}
 
     }
 

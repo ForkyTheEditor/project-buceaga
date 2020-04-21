@@ -36,7 +36,11 @@ public class ResourceVein : MonoBehaviour
     {
         //Mine the resource
         Debug.Log("Woohoo you are mining!");
-        
+        GameObject src = (GameObject)source;
+        src.name = "yuhoo";
+
+
+
     }
 
     public void OnStopInteract(object source, EventArgs args)
