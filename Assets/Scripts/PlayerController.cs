@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Linq.Expressions;
+using System.Reflection;
+using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Networking;
 
@@ -15,7 +17,7 @@ public class PlayerController : NetworkBehaviour
     //The object the Player is currently focusing (the object the Player last clicked on)
     [SerializeField]
     private Interactable currentFocus;
-
+    //The last object focused; Mainly an auxiliary reference to the last object focused
     private Interactable previousFocus;
    
     [SerializeField]
@@ -63,7 +65,24 @@ public class PlayerController : NetworkBehaviour
     {
         previousFocus = currentFocus;
         currentFocus = newFocus;
+
+        if (previousFocus != null)
+        {
+            //Stop the interaction with the previous focus
+            if (currentFocus == null)
+            {
+                previousFocus.StopInteract(this.gameObject);
+            }
+            else if(!GameObject.ReferenceEquals(previousFocus, currentFocus))
+            {
+                previousFocus.StopInteract(this.gameObject);
+            }
+
+        }
+
+
     }
+    
 
     /// <summary>
     ///Performs the relevant action depending on the focus
@@ -90,7 +109,7 @@ public class PlayerController : NetworkBehaviour
                 //TODO: Separate the kinds of interaction based on the player input
 
                 //Check if it is the same gameobject that the player clicked on
-                if (GameObject.ReferenceEquals(hitInfo.collider.gameObject,currentFocus.gameObject))
+                if (GameObject.ReferenceEquals(hitInfo.collider.gameObject, currentFocus.gameObject))
                 {
                     //The player is in interaction range with the current focus
                     //Stop the player from moving towards the target (it's already within interaction range)
@@ -98,8 +117,6 @@ public class PlayerController : NetworkBehaviour
                     
                     //Interact with it
                     currentFocus.DefaultInteract(this.gameObject);
-
-                    
 
                 }
             }
@@ -111,15 +128,7 @@ public class PlayerController : NetworkBehaviour
             relevantRange = 0;
             //The current layer mask should be cleared
             currentMask = 0;
-        }
-
-        //if(!GameObject.ReferenceEquals(previousFocus.gameObject,currentFocus.gameObject))
-        //{
-
-
-
-        //}
-
+        } 
     }
 
 

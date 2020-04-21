@@ -21,51 +21,73 @@ public class Interactable : NetworkBehaviour
 
 
     //A reference to the interacting objects
-    public GameObject[] interactingObjects;
+    public List<GameObject> interactingObjects;
+
 
     public int maxInteractingObjects = 1;
 
-    private void Awake()
-    {
-        interactingObjects = new GameObject[maxInteractingObjects];
-    }
+
 
     /// <summary>
-    ///The default interaction of the object 
+    ///The default interaction of the object; 
+    ///Parameters: source - the GameObject that is interacting;
     /// </summary>
     public virtual void DefaultInteract(GameObject source)
     {
        
         if (isAvailable)
         {
-            
-            if(interactingObjects.Contains(source))    
+            Predicate<GameObject> compareInstanceID = (go) => go.GetInstanceID() == source.GetInstanceID();
+    
+            if(interactingObjects.Count < maxInteractingObjects)
+            {
+                //There's still place for people to interact
 
+                //Check if the source of the interaction is in the interacting list
+                if (!interactingObjects.Exists(compareInstanceID)) //did i mention i goddamn love c#
+                {
+                    //The player isn't registered in the interactingObjects list
+                    //Register it
+                    interactingObjects.Add(source);
+
+                }
+            }
+            else
+            {
+                //The maximum limit has been reached
+                //Check if the source is not registered
+                if (!interactingObjects.Exists(compareInstanceID))
+                {
+                    return;
+                }
+            }
+            //Check if there are any subscribers to the event
             if (Interacted != null)
             {
                 Interacted(source, EventArgs.Empty);
-
             }
         }
         else
         {
             Debug.Log(this.gameObject.name + " is not available for interaction!");
-        }
-
-       
+        }     
     }
 
-    //Stops the last interaction
-    public virtual void StopInteract()
+    ///<summary>
+    ///Must be called when the Player stops interacting with the object;
+    ///Parameters: source - the GameObject that stopped interacting;
+    /// </summary>
+    public virtual void StopInteract(GameObject source)
     {
+        Predicate<GameObject> compareInstanceID = (go) => go.GetInstanceID() == source.GetInstanceID();
 
-        
-
-        if (Interacted != null)
+        //Remove the object that stopped interacting
+        int index = interactingObjects.FindIndex(compareInstanceID);
+        if(index >= 0)
         {
-            Interacted(this, EventArgs.Empty);
+            interactingObjects.RemoveAt(index);
+            Debug.Log("Stopped interacting");
         }
-
     }
 
     //TODO: Add other kinds of interacts: for instance DestructiveInteract for when players Attack click something etc.
