@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Networking;
 
@@ -18,6 +15,8 @@ public class PlayerController : NetworkBehaviour
     //The object the Player is currently focusing (the object the Player last clicked on)
     [SerializeField]
     private Interactable currentFocus;
+
+    private Interactable previousFocus;
    
     [SerializeField]
     //The range the player needs to be in to be able to mine the resource
@@ -62,6 +61,7 @@ public class PlayerController : NetworkBehaviour
     //Sets the current focus of the player to the given Interactable object
     void SetFocus(Interactable newFocus)
     {
+        previousFocus = currentFocus;
         currentFocus = newFocus;
     }
 
@@ -96,13 +96,10 @@ public class PlayerController : NetworkBehaviour
                     //Stop the player from moving towards the target (it's already within interaction range)
                     navAgent.ResetPath();
                     
-                    //Check if the object is available to interact with
-                    if (currentFocus.isAvailable)
-                    {
-                        //Interact with it
-                        currentFocus.DefaultInteract();
+                    //Interact with it
+                    currentFocus.DefaultInteract(this.gameObject);
 
-                    }
+                    
 
                 }
             }
@@ -114,6 +111,13 @@ public class PlayerController : NetworkBehaviour
             relevantRange = 0;
             //The current layer mask should be cleared
             currentMask = 0;
+        }
+
+        if(!GameObject.ReferenceEquals(previousFocus.gameObject,currentFocus.gameObject))
+        {
+
+
+
         }
 
     }

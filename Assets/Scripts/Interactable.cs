@@ -18,28 +18,49 @@ public class Interactable : NetworkBehaviour
     //behaviours regarding availability)
     public bool isAvailable = true;
 
+
+    //A reference to the interacting objects
+    public GameObject[] interactingObjects;
+
+    public int maxInteractingObjects = 1;
+
+    private void Awake()
+    {
+        interactingObjects = new GameObject[maxInteractingObjects];
+    }
+
     /// <summary>
     ///The default interaction of the object 
     /// </summary>
-    public virtual void DefaultInteract()
+    public virtual void DefaultInteract(GameObject source)
     {
-        if (Interacted != null)
+       
+        if (isAvailable)
         {
-            Interacted(this, EventArgs.Empty);
+            if()    
 
+            if (Interacted != null)
+            {
+                Interacted(this, EventArgs.Empty);
+
+            }
         }
+
+       
     }
 
     //Stops the last interaction
-    //PROBABLY WILL NOT BE USED FOR NOW
-    //public virtual void StopInteract()
-    //{
-    //    if(Interacted != null)
-    //    {
-    //        Interacted(this, EventArgs.Empty);
-    //    }
+    public virtual void StopInteract()
+    {
 
-    //}
+        
+
+        if (Interacted != null)
+        {
+            Interacted(this, EventArgs.Empty);
+        }
+
+    }
 
     //TODO: Add other kinds of interacts: for instance DestructiveInteract for when players Attack click something etc.
 
