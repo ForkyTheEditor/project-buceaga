@@ -9,17 +9,18 @@ using UnityEngine.Networking;
 public class Interactable : NetworkBehaviour
 {
     
-    public delegate void InteractionEventHandler(object source, EventArgs args);
+    public delegate void InteractionEventHandler(GameObject source, EventArgs args);
 
-    //The event function that handles interaction
+    //The event function that notifies that the player is interacting
     public event InteractionEventHandler Interacted;
+    //The event function that notifies that the player stopped interacting
+    public event InteractionEventHandler StopInteracted;
 
     //Is the object available to interact with?
     //The actual implementantion of when the object is available to use should be left to the object class itself (as different objects may have different
     //behaviours regarding availability)
     public bool isAvailable = true;
-
-
+   
     //A reference to the interacting objects
     public List<GameObject> interactingObjects;
 
@@ -86,7 +87,11 @@ public class Interactable : NetworkBehaviour
         if(index >= 0)
         {
             interactingObjects.RemoveAt(index);
-            Debug.Log("Stopped interacting");
+
+            if(StopInteracted != null)
+            {
+                StopInteracted(source, EventArgs.Empty);
+            }
         }
     }
 
