@@ -2,11 +2,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public enum ResourceTypes { Energy }
 
 [RequireComponent(typeof(Interactable))]
-public class ResourceVein : MonoBehaviour
+public class ResourceVein : NetworkBehaviour
 {
 
     [SerializeField]
@@ -60,10 +61,9 @@ public class ResourceVein : MonoBehaviour
             col.Raycast(ray, out hitInfo, 10);
             
             playedMiningEffect = true;
-            
-            miningEffect.transform.LookAt(source.transform);
-            miningEffect.transform.position = new Vector3(hitInfo.point.x, playerPos.y, hitInfo.point.z);
-            miningEffect.Play();
+
+            //Play the mining effect on ALL the clients
+            RpcPlayMiningEffect(playerPos, hitInfo.point);
             
             
         }
@@ -74,8 +74,24 @@ public class ResourceVein : MonoBehaviour
     {
 
         playedMiningEffect = false;
-        miningEffect.Stop();
+        //Stop it from all the clients!
+        RpcStopMiningEffect();
 
+    }
+
+
+    [ClientRpc]
+    void RpcPlayMiningEffect(Vector3 playerPos, Vector3 edgePos)
+    {
+        miningEffect.transform.LookAt(playerPos);
+        miningEffect.transform.position = new Vector3(edgePos.x, playerPos.y, edgePos.z);
+        miningEffect.Play();
+    }
+
+    [ClientRpc]
+    void RpcStopMiningEffect()
+    {
+        miningEffect.Stop();
     }
 
 }

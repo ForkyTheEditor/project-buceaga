@@ -5,10 +5,12 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Networking;
 
+[RequireComponent(typeof(NetworkIdentity))]
 //The component of all interactable objects in the game
 public class Interactable : NetworkBehaviour
 {
-    
+    public NetworkIdentity netId;
+
     public delegate void InteractionEventHandler(GameObject source, EventArgs args);
 
     //The event function that notifies that the player is interacting
@@ -20,20 +22,45 @@ public class Interactable : NetworkBehaviour
     //The actual implementantion of when the object is available to use should be left to the object class itself (as different objects may have different
     //behaviours regarding availability)
     public bool isAvailable = true;
-   
+
     //A reference to the interacting objects
     public List<GameObject> interactingObjects;
 
-
     public int maxInteractingObjects = 1;
 
+    private void Awake()
+    {
+        netId = gameObject.GetComponent<NetworkIdentity>();
+    }
 
+    private void Update()
+    {
+        //Only run the interaction on the server
+        //Then notify the players of the consequences
+        if (!isServer)
+        {
+            return;
+        }
+       
+
+        if (isAvailable)
+        {
+            foreach(GameObject go in interactingObjects)
+            {   
+                if(Interacted != null)
+                {
+                    Interacted(go, EventArgs.Empty);
+                }
+            }
+
+        }
+    }
 
     /// <summary>
     ///The default interaction of the object; 
     ///Parameters: source - the GameObject that is interacting;
     /// </summary>
-    public virtual void DefaultInteract(GameObject source)
+    public virtual void StartDefaultInteract(GameObject source)
     {
        
         if (isAvailable)
@@ -62,11 +89,7 @@ public class Interactable : NetworkBehaviour
                     return;
                 }
             }
-            //Check if there are any subscribers to the event
-            if (Interacted != null)
-            {
-                Interacted(source, EventArgs.Empty);
-            }
+            
         }
         else
         {

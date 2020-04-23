@@ -19,6 +19,8 @@ public class PlayerController : NetworkBehaviour
     private Interactable currentFocus;
     //The last object focused; Mainly an auxiliary reference to the last object focused
     private Interactable previousFocus;
+
+    private bool isInteracting = false;
    
     [SerializeField]
     //The range the player needs to be in to be able to mine the resource
@@ -71,12 +73,14 @@ public class PlayerController : NetworkBehaviour
             //Stop the interaction with the previous focus
             if (currentFocus == null)
             {
-                previousFocus.StopInteract(this.gameObject);
+                CmdStopInteract(previousFocus.netId);
             }
             else if(!GameObject.ReferenceEquals(previousFocus, currentFocus))
             {
-                previousFocus.StopInteract(this.gameObject);
+                CmdStopInteract(previousFocus.netId);
             }
+
+            isInteracting = false;
 
         }
 
@@ -111,12 +115,19 @@ public class PlayerController : NetworkBehaviour
                 //Check if it is the same gameobject that the player clicked on
                 if (GameObject.ReferenceEquals(hitInfo.collider.gameObject, currentFocus.gameObject))
                 {
-                    //The player is in interaction range with the current focus
-                    //Stop the player from moving towards the target (it's already within interaction range)
-                    navAgent.ResetPath();
-                    
-                    //Interact with it
-                    currentFocus.DefaultInteract(this.gameObject);
+                    if (!isInteracting)
+                    {
+                        //The player is in interaction range with the current focus
+                        //Stop the player from moving towards the target (it's already within interaction range)
+                        navAgent.ResetPath();
+
+                        //Interact with it
+                        CmdStartDefaultInteract(currentFocus.netId);
+                        
+                        isInteracting = true;
+                    }
+
+                   
 
                 }
             }
@@ -151,6 +162,22 @@ public class PlayerController : NetworkBehaviour
 
             }
         }
+
+    }
+
+    [Command]
+    void CmdStartDefaultInteract(NetworkIdentity netId)
+    {
+
+
+        netId.gameObject.GetComponent<Interactable>().StartDefaultInteract(this.gameObject);
+       
+    }
+
+    [Command]
+    void CmdStopInteract(NetworkIdentity netId)
+    {
+        netId.gameObject.GetComponent<Interactable>().StopInteract(this.gameObject);
 
     }
 
