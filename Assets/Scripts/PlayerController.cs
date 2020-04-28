@@ -7,6 +7,7 @@ using UnityEngine.Networking;
 [RequireComponent(typeof(NetworkIdentity))]
 //Forces the GameObject to attach a NavMeshAgent component
 [RequireComponent(typeof(NavMeshAgent))]
+[RequireComponent(typeof(CharacterStats))]
 public class PlayerController : NetworkBehaviour
 {
     //An reference to the main camera 
@@ -14,21 +15,32 @@ public class PlayerController : NetworkBehaviour
     //A reference to the NavMeshAgent
     NavMeshAgent navAgent;
     
+    //The current action taken by the player
+    private CharacterActions currentAction;
+    //A reference to the character's stats
+    private CharacterStats stats;
+
+
+    private Attackable attackingFocus;
+
     //The object the Player is currently focusing (the object the Player last clicked on)
     [SerializeField]
-    private Interactable currentFocus;
+    private Interactable currentInteractFocus;
     //The last object focused; Mainly an auxiliary reference to the last object focused
-    private Interactable previousFocus;
+    private Interactable previousInteractFocus;
 
     private bool isInteracting = false;
-   
+
+    [SerializeField]
+    private float attackRange = 0.3f;
     [SerializeField]
     //The range the player needs to be in to be able to mine the resource
     private float miningRange = 0.5f;
 
-    //A LayerMask that ignores everything besides the current focus
-    private LayerMask currentMask;
+    //A LayerMask that ignores everything besides the current interaction focus
+    private LayerMask currentInteractionMask;
 
+    
     //The range that the player actually needs to have in order to do the current action (e.g. if the current action is mining
     //relevantRange will be equal to miningRange)
     private float relevantRange = 0;
@@ -38,8 +50,9 @@ public class PlayerController : NetworkBehaviour
     {
         
         cam = Camera.main;
-        navAgent = this.GetComponent<NavMeshAgent>();
-        
+        navAgent = gameObject.GetComponent<NavMeshAgent>();
+        stats = gameObject.GetComponent<CharacterStats>();
+        currentAction = CharacterActions.Idle;
     }
 
     // Update is called once per frame
@@ -51,9 +64,9 @@ public class PlayerController : NetworkBehaviour
             //You do not have authority. Get the hell out of here
             return;
         }
-
+      
         //Perform the relevant action according to the focus
-        ActOnTheFocus();
+        ActOnInteractingFocus();
 
         //Check if the player pressed the right mouse button 
         //The right mouse button is the "Default Interaction" button
@@ -63,57 +76,63 @@ public class PlayerController : NetworkBehaviour
 
 
     //Sets the current focus of the player to the given Interactable object
-    void SetFocus(Interactable newFocus)
+    void SetInteractingFocus(Interactable newFocus)
     {
-        previousFocus = currentFocus;
-        currentFocus = newFocus;
+        previousInteractFocus = currentInteractFocus;
+        currentInteractFocus = newFocus;
 
-        if (previousFocus != null)
+        if (previousInteractFocus != null)
         {
             //Stop the interaction with the previous focus
-            if (currentFocus == null)
+            if (currentInteractFocus == null)
             {
-                CmdStopInteract(previousFocus.netId);
+                CmdStopInteract(previousInteractFocus.netId);
             }
-            else if(!GameObject.ReferenceEquals(previousFocus, currentFocus))
+            else if(!GameObject.ReferenceEquals(previousInteractFocus, currentInteractFocus))
             {
-                CmdStopInteract(previousFocus.netId);
+                CmdStopInteract(previousInteractFocus.netId);
             }
 
+            
             isInteracting = false;
 
         }
 
 
     }
+
+    void SetAttackingFocus(Attackable newFocus)
+    {
+        attackingFocus = newFocus;
+    }
     
 
     /// <summary>
     ///Performs the relevant action depending on the focus
     /// </summary>
-    void ActOnTheFocus()
+    void ActOnInteractingFocus()
     {
         //Check if there is a current action (otherwise the player is either just walking or idling)
-        if (currentFocus != null)
+        if (currentInteractFocus != null)
         {
-            Ray ray = new Ray(transform.position, currentFocus.gameObject.transform.position - transform.position);
+            Ray ray = new Ray(transform.position, currentInteractFocus.gameObject.transform.position - transform.position);
             RaycastHit hitInfo;
-            currentMask = LayerMask.GetMask(LayerMask.LayerToName(currentFocus.gameObject.layer));
+            currentInteractionMask = LayerMask.GetMask(LayerMask.LayerToName(currentInteractFocus.gameObject.layer));
 
             //Check which is the current relevant range
-            if (currentFocus.gameObject.tag == "Resource")
+            if (currentInteractFocus.gameObject.tag == "Resource")
             {
                 relevantRange = miningRange;
             }
 
             //Check if the player is within relevant range
-            if (Physics.Raycast(ray, out hitInfo, relevantRange, currentMask.value))
+            if (Physics.Raycast(ray, out hitInfo, relevantRange, currentInteractionMask.value))
             {
                 
                 //TODO: Separate the kinds of interaction based on the player input
 
                 //Check if it is the same gameobject that the player clicked on
-                if (GameObject.ReferenceEquals(hitInfo.collider.gameObject, currentFocus.gameObject))
+                if (GameObject.ReferenceEquals(hitInfo.collider.gameObject, currentInteractFocus.gameObject))
                 {
                     if (!isInteracting)
                     {
@@ -122,8 +141,9 @@ public class PlayerController : NetworkBehaviour
                         navAgent.ResetPath();
 
                         //Interact with it
-                        CmdStartDefaultInteract(currentFocus.netId);
-                        
+                        CmdStartDefaultInteract(currentInteractFocus.netId);
+
+                        currentAction = CharacterActions.Interact;
                         isInteracting = true;
                     }
 
@@ -138,10 +158,26 @@ public class PlayerController : NetworkBehaviour
             //The relevant range must be cleared
             relevantRange = 0;
             //The current layer mask should be cleared
-            currentMask = 0;
+            currentInteractionMask = 0;
         } 
     }
 
+    void ActOnAttackingFocus()
+    {
+        if(attackingFocus != null)
+        {
+            float distanceToFocus = (attackingFocus.transform.position - transform.position).magnitude;
+            if(distanceToFocus <= attackRange)
+            {
+                //You are within attacking range
+
+            }
+
+
+        }
+
+
+    }
 
 
     void CheckRightMouseClick()
@@ -156,9 +192,21 @@ public class PlayerController : NetworkBehaviour
             if (Physics.Raycast(ray, out hitInfo))
             {
                 //Move towards the click either way
-                //If the object isn't interactable, then the focus will be null
                 navAgent.SetDestination(hitInfo.point);
-                SetFocus(hitInfo.collider.GetComponent<Interactable>());
+
+                if (hitInfo.transform.tag == "Player")
+                {
+                    SetAttackingFocus(hitInfo.collider.GetComponent<Attackable>());
+                    
+
+                }
+                else
+                {
+                    //If the object isn't interactable, then the focus will be null
+                    SetInteractingFocus(hitInfo.collider.GetComponent<Interactable>());
+                }
+
+               
 
             }
         }

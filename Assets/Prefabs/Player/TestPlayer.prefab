@@ -13,10 +13,11 @@ GameObject:
   - component: {fileID: 5977878256031008828}
   - component: {fileID: 4301772548717874681}
   - component: {fileID: 4301772548717874682}
+  - component: {fileID: 2729254931895982919}
   - component: {fileID: 2985469844163237414}
   m_Layer: 0
   m_Name: TestPlayer
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -125,7 +126,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4f30bb1b5d347645ba9864fe3f00e31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentInteractFocus: {fileID: 0}
   miningRange: 3.5
+--- !u!114 &2729254931895982919
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4301772548717874683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09b6a2e52be89694d9e01dba38dabcb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _currentHealth: 0
+  _maxHealth: 0
+  _team: 0
 --- !u!136 &2985469844163237414
 CapsuleCollider:
   m_ObjectHideFlags: 0
