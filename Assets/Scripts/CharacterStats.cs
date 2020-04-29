@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum CharacterActions { Idle, Move, Attack, Interact }
+
 
 public class CharacterStats : MonoBehaviour
 {
