@@ -9,7 +9,7 @@ using UnityEngine.Networking;
 //The component of all interactable objects in the game
 public class Interactable : NetworkBehaviour
 {
-    public NetworkIdentity netId;
+    public NetworkIdentity networkId;
 
     public delegate void InteractionEventHandler(GameObject source, EventArgs args);
 
@@ -30,7 +30,7 @@ public class Interactable : NetworkBehaviour
 
     private void Awake()
     {
-        netId = gameObject.GetComponent<NetworkIdentity>();
+        networkId = gameObject.GetComponent<NetworkIdentity>();
     }
 
     private void Update()

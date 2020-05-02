@@ -83,7 +83,7 @@ public class PlayerInteractionMotor : NetworkBehaviour
                         controller.StopPlayerMovement();
 
                         //Interact with it
-                        CmdStartDefaultInteract(currentInteractFocus.netId);
+                        CmdStartDefaultInteract(currentInteractFocus.networkId);
 
 
                         isInteracting = true;
@@ -114,11 +114,11 @@ public class PlayerInteractionMotor : NetworkBehaviour
             //Stop the interaction with the previous focus
             if (currentInteractFocus == null)
             {
-                CmdStopInteract(previousInteractFocus.netId);
+                CmdStopInteract(previousInteractFocus.networkId);
             }
             else if (!GameObject.ReferenceEquals(previousInteractFocus, currentInteractFocus))
             {
-                CmdStopInteract(previousInteractFocus.netId);
+                CmdStopInteract(previousInteractFocus.networkId);
             }
 
 

@@ -9,6 +9,7 @@ using UnityEngine.Networking;
 [RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(CharacterStats))]
 [RequireComponent(typeof(PlayerInteractionMotor))]
+[RequireComponent(typeof(PlayerAttackingMotor))]
 public class PlayerController : NetworkBehaviour
 {
     //An reference to the main camera 
@@ -20,15 +21,9 @@ public class PlayerController : NetworkBehaviour
     private CharacterStats stats;
     //A reference to the component that handles all the interaction with interactables (buildings etc.)
     private PlayerInteractionMotor interactionMotor;
+    private PlayerAttackingMotor attackingMotor;
 
-    private Attackable attackingFocus;
-
-    private bool isInteracting = false;
-
-    [SerializeField]
-    private float attackRange = 0.3f;
-    
-
+ 
     // Start is called before the first frame update
     void Start()
     {
@@ -37,6 +32,7 @@ public class PlayerController : NetworkBehaviour
         navAgent = gameObject.GetComponent<NavMeshAgent>();
         stats = gameObject.GetComponent<CharacterStats>();
         interactionMotor = gameObject.GetComponent<PlayerInteractionMotor>();
+        attackingMotor = gameObject.GetComponent<PlayerAttackingMotor>();
     }
 
     // Update is called once per frame
@@ -54,29 +50,6 @@ public class PlayerController : NetworkBehaviour
         CheckRightMouseClick();
     }
 
-    void SetAttackingFocus(Attackable newFocus)
-    {
-        attackingFocus = newFocus;
-    }
-    
-
-    void ActOnAttackingFocus()
-    {
-        if(attackingFocus != null)
-        {
-            float distanceToFocus = (attackingFocus.transform.position - transform.position).magnitude;
-            if(distanceToFocus <= attackRange)
-            {
-                //You are within attacking range
-
-            }
-
-
-        }
-
-
-    }
-
     void CheckRightMouseClick()
     {
         //If the player right clicks somewhere on the map, start moving towards that point
@@ -91,10 +64,11 @@ public class PlayerController : NetworkBehaviour
                 //Move towards the click either way
                 navAgent.SetDestination(hitInfo.point);
 
-                if (hitInfo.transform.tag == "Player")
-                {
-                    SetAttackingFocus(hitInfo.collider.GetComponent<Attackable>());
-                    
+                if (hitInfo.transform.tag == "Player" && !GameObject.ReferenceEquals(hitInfo.transform.gameObject, this.gameObject))
+                {   
+                    //We've clicked a player. Attack him!
+                    attackingMotor.SetAttackingFocus(hitInfo.collider.GetComponent<Attackable>());
+
 
                 }
                 else
