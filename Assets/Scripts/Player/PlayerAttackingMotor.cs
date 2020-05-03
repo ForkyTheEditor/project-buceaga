@@ -87,7 +87,7 @@ public class PlayerAttackingMotor : NetworkBehaviour
         }
         else
         {
-            controller.ResumePlayerMovement();
+            controller.withinRange = true;
         }
 
 
