@@ -80,7 +80,7 @@ public class PlayerInteractionMotor : NetworkBehaviour
 
                         //The player is in interaction range with the current focus
                         //Stop the player from moving towards the target (it's already within interaction range)
-                        controller.StopPlayerMovement();
+                        controller.withinRange = true;
 
                         //Interact with it
                         CmdStartDefaultInteract(currentInteractFocus.networkId);
@@ -92,6 +92,11 @@ public class PlayerInteractionMotor : NetworkBehaviour
 
 
                 }
+               
+            }
+            else
+            {
+                controller.withinRange = false;
             }
         }
         else
@@ -101,6 +106,7 @@ public class PlayerInteractionMotor : NetworkBehaviour
             relevantRange = 0;
             //The current layer mask should be cleared
             currentInteractionMask = 0;
+            controller.withinRange = false;
         }
     }
 

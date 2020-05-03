@@ -73,14 +73,14 @@ public class PlayerAttackingMotor : NetworkBehaviour
 
                 }
 
-                controller.PausePlayerMovement();
+                controller.withinRange = true;
             }
             else
             {
                 //The enemy has exited the attack range
                 //Resume the following
 
-                controller.ResumePlayerMovement();
+                controller.withinRange = false;
             }
 
 

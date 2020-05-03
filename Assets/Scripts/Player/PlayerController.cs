@@ -16,6 +16,9 @@ public class PlayerController : NetworkBehaviour
     Camera cam;
     //A reference to the NavMeshAgent
     NavMeshAgent navAgent;
+
+    //Is the player within range of its current action? 
+    public bool withinRange = false;
     
     //A reference to the character's stats
     private CharacterStats stats;
@@ -55,6 +58,11 @@ public class PlayerController : NetworkBehaviour
     private void LateUpdate()
     {
         FollowNavTarget();
+
+        if (withinRange)
+        {
+            StopPlayerMovement();
+        }
     }
 
     void CheckRightMouseClick()
@@ -72,6 +80,8 @@ public class PlayerController : NetworkBehaviour
                 navAgent.SetDestination(hitInfo.point);
                 //Delete the previous follow target
                 SetNavTarget(null);
+                ResumePlayerMovement();
+                
 
                 if (hitInfo.transform.tag == "Player" && !GameObject.ReferenceEquals(hitInfo.transform.gameObject, this.gameObject))
                 {   
@@ -132,8 +142,11 @@ public class PlayerController : NetworkBehaviour
     {
         if(currentNavTarget != null)
         {
-            navAgent.SetDestination(currentNavTarget.position);
-          
+            if (!withinRange)
+            {
+                navAgent.SetDestination(currentNavTarget.position);
+            }
+
         }
     }
 
