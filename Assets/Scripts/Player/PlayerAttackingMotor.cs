@@ -87,7 +87,7 @@ public class PlayerAttackingMotor : NetworkBehaviour
         }
         else
         {
-            controller.withinRange = true;
+            controller.withinRange = false;
         }
 
 
