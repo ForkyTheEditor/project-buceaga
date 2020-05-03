@@ -11,17 +11,17 @@ public class CharacterStats : NetworkBehaviour
 {
     [SyncVar]
     [SerializeField]
-    private float _currentHealth;
+    private float _currentHealth = 0f;
     [SyncVar]
     [SerializeField]
-    private int _maxHealth;
+    private int _maxHealth = 0;
     [SerializeField]
     private Teams _team;
 
     [SerializeField]
     private float _attackTime = 1f;
     [SerializeField]
-    private float _attackDamage;
+    private float _attackDamage = 0f;
 
     private Attackable attackableComponent;
 
