@@ -23,6 +23,8 @@ public class PlayerController : NetworkBehaviour
     private PlayerInteractionMotor interactionMotor;
     private PlayerAttackingMotor attackingMotor;
 
+    private Transform currentNavTarget;
+   
  
     // Start is called before the first frame update
     void Start()
@@ -44,10 +46,15 @@ public class PlayerController : NetworkBehaviour
             //You do not have authority. Get the hell out of here
             return;
         }
-      
+        
         //Check if the player pressed the right mouse button 
         //The right mouse button is the "Default Interaction" button
         CheckRightMouseClick();
+    }
+
+    private void LateUpdate()
+    {
+        FollowNavTarget();
     }
 
     void CheckRightMouseClick()
@@ -63,16 +70,20 @@ public class PlayerController : NetworkBehaviour
             {
                 //Move towards the click either way
                 navAgent.SetDestination(hitInfo.point);
+                //Delete the previous follow target
+                SetNavTarget(null);
 
                 if (hitInfo.transform.tag == "Player" && !GameObject.ReferenceEquals(hitInfo.transform.gameObject, this.gameObject))
                 {   
                     //We've clicked a player. Attack him!
                     attackingMotor.SetAttackingFocus(hitInfo.collider.GetComponent<Attackable>());
-
+                    //Follow if its a player (or other unit, but that will be later)
+                    SetNavTarget(hitInfo.transform);
 
                 }
                 else
                 {
+                    
                     //If the object isn't interactable, then the focus will be null
                     interactionMotor.SetInteractingFocus(hitInfo.collider.GetComponent<Interactable>());
                    
@@ -85,6 +96,19 @@ public class PlayerController : NetworkBehaviour
 
     }
 
+    public void ResumePlayerMovement()
+    {
+        navAgent.isStopped = false;
+    }
+
+    /// <summary>
+    /// Pauses the player movement, but retains the previous path
+    /// </summary>
+    public void PausePlayerMovement()
+    {
+        navAgent.isStopped = true;
+    }
+
     /// <summary>
     /// Stops the player from moving
     /// </summary>
@@ -93,6 +117,24 @@ public class PlayerController : NetworkBehaviour
 
         navAgent.ResetPath();
 
+    }
+
+    /// <summary>
+    /// Sets the target for the NavAgent to follow
+    /// </summary>
+    /// <param name="target"></param>
+    private void SetNavTarget(Transform target)
+    {
+        currentNavTarget = target;
+    }
+
+    private void FollowNavTarget()
+    {
+        if(currentNavTarget != null)
+        {
+            navAgent.SetDestination(currentNavTarget.position);
+          
+        }
     }
 
 

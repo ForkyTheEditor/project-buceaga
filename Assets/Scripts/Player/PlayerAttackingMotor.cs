@@ -11,8 +11,8 @@ public class PlayerAttackingMotor : NetworkBehaviour
 
     private Attackable attackingFocus;
 
-
     private bool canAttack = true;
+
     [SerializeField]
     private float attackRange = 0.3f;
 
@@ -73,7 +73,14 @@ public class PlayerAttackingMotor : NetworkBehaviour
 
                 }
 
+                controller.PausePlayerMovement();
+            }
+            else
+            {
+                //The enemy has exited the attack range
+                //Resume the following
 
+                controller.ResumePlayerMovement();
             }
 
 

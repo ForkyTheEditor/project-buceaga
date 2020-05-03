@@ -69,7 +69,7 @@ public class PlayerInteractionMotor : NetworkBehaviour
             //Check if the player is within relevant range
             if (Physics.Raycast(ray, out hitInfo, relevantRange, currentInteractionMask.value))
             {
-
+               
                 //TODO: Separate the kinds of interaction based on the player input
 
                 //Check if it is the same gameobject that the player clicked on
