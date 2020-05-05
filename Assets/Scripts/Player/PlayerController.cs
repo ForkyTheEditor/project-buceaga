@@ -17,9 +17,6 @@ public class PlayerController : NetworkBehaviour
     //A reference to the NavMeshAgent
     NavMeshAgent navAgent;
 
-    //Is the player within range of its current action? 
-    public bool withinRange = false;
-    
     //A reference to the character's stats
     private CharacterStats stats;
     //A reference to the component that handles all the interaction with interactables (buildings etc.)
@@ -53,16 +50,12 @@ public class PlayerController : NetworkBehaviour
         //Check if the player pressed the right mouse button 
         //The right mouse button is the "Default Interaction" button
         CheckRightMouseClick();
+
     }
 
     private void LateUpdate()
     {
         FollowNavTarget();
-
-        if (withinRange)
-        {
-            StopPlayerMovement();
-        }
     }
 
     void CheckRightMouseClick()
@@ -80,30 +73,46 @@ public class PlayerController : NetworkBehaviour
                 navAgent.SetDestination(hitInfo.point);
                 //Delete the previous follow target
                 SetNavTarget(null);
+                //Override any stopped movement done by the motors
                 ResumePlayerMovement();
-                
+                //Clear the player's focuses so that no weird interaction happens (and so the Great Bug of May doesn't happen again)
+                RemoveAllFocus();
 
-                if (hitInfo.transform.tag == "Player" && !GameObject.ReferenceEquals(hitInfo.transform.gameObject, this.gameObject))
-                {   
-                    //We've clicked a player. Attack him!
-                    attackingMotor.SetAttackingFocus(hitInfo.collider.GetComponent<Attackable>());
-                    //Follow if its a player (or other unit, but that will be later)
-                    SetNavTarget(hitInfo.transform);
-
-                }
-                else
+                //Switch to determine which type of object was hit
+                switch (hitInfo.transform.tag)
                 {
-                    
-                    //If the object isn't interactable, then the focus will be null
-                    interactionMotor.SetInteractingFocus(hitInfo.collider.GetComponent<Interactable>());
-                   
+                    case "Player":
+                        {
+                            if(!GameObject.ReferenceEquals(hitInfo.transform.gameObject, this.gameObject))
+                            {
+                                //We've clicked a player. Attack him!
+                                attackingMotor.SetAttackingFocus(hitInfo.collider.GetComponent<Attackable>());
+                                //Follow if its a player (or other unit, but that will be later)
+                                SetNavTarget(hitInfo.transform);
+                            }
+                            break;
+                        }
+                    case "Resource":
+                        {
+                            interactionMotor.SetInteractingFocus(hitInfo.collider.GetComponent<Interactable>());
+                            break;
+                        }
+                    default:
+                        {
+                            RemoveAllFocus();
+                            break;
+                        }
+
+
                 }
-
-               
-
             }
         }
+    }
 
+    public void RemoveAllFocus()
+    {
+        interactionMotor.SetInteractingFocus(null);
+        attackingMotor.SetAttackingFocus(null);
     }
 
     public void ResumePlayerMovement()
@@ -142,10 +151,9 @@ public class PlayerController : NetworkBehaviour
     {
         if(currentNavTarget != null)
         {
-            if (!withinRange)
-            {
-                navAgent.SetDestination(currentNavTarget.position);
-            }
+            
+            navAgent.SetDestination(currentNavTarget.position);
+            
 
         }
     }
