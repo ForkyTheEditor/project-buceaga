@@ -9,6 +9,8 @@ public class PlayerNetworkObject : NetworkBehaviour
     [SerializeField]
     private GameObject playerPrefab;
 
+    private int temporaryTeamSelect = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,8 +31,36 @@ public class PlayerNetworkObject : NetworkBehaviour
     [Command]
     void CmdSpawnPlayer() 
     {
-
+        //First instantiate the prefab, do any modifications/settings to it and then SPAWN it on the server
         GameObject go = Instantiate(playerPrefab);
+
+        //---------<TEMPORARY TEAM SELECT AND MATERIAL SELECT>---------------
+
+        switch (temporaryTeamSelect % 2) {
+
+            case 0:
+                {
+
+                    go.GetComponentInChildren<MeshRenderer>().material.color = Color.green;
+                    go.GetComponent<CharacterStats>().team = Teams.Modernists;
+
+                    temporaryTeamSelect++;
+                    break;
+                }
+            case 1:
+                {
+                    go.GetComponentInChildren<MeshRenderer>().material.color = Color.cyan;
+                    go.GetComponent<CharacterStats>().team = Teams.Traditionalists;
+
+                    temporaryTeamSelect++;
+                    break;
+                }
+        
+        }
+
+
+        //---------</TEMPORARY TEAM SELECT AND MATERIAL SELECT>---------------
+
 
         NetworkServer.SpawnWithClientAuthority(go, connectionToClient);
     

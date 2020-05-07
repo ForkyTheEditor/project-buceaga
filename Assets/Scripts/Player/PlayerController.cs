@@ -18,7 +18,7 @@ public class PlayerController : NetworkBehaviour
     NavMeshAgent navAgent;
 
     //A reference to the character's stats
-    private CharacterStats stats;
+    private CharacterStats charStats;
     //A reference to the component that handles all the interaction with interactables (buildings etc.)
     private PlayerInteractionMotor interactionMotor;
     private PlayerAttackingMotor attackingMotor;
@@ -32,7 +32,7 @@ public class PlayerController : NetworkBehaviour
         
         cam = Camera.main;
         navAgent = gameObject.GetComponent<NavMeshAgent>();
-        stats = gameObject.GetComponent<CharacterStats>();
+        charStats = gameObject.GetComponent<CharacterStats>();
         interactionMotor = gameObject.GetComponent<PlayerInteractionMotor>();
         attackingMotor = gameObject.GetComponent<PlayerAttackingMotor>();
     }
@@ -85,8 +85,13 @@ public class PlayerController : NetworkBehaviour
                         {
                             if(!GameObject.ReferenceEquals(hitInfo.transform.gameObject, this.gameObject))
                             {
+
                                 //We've clicked a player. Attack him!
-                                attackingMotor.SetAttackingFocus(hitInfo.collider.GetComponent<Attackable>());
+                                //...but only if he's on the other team! (or maybe if we implement a deny mechanic or something)
+                                if(hitInfo.transform.GetComponent<CharacterStats>().team != charStats.team)
+                                {
+                                    attackingMotor.SetAttackingFocus(hitInfo.collider.GetComponent<Attackable>());
+                                }
                                 //Follow if its a player (or other unit, but that will be later)
                                 SetNavTarget(hitInfo.transform);
                             }

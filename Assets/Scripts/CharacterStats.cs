@@ -25,7 +25,7 @@ public class CharacterStats : NetworkBehaviour
 
     private Attackable attackableComponent;
 
-    public Teams team { get { return _team; } }
+    public Teams team { get { return _team; } set { _team = value; } }
     public float currentHealth { get { return _currentHealth; } }
     public int maxHealth { get { return _maxHealth; } }
     public float attackTime { get { return _attackTime; } }
@@ -65,4 +65,7 @@ public class CharacterStats : NetworkBehaviour
         Destroy(this.gameObject);
 
     }
+
+
+
 }
