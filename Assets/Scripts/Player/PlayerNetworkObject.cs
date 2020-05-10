@@ -9,7 +9,7 @@ public class PlayerNetworkObject : NetworkBehaviour
     [SerializeField]
     private GameObject playerPrefab;
 
-    private int temporaryTeamSelect = 0;
+    private static int temporaryTeamSelect = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -41,7 +41,6 @@ public class PlayerNetworkObject : NetworkBehaviour
             case 0:
                 {
 
-                    go.GetComponentInChildren<MeshRenderer>().material.color = Color.green;
                     go.GetComponent<CharacterStats>().team = Teams.Modernists;
 
                     temporaryTeamSelect++;
@@ -49,7 +48,6 @@ public class PlayerNetworkObject : NetworkBehaviour
                 }
             case 1:
                 {
-                    go.GetComponentInChildren<MeshRenderer>().material.color = Color.cyan;
                     go.GetComponent<CharacterStats>().team = Teams.Traditionalists;
 
                     temporaryTeamSelect++;

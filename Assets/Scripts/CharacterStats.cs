@@ -15,6 +15,7 @@ public class CharacterStats : NetworkBehaviour
     [SyncVar]
     [SerializeField]
     private int _maxHealth = 0;
+    [SyncVar]
     [SerializeField]
     private Teams _team;
 
@@ -25,7 +26,25 @@ public class CharacterStats : NetworkBehaviour
 
     private Attackable attackableComponent;
 
-    public Teams team { get { return _team; } set { _team = value; } }
+    public Teams team { 
+        get { 
+            return _team; 
+        } 
+        set { 
+            _team = value;
+            //------TEMPORARY------
+            if (_team == Teams.Modernists){
+                gameObject.GetComponentInChildren<MeshRenderer>().material.color = Color.green;
+
+            }
+            else
+            {
+                gameObject.GetComponentInChildren<MeshRenderer>().material.color = Color.cyan;
+            }
+            //------/TEMPORARY------
+
+        }
+    }
     public float currentHealth { get { return _currentHealth; } }
     public int maxHealth { get { return _maxHealth; } }
     public float attackTime { get { return _attackTime; } }
