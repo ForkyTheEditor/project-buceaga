@@ -8,8 +8,7 @@ using UnityEngine.Networking;
 public class ResourceVein : NetworkBehaviour
 {
 
-    [SerializeField]
-    private ResourceTypes _resourceType;
+    [SerializeField] private ResourceTypes _resourceType;
 
     public ResourceTypes resourceType { get { return _resourceType; } }
 
@@ -22,10 +21,18 @@ public class ResourceVein : NetworkBehaviour
 
     private ParticleSystem miningEffect;
     private bool playedMiningEffect = false;
-     
+    
+    //The amount of time it takes to mine before finding the miningAmount
+    [SerializeField] private float miningTick = 1f;
+    //The amount of resource gained per tick
+    [SerializeField] private int miningAmount = 10;
+    //Timer to count down the ticks
+    private float timer;
+
 
     private void Awake()
     { 
+        //Get the references
         interactComponent = gameObject.GetComponent<Interactable>();
         miningEffect = gameObject.GetComponentInChildren<ParticleSystem>();
         col = gameObject.GetComponent<BoxCollider>();
@@ -40,14 +47,33 @@ public class ResourceVein : NetworkBehaviour
             interactComponent.maxInteractingObjects = this.maxInteractingObjects;
         }
 
-        
+        timer = miningTick;
     }
 
     public void OnDefaultInteract(GameObject source, EventArgs args)
     {
+        //Get the source's inventory
+        ResourceInventory sourceInventory = source.GetComponent<ResourceInventory>();
 
-        //Mine the resource
-        Debug.Log("Woohoo you are mining!");
+        //Check for errors
+        if(sourceInventory == null)
+        {
+            print(this.name + ": Cannot get source's inventory!");
+            return;
+        }
+
+        //Check the tick
+        if(timer <= 0)
+        {
+            //Mine the resource
+            sourceInventory.AddResource(resourceType, miningAmount);
+            //Reset the timer
+            timer = miningTick;
+
+        }
+        //Countdown the tick
+        timer -= Time.deltaTime;
+
         //Play the mining effect
         if(miningEffect != null && !playedMiningEffect)
         {

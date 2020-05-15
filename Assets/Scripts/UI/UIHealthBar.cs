@@ -19,6 +19,12 @@ public class UIHealthBar : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
+        //Check for errors
+        if(hpText == null || characterStats == null)
+        {
+            return;
+        }
+
         int truncatedCurrentHealth = Mathf.FloorToInt(characterStats.currentHealth);
         int truncatedMaxHealth = Mathf.FloorToInt(characterStats.maxHealth);
         hpText.text = truncatedCurrentHealth.ToString() + "/" + truncatedMaxHealth.ToString();

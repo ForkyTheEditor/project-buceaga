@@ -12,7 +12,8 @@ public class ResourceManager : NetworkBehaviour
     [SerializeField]
     //The team this object belongs to 
     private Teams team;
-
+    
+    
     ResourceInventory resourceInventory;
 
     private void Start()
