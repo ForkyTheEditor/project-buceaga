@@ -4,8 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public enum ResourceTypes { Energy }
-
 [RequireComponent(typeof(Interactable))]
 public class ResourceVein : NetworkBehaviour
 {

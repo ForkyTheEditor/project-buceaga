@@ -10,6 +10,7 @@ using UnityEngine.Networking;
 [RequireComponent(typeof(CharacterStats))]
 [RequireComponent(typeof(PlayerInteractionMotor))]
 [RequireComponent(typeof(PlayerAttackingMotor))]
+[RequireComponent(typeof(ResourceInventory))]
 public class PlayerController : NetworkBehaviour
 {
     //An reference to the main camera 
@@ -114,12 +115,18 @@ public class PlayerController : NetworkBehaviour
         }
     }
 
+    /// <summary>
+    /// Removes the focuses from all the control motors
+    /// </summary>
     public void RemoveAllFocus()
     {
         interactionMotor.SetInteractingFocus(null);
         attackingMotor.SetAttackingFocus(null);
     }
 
+    /// <summary>
+    /// Resumes the previous path
+    /// </summary>
     public void ResumePlayerMovement()
     {
         navAgent.isStopped = false;
@@ -146,7 +153,7 @@ public class PlayerController : NetworkBehaviour
     /// <summary>
     /// Sets the target for the NavAgent to follow
     /// </summary>
-    /// <param name="target"></param>
+    /// <param name="target">The target GameObject to follow</param>
     private void SetNavTarget(Transform target)
     {
         currentNavTarget = target;
