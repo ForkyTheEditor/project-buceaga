@@ -7,9 +7,8 @@ public class GameManager : MonoBehaviour
     //This is a singleton object, check for other instances and DESTROY them
     private static GameManager instance;
 
-    private static GameObject _localPlayerInstance;
+    private static GameObject _localPlayerInstance = null;
     public static GameObject localPlayerInstance { get { return _localPlayerInstance; } }
-
 
     //INSTANTIATE THE OBJECT
     private void Awake()
@@ -32,6 +31,5 @@ public class GameManager : MonoBehaviour
     {
         _localPlayerInstance = newPlayer;
     }
-
 
 }

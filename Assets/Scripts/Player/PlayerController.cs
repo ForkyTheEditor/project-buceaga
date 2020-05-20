@@ -25,17 +25,22 @@ public class PlayerController : NetworkBehaviour
     private PlayerAttackingMotor attackingMotor;
 
     private Transform currentNavTarget;
-   
- 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+
+    void Awake()
+    { 
         cam = Camera.main;
         navAgent = gameObject.GetComponent<NavMeshAgent>();
         charStats = gameObject.GetComponent<CharacterStats>();
         interactionMotor = gameObject.GetComponent<PlayerInteractionMotor>();
         attackingMotor = gameObject.GetComponent<PlayerAttackingMotor>();
+    }
+
+    public override void OnStartAuthority()
+    {
+        //LOAD THE CURRENT GAMEOBJECT INTO THE GAME MANAGER
+        //THIS IS THE LOCAL PLAYER INSTANCE
+        GameManager.SetLocalPlayer(this.gameObject);
+
     }
 
     // Update is called once per frame

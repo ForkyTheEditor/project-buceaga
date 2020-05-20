@@ -50,7 +50,7 @@ public class CharacterStats : NetworkBehaviour
     public float attackTime { get { return _attackTime; } }
     public float attackDamage { get { return _attackDamage; } }
 
-    private void Start()
+    private void Awake()
     {
         attackableComponent = GetComponent<Attackable>();
         attackableComponent.Attacked += OnAttacked;

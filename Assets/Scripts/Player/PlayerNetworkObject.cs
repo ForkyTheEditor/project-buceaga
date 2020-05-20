@@ -6,8 +6,11 @@ using UnityEngine.Networking;
 [RequireComponent(typeof(NetworkIdentity))]
 public class PlayerNetworkObject : NetworkBehaviour
 {
-    [SerializeField]
-    private GameObject playerPrefab;
+
+    [SerializeField] private GameObject playerPrefab;
+
+
+  
 
     private static int temporaryTeamSelect = 0;
 
@@ -34,7 +37,7 @@ public class PlayerNetworkObject : NetworkBehaviour
         //First instantiate the prefab, do any modifications/settings to it and then SPAWN it on the server
         GameObject go = Instantiate(playerPrefab);
 
-        //---------<TEMPORARY TEAM SELECT AND MATERIAL SELECT>---------------
+        //-----------<TEMPORARY TEAM SELECT AND MATERIAL SELECT>---------------
 
         switch (temporaryTeamSelect % 2) {
 
@@ -57,9 +60,9 @@ public class PlayerNetworkObject : NetworkBehaviour
         }
 
 
-        //---------</TEMPORARY TEAM SELECT AND MATERIAL SELECT>---------------
+        //-----------</TEMPORARY TEAM SELECT AND MATERIAL SELECT>---------------
 
-
+      
         NetworkServer.SpawnWithClientAuthority(go, connectionToClient);
     
     }
