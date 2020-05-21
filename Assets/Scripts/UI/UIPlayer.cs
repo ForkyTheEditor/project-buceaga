@@ -12,7 +12,7 @@ public class UIPlayer : MonoBehaviour
     private CharacterStats playerStats;
 
     private ResourceInventory resourceInv;
-    [SerializeField] private TextMeshProUGUI resourceText;
+    [SerializeField] private TextMeshProUGUI energyResourceText;
 
     // Start is called before the first frame update
     void Start()
@@ -40,21 +40,23 @@ public class UIPlayer : MonoBehaviour
     void LateUpdate()
     {
         //Check for errors
-        if (resourceText == null || resourceInv == null)
+        if (energyResourceText == null || resourceInv == null)
         {
             return;
         }
 
-        resourceText.text = "";
+        //Load the energy resource
+        energyResourceText.text = resourceInv.GetResource(ResourceTypes.Energy).ToString();
 
-        //Show all resource types
-        foreach (ResourceTypes rt in Enum.GetValues(typeof(ResourceTypes)))
-        {
-            string resourceName = rt.ToString();
-            int playerResourceAmount = resourceInv.GetResource(rt);
+        //NOT NEEDED ANYMORE (FOR NOW)
+        ////Show all resource types
+        //foreach (ResourceTypes rt in Enum.GetValues(typeof(ResourceTypes)))
+        //{
+        //    string resourceName = rt.ToString();
+        //    int playerResourceAmount = resourceInv.GetResource(rt);
 
-            resourceText.text += resourceName + ":" + playerResourceAmount.ToString();
+        //    resourceText.text += resourceName + ":" + playerResourceAmount.ToString();
 
-        }
+        //}
     }
 }

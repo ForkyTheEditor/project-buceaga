@@ -26,6 +26,7 @@ public class PlayerController : NetworkBehaviour
 
     private Transform currentNavTarget;
 
+    //Initialize components in awake so that they're ready if other gameobjects might need them (not the case, just good practice)
     void Awake()
     { 
         cam = Camera.main;
@@ -39,6 +40,7 @@ public class PlayerController : NetworkBehaviour
     {
         //LOAD THE CURRENT GAMEOBJECT INTO THE GAME MANAGER
         //THIS IS THE LOCAL PLAYER INSTANCE
+        //ONLY CALL THIS ON THE CLIENT WHOSE OBJECT THIS IS (AKA THE CLIENT WITH AUTHORITY)
         GameManager.SetLocalPlayer(this.gameObject);
 
     }

@@ -1759,6 +1759,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 395442164}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &399798454 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3773821040108688153, guid: b80eb4002d772ea49bcd222ecc199a55,
+    type: 3}
+  m_PrefabInstance: {fileID: 3773821040321799087}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &413820939
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3648,7 +3660,7 @@ PrefabInstance:
     - target: {fileID: 5390833970308473472, guid: 46cb5b7bf32532746993c0c1cb6a56b0,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -93.7
+      value: -226.4
       objectReference: {fileID: 0}
     - target: {fileID: 5390833970308473472, guid: 46cb5b7bf32532746993c0c1cb6a56b0,
         type: 3}
@@ -8301,6 +8313,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3773821039673225112, guid: b80eb4002d772ea49bcd222ecc199a55,
+        type: 3}
+      propertyPath: energyResourceText
+      value: 
+      objectReference: {fileID: 399798454}
     - target: {fileID: 3773821039673225113, guid: b80eb4002d772ea49bcd222ecc199a55,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -8410,6 +8427,71 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: 'Player UI '
+      objectReference: {fileID: 0}
+    - target: {fileID: 3773821040108688153, guid: b80eb4002d772ea49bcd222ecc199a55,
+        type: 3}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3773821040108688153, guid: b80eb4002d772ea49bcd222ecc199a55,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3773821040108688153, guid: b80eb4002d772ea49bcd222ecc199a55,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3773821040108688153, guid: b80eb4002d772ea49bcd222ecc199a55,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3773821040108688153, guid: b80eb4002d772ea49bcd222ecc199a55,
+        type: 3}
+      propertyPath: m_textInfo.pageCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3773821040108688153, guid: b80eb4002d772ea49bcd222ecc199a55,
+        type: 3}
+      propertyPath: m_margin.x
+      value: 0.2826233
+      objectReference: {fileID: 0}
+    - target: {fileID: 3773821040108688153, guid: b80eb4002d772ea49bcd222ecc199a55,
+        type: 3}
+      propertyPath: m_textAlignment
+      value: 513
+      objectReference: {fileID: 0}
+    - target: {fileID: 3773821040108688153, guid: b80eb4002d772ea49bcd222ecc199a55,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3773821040108688153, guid: b80eb4002d772ea49bcd222ecc199a55,
+        type: 3}
+      propertyPath: m_fontSizeBase
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3773821040108688154, guid: b80eb4002d772ea49bcd222ecc199a55,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 177.79
+      objectReference: {fileID: 0}
+    - target: {fileID: 3773821040108688154, guid: b80eb4002d772ea49bcd222ecc199a55,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 123.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 3773821040108688154, guid: b80eb4002d772ea49bcd222ecc199a55,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -31.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3773821040108688154, guid: b80eb4002d772ea49bcd222ecc199a55,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 62.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b80eb4002d772ea49bcd222ecc199a55, type: 3}
