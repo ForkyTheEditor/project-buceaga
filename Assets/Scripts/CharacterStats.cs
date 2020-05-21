@@ -84,7 +84,4 @@ public class CharacterStats : NetworkBehaviour
         Destroy(this.gameObject);
 
     }
-
-
-
 }
