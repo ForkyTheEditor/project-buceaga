@@ -23,19 +23,15 @@ public class PlayerInteractionMotor : NetworkBehaviour
     //A LayerMask that ignores everything besides the current interaction focus
     private LayerMask currentInteractionMask;
 
-
     //The range that the player actually needs to have in order to do the current action (e.g. if the current action is mining
     //relevantRange will be equal to miningRange)
     private float relevantRange = 0;
 
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         controller = gameObject.GetComponent<PlayerController>();
-
     }
-
-    // Update is called once per frame
+   
     void Update()
     {
         if (!hasAuthority)
@@ -44,8 +40,6 @@ public class PlayerInteractionMotor : NetworkBehaviour
         }
 
         ActOnInteractingFocus();
-
-
     }
 
     /// <summary>
@@ -60,6 +54,7 @@ public class PlayerInteractionMotor : NetworkBehaviour
             RaycastHit hitInfo;
             currentInteractionMask = LayerMask.GetMask(LayerMask.LayerToName(currentInteractFocus.gameObject.layer));
             
+            //TODO: Change this to a switch statement with a default "default action range" range
             //Check which is the current relevant range
             if (currentInteractFocus.gameObject.tag == "Resource")
             {
@@ -69,7 +64,6 @@ public class PlayerInteractionMotor : NetworkBehaviour
             //Check if the player is within relevant range
             if (Physics.Raycast(ray, out hitInfo, relevantRange, currentInteractionMask.value))
             {
-               
                 //TODO: Separate the kinds of interaction based on the player input
 
                 //Check if it is the same gameobject that the player clicked on
@@ -77,24 +71,17 @@ public class PlayerInteractionMotor : NetworkBehaviour
                 {
                     if (!isInteracting)
                     {
-
                         //The player is in interaction range with the current focus
                         //Stop the player from moving towards the target (it's already within interaction range)
                         controller.StopPlayerMovement();
 
-                        //Interact with it
+                        //Start interacting with it
                         CmdStartDefaultInteract(currentInteractFocus.networkId);
-
 
                         isInteracting = true;
                     }
-
-
-
                 }
-               
-            }
-            
+            }   
         }
         else
         {
@@ -106,7 +93,10 @@ public class PlayerInteractionMotor : NetworkBehaviour
            
         }
     }
-
+    /// <summary>
+    /// Sets the interaction focus and stops the interaction with the previous focus
+    /// </summary>
+    /// <param name="newFocus"></param>
     public void SetInteractingFocus(Interactable newFocus)
     {
         previousInteractFocus = currentInteractFocus;
@@ -124,12 +114,8 @@ public class PlayerInteractionMotor : NetworkBehaviour
                 CmdStopInteract(previousInteractFocus.networkId);
             }
 
-
             isInteracting = false;
-
         }
-
-
     }
 
     [Command]
