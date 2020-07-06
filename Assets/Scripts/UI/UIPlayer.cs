@@ -42,15 +42,20 @@ public class UIPlayer : MonoBehaviour
         playerResourceInv = playerStats.GetComponent<ResourceInventory>();
         //Get the team of the player
         playerTeam = playerStats.team;
-        //Get the relevant resource manager's inventory (the team's resource inventory)
-        teamResourceInv = GameManager.GetResourceManager(playerTeam).GetComponent<ResourceInventory>();
+        //Check if the team is neutral (no resource manager for the neutral team) 
+        if( playerTeam != Teams.Neutral)
+        {
+            //Get the relevant resource manager's inventory (the team's resource inventory)
+            teamResourceInv = GameManager.GetResourceManager(playerTeam).GetComponent<ResourceInventory>();
+
+        }
     } 
 
     // Update is called once per frame
     void LateUpdate()
     {
         //Check for errors
-        if (playerEnergyResourceText == null || playerResourceInv == null)
+        if (playerEnergyResourceText == null || playerResourceInv == null || teamResourceInv == null)
         {
             return;
         }

@@ -11,6 +11,7 @@ using UnityEngine.Networking;
 [RequireComponent(typeof(PlayerInteractionMotor))]
 [RequireComponent(typeof(PlayerAttackingMotor))]
 [RequireComponent(typeof(ResourceInventory))]
+[RequireComponent(typeof(PlayerAnimationMotor))]
 public class PlayerController : NetworkBehaviour
 {
     //An reference to the main camera 
@@ -23,8 +24,14 @@ public class PlayerController : NetworkBehaviour
     //A reference to the component that handles all the interaction with interactables (buildings etc.)
     private PlayerInteractionMotor interactionMotor;
     private PlayerAttackingMotor attackingMotor;
+    private PlayerAnimationMotor animationMotor;
 
+    //The target towards which the player is walking
     private Transform currentNavTarget;
+
+    //Is the player walking (actually moving, if movement is impossible, this will still be false) towards something? 
+    private bool _isRunning = false;
+    public bool isRunning { get { return _isRunning; } }
 
     //Initialize components in awake so that they're ready if other gameobjects might need them (not the case, just good practice)
     void Awake()
@@ -34,6 +41,7 @@ public class PlayerController : NetworkBehaviour
         charStats = gameObject.GetComponent<CharacterStats>();
         interactionMotor = gameObject.GetComponent<PlayerInteractionMotor>();
         attackingMotor = gameObject.GetComponent<PlayerAttackingMotor>();
+        animationMotor = gameObject.GetComponent<PlayerAnimationMotor>();
     }
 
     public override void OnStartAuthority()
@@ -58,7 +66,8 @@ public class PlayerController : NetworkBehaviour
         //Check if the player pressed the right mouse button 
         //The right mouse button is the "Default Interaction" button
         CheckRightMouseClick();
-
+        //Update the player's current state
+        UpdatePlayerState();
     }
 
     private void LateUpdate()
@@ -123,6 +132,26 @@ public class PlayerController : NetworkBehaviour
     }
 
     /// <summary>
+    /// Updates the player's current state (idle, moving, attacking etc.)
+    /// This can be used for animations, abilities that rely on different states etc.
+    /// </summary>
+    private void UpdatePlayerState()
+    {
+
+        //Check if the player is ACTUALLY moving
+        if(navAgent.velocity != Vector3.zero)
+        {
+            _isRunning = true;
+        }
+        else
+        {
+            _isRunning = false;
+        }
+
+
+    }
+
+    /// <summary>
     /// Removes the focuses from all the control motors
     /// </summary>
     public void RemoveAllFocus()
@@ -166,14 +195,14 @@ public class PlayerController : NetworkBehaviour
         currentNavTarget = target;
     }
 
+    //Follows the specified target; if the target moves its position, it follows it indefinitely
     private void FollowNavTarget()
     {
         if(currentNavTarget != null)
         {
             
             navAgent.SetDestination(currentNavTarget.position);
-            
-
+          
         }
     }
 

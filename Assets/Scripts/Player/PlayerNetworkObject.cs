@@ -37,7 +37,10 @@ public class PlayerNetworkObject : NetworkBehaviour
         //First instantiate the prefab, do any modifications/settings to it and then SPAWN it on the server
         GameObject go = Instantiate(playerPrefab);
 
-      
+        //----TEMPORARY-----
+        go.GetComponent<CharacterStats>().team = Teams.Modernists;
+        //----/TEMPORARY-----
+
         NetworkServer.SpawnWithClientAuthority(go, connectionToClient);
     
     }
