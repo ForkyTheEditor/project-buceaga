@@ -13,13 +13,17 @@ public class ResourceManager : NetworkBehaviour
     //The team this object belongs to 
     private Teams team;
     
-    
     ResourceInventory resourceInventory;
 
-    private void Start()
+    private void Awake()
     {
         resourceInventory = gameObject.GetComponent<ResourceInventory>();
    
+    }
+    private void Start()
+    {
+        //Set this manager as the team's resource manager in the GameManager
+        GameManager.SetResourceManager(team, this.gameObject);
     }
 
     //This checks if the players are within range to put the resources in the base

@@ -10,9 +10,16 @@ public class UIPlayer : MonoBehaviour
     //in the future we might want the player to be able to click on other units and see their inventory
     // like in DOTA for instance)
     private CharacterStats playerStats;
+    //The team of the player
+    //This is relevant because perhaps you do not want to display the enemy's inventories, even though the player clicks on them
+    private Teams playerTeam;
 
-    private ResourceInventory resourceInv;
-    [SerializeField] private TextMeshProUGUI energyResourceText;
+    private ResourceInventory playerResourceInv;
+    [SerializeField] private TextMeshProUGUI playerEnergyResourceText;
+    private ResourceInventory teamResourceInv;
+    [SerializeField] private TextMeshProUGUI teamEnergyResourceText;
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -32,31 +39,30 @@ public class UIPlayer : MonoBehaviour
         {
             Debug.LogError("Local player instance couldn't be found!", this);
         }
-        resourceInv = playerStats.GetComponent<ResourceInventory>();
-        
+        playerResourceInv = playerStats.GetComponent<ResourceInventory>();
+        //Get the team of the player
+        playerTeam = playerStats.team;
+        //Check if the team is neutral (no resource manager for the neutral team) 
+        if( playerTeam != Teams.Neutral)
+        {
+            //Get the relevant resource manager's inventory (the team's resource inventory)
+            teamResourceInv = GameManager.GetResourceManager(playerTeam).GetComponent<ResourceInventory>();
+
+        }
     } 
 
     // Update is called once per frame
     void LateUpdate()
     {
         //Check for errors
-        if (energyResourceText == null || resourceInv == null)
+        if (playerEnergyResourceText == null || playerResourceInv == null || teamResourceInv == null)
         {
             return;
         }
 
         //Load the energy resource
-        energyResourceText.text = resourceInv.GetResource(ResourceTypes.Energy).ToString();
+        playerEnergyResourceText.text = playerResourceInv.GetResource(ResourceTypes.Energy).ToString();
+        teamEnergyResourceText.text = teamResourceInv.GetResource(ResourceTypes.Energy).ToString();
 
-        //NOT NEEDED ANYMORE (FOR NOW)
-        ////Show all resource types
-        //foreach (ResourceTypes rt in Enum.GetValues(typeof(ResourceTypes)))
-        //{
-        //    string resourceName = rt.ToString();
-        //    int playerResourceAmount = resourceInv.GetResource(rt);
-
-        //    resourceText.text += resourceName + ":" + playerResourceAmount.ToString();
-
-        //}
     }
 }
