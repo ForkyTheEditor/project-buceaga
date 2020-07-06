@@ -32,16 +32,6 @@ public class CharacterStats : NetworkBehaviour
         } 
         set { 
             _team = value;
-            //------TEMPORARY------
-            if (_team == Teams.Modernists){
-                gameObject.GetComponentInChildren<MeshRenderer>().material.color = Color.green;
-
-            }
-            else
-            {
-                gameObject.GetComponentInChildren<MeshRenderer>().material.color = Color.cyan;
-            }
-            //------/TEMPORARY------
 
         }
     }

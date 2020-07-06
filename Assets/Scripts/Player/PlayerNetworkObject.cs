@@ -37,31 +37,6 @@ public class PlayerNetworkObject : NetworkBehaviour
         //First instantiate the prefab, do any modifications/settings to it and then SPAWN it on the server
         GameObject go = Instantiate(playerPrefab);
 
-        //-----------<TEMPORARY TEAM SELECT AND MATERIAL SELECT>---------------
-
-        switch (temporaryTeamSelect % 2) {
-
-            case 0:
-                {
-
-                    go.GetComponent<CharacterStats>().team = Teams.Modernists;
-
-                    temporaryTeamSelect++;
-                    break;
-                }
-            case 1:
-                {
-                    go.GetComponent<CharacterStats>().team = Teams.Traditionalists;
-
-                    temporaryTeamSelect++;
-                    break;
-                }
-        
-        }
-
-
-        //-----------</TEMPORARY TEAM SELECT AND MATERIAL SELECT>---------------
-
       
         NetworkServer.SpawnWithClientAuthority(go, connectionToClient);
     
