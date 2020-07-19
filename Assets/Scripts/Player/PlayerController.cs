@@ -12,13 +12,15 @@ using UnityEngine.Networking;
 [RequireComponent(typeof(PlayerAttackingMotor))]
 [RequireComponent(typeof(ResourceInventory))]
 [RequireComponent(typeof(PlayerAnimationMotor))]
+[RequireComponent(typeof(Rigidbody))]
 public class PlayerController : NetworkBehaviour
 {
     //An reference to the main camera 
     Camera cam;
     //A reference to the NavMeshAgent
     NavMeshAgent navAgent;
-
+    //Reference to the rigidbody attached to this gameobject
+    private Rigidbody rb;
     //A reference to the character's stats
     private CharacterStats charStats;
     //A reference to the component that handles all the interaction with interactables (buildings etc.)
@@ -28,6 +30,17 @@ public class PlayerController : NetworkBehaviour
 
     //The target towards which the player is walking
     private Transform currentNavTarget;
+
+    [SyncVar]
+    private Vector3 syncedPosition; // Position sent to the server for smooth and correct movement between clients
+    [SyncVar]
+    private Quaternion syncedRotation; // Rotation sent to the server - || -  
+
+    private Vector3 prevPos; //The previous position of this object
+    private Vector3 currentPos; //The current position of the object; Together the two are used to determine if the player has moved;
+
+    private float updateInterval;
+    private float updatePeriod = 0.11f; //The period of time between each; currently ~ 9 times / second
 
     //Is the player walking (actually moving, if movement is impossible, this will still be false) towards something? 
     private bool _isRunning = false;
@@ -42,6 +55,10 @@ public class PlayerController : NetworkBehaviour
         interactionMotor = gameObject.GetComponent<PlayerInteractionMotor>();
         attackingMotor = gameObject.GetComponent<PlayerAttackingMotor>();
         animationMotor = gameObject.GetComponent<PlayerAnimationMotor>();
+        rb = gameObject.GetComponent<Rigidbody>();
+
+        prevPos = transform.position;
+        currentPos = transform.position;
     }
 
     public override void OnStartAuthority()
@@ -59,20 +76,56 @@ public class PlayerController : NetworkBehaviour
         //Check if the client running this code has authority over this gameobject
         if (!hasAuthority)
         {
+            //Interpolate the position and rotation for client objects with no authority for smooth movement / rotation
+            transform.position = Vector3.Lerp(transform.position, syncedPosition, 0.08f);
+            transform.rotation = Quaternion.Lerp(transform.rotation, syncedRotation, 0.08f);
+
             //You do not have authority. Get the hell out of here
             return;
         }
-        
+
         //Check if the player pressed the right mouse button 
         //The right mouse button is the "Default Interaction" button
         CheckRightMouseClick();
-        //Update the player's current state
-        UpdatePlayerState();
+
+        //Timer for the sync update
+        updateInterval += Time.deltaTime;
+        if (updateInterval >= updatePeriod)
+        {
+            //Sync the movement and the rotation
+            CmdSyncPositionRotation(transform.position, transform.rotation);
+
+            //Reset timer
+            updateInterval = 0;
+        }
+
     }
 
     private void LateUpdate()
-    {
+    {  
+        //Update the player's current state, before checking for authority, as you want to update the state across ALL clients (for animations, syncing etc.)
+        UpdatePlayerState();
+
+        //Check if the client running this code has authority over this gameobject
+        if (!hasAuthority)
+        {
+            //You do not have authority. Get the hell out of here
+            return;
+        }
+
         FollowNavTarget();
+    }
+
+    /// <summary>
+    /// Syncs the position and rotation of the player from client to server
+    /// </summary>
+    /// <param name="position"></param>
+    /// <param name="rotation"></param>
+    [Command]
+    void CmdSyncPositionRotation(Vector3 position, Quaternion rotation)
+    {
+        syncedPosition = position;
+        syncedRotation = rotation;
     }
 
     void CheckRightMouseClick()
@@ -100,6 +153,7 @@ public class PlayerController : NetworkBehaviour
                 {
                     case "Player":
                         {
+                            //Check if we didn't click ourselves
                             if(!GameObject.ReferenceEquals(hitInfo.transform.gameObject, this.gameObject))
                             {
 
@@ -138,19 +192,24 @@ public class PlayerController : NetworkBehaviour
     private void UpdatePlayerState()
     {
 
-        //Check if the player is ACTUALLY moving
-        if(navAgent.velocity != Vector3.zero)
+        //Update the current position
+        currentPos = transform.position;
+
+        //Check if the player is ACTUALLY moving, by checking if the position has changed
+        if(prevPos != currentPos)
         {
             _isRunning = true;
+            prevPos = currentPos;
+            
         }
         else
         {
             _isRunning = false;
         }
-
+        
 
     }
-
+    
     /// <summary>
     /// Removes the focuses from all the control motors
     /// </summary>
