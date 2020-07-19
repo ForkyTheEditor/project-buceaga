@@ -196,7 +196,8 @@ public class PlayerController : NetworkBehaviour
         currentPos = transform.position;
 
         //Check if the player is ACTUALLY moving, by checking if the position has changed
-        if(prevPos != currentPos)
+        //Also check that they are INTENTIONALLY moving
+        if(prevPos != currentPos )
         {
             _isRunning = true;
             prevPos = currentPos;
@@ -257,11 +258,24 @@ public class PlayerController : NetworkBehaviour
     //Follows the specified target; if the target moves its position, it follows it indefinitely
     private void FollowNavTarget()
     {
+        //Check for errors
         if(currentNavTarget != null)
         {
-            
-            navAgent.SetDestination(currentNavTarget.position);
-          
+            //Check that the target isn't already within a reasonable range, so no weird movement happens
+            //TODO: Make this distance a variable (possibly based on the other interaction range variables)
+            if ((currentNavTarget.position - transform.position).magnitude < 1.5f )
+            {
+                PausePlayerMovement();
+            }
+            else
+            {
+                ResumePlayerMovement();
+                //Go to target's current position
+                navAgent.SetDestination(currentNavTarget.position);
+
+            }
+
+
         }
     }
 
