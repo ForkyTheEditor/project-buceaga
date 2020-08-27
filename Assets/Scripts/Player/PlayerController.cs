@@ -27,7 +27,7 @@ public class PlayerController : NetworkBehaviour
     private PlayerInteractionMotor interactionMotor;
     private PlayerAttackingMotor attackingMotor;
     private PlayerAnimationMotor animationMotor;
-
+    
     //The target towards which the player is walking
     private Transform currentNavTarget;
 

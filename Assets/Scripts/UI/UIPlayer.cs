@@ -18,12 +18,13 @@ public class UIPlayer : MonoBehaviour
     [SerializeField] private TextMeshProUGUI playerEnergyResourceText;
     private ResourceInventory teamResourceInv;
     [SerializeField] private TextMeshProUGUI teamEnergyResourceText;
-
+    //Reference to the UI for buildings and constructions
+    [SerializeField] private GameObject playerBuildingUI;
 
 
     // Start is called before the first frame update
     void Start()
-    {
+    {   
         //Initialize the UI components
         StartCoroutine(InitializeComponents());
     }
@@ -47,8 +48,10 @@ public class UIPlayer : MonoBehaviour
         {
             //Get the relevant resource manager's inventory (the team's resource inventory)
             teamResourceInv = GameManager.GetResourceManager(playerTeam).GetComponent<ResourceInventory>();
-
         }
+
+        //TODO: Subscribe to a player event so that when the player pushes the hotkey for the Building UI this UI toggles (possibly based on proximity to base)
+
     } 
 
     // Update is called once per frame

@@ -8,9 +8,11 @@ public class GameManager : MonoBehaviour
     private static GameManager instance;
 
     private static GameObject _localPlayerInstance = null;
+    //Reference to the local player
     public static GameObject localPlayerInstance { get { return _localPlayerInstance; } }
     //The dictionary containing all the resource managers, sorted by their team
     private static Dictionary<Teams, GameObject> _resourceManagersInstances = new Dictionary<Teams, GameObject>();
+    
 
     //INSTANTIATE THE OBJECT
     private void Awake()
