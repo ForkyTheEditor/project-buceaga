@@ -13,7 +13,7 @@ public class ResourceInventory : NetworkBehaviour
     //ALWAYS INITIALIZE THESE WITH THE VALUES NEEDED
     private SyncListInt resourceAmounts = new SyncListInt();
 
-    private void Start()
+    private void Awake()
     {
         //Initialize the resource list
         ResourcesEnum.InitializeResourceList(resourceAmounts);

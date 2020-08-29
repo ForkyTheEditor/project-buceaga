@@ -40,11 +40,18 @@ public class PlayerController : NetworkBehaviour
     private Vector3 currentPos; //The current position of the object; Together the two are used to determine if the player has moved;
 
     private float updateInterval;
-    private float updatePeriod = 0.11f; //The period of time between each; currently ~ 9 times / second
+    private float updatePeriod = 0.11f; //The period of time between each update; currently ~ 9 times / second
 
     //Is the player walking (actually moving, if movement is impossible, this will still be false) towards something? 
     private bool _isRunning = false;
     public bool isRunning { get { return _isRunning; } }
+
+    //Delegate to handle hotkey presses by the player; For now it only takes in the keycode of the key pressed, but in the future we may have to add more complex behaviour
+    //for instance taking in macros such as CTRL + ALT + W 
+    public delegate void HotkeyHandler (GameObject source, KeyCode kc);
+    //Event raised when a certain hotkey is pressed
+    public event HotkeyHandler HotkeyPressed;
+    
 
     //Initialize components in awake so that they're ready if other gameobjects might need them (not the case, just good practice)
     void Awake()
@@ -97,6 +104,12 @@ public class PlayerController : NetworkBehaviour
 
             //Reset timer
             updateInterval = 0;
+        }
+
+        //I couldn't figure out a better way to do this for now and it doesn't really matter for the prototype; So for now enjoy this ugliness
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            HotkeyPressed(this.gameObject, KeyCode.B);
         }
 
     }
