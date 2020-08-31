@@ -38,18 +38,18 @@ public class ResourceManager : NetworkBehaviour
         if (other.tag == "Player" && other.GetComponent<CharacterStats>().team == this.team)
         {
 
-            ResourceInventory enemyInventory = other.GetComponent<ResourceInventory>();
+            ResourceInventory playerInventory = other.GetComponent<ResourceInventory>();
             //Check for loading error
-            if(enemyInventory == null)
+            if(playerInventory == null)
             {
-                print(this.name + ": Enemy inventory failed to load!");
+                print(this.name + ": Player inventory failed to load!");
                 return;
             }
 
             //Take all the resources from their inventory
             foreach(ResourceTypes rt in Enum.GetValues(typeof(ResourceTypes)))
             {
-                this.resourceInventory.AddResource(rt, enemyInventory.TakeEntireResource(rt));
+                this.resourceInventory.AddResource(rt, playerInventory.TakeEntireResource(rt));
             }
 
         }

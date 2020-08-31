@@ -14,7 +14,7 @@ public class PlayerAttackingMotor : NetworkBehaviour
     private bool canAttack = true;
 
     [SerializeField]
-    private float attackRange = 0.3f;
+    private float attackRange = 0.6f;
 
     private float attackTimer = 0f;
 
@@ -46,6 +46,7 @@ public class PlayerAttackingMotor : NetworkBehaviour
 
     void ActOnAttackingFocus()
     {
+        //Attack timer
         if (!canAttack)
         {
             attackTimer -= Time.deltaTime;
