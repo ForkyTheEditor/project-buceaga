@@ -28,7 +28,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4301772548717874680}
-  - component: {fileID: 5977878256031008828}
   - component: {fileID: 4301772548717874681}
   - component: {fileID: 2985469844163237414}
   - component: {fileID: 5518313007941729624}
@@ -39,6 +38,7 @@ GameObject:
   - component: {fileID: 6117657285119295478}
   - component: {fileID: 685215190925115216}
   - component: {fileID: 4591360807848000098}
+  - component: {fileID: -5360753531687437745}
   m_Layer: 0
   m_Name: TestPlayer
   m_TagString: Player
@@ -62,39 +62,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5977878256031008828
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4301772548717874683}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8258ea15b8f74c4889ce485d21cbbb1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 0
-    i1: 0
-    i2: 0
-    i3: 0
-    i4: 0
-    i5: 0
-    i6: 0
-    i7: 0
-    i8: 0
-    i9: 0
-    i10: 0
-    i11: 0
-    i12: 0
-    i13: 0
-    i14: 0
-    i15: 0
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 1
 --- !u!195 &4301772548717874681
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -159,6 +126,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4f30bb1b5d347645ba9864fe3f00e31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
 --- !u!114 &2729254931895982919
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -171,6 +140,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09b6a2e52be89694d9e01dba38dabcb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   _currentHealth: 100
   _maxHealth: 100
   _team: 0
@@ -188,6 +159,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09a80f7dc8d60a74ba9a9c493be19a2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   currentInteractFocus: {fileID: 0}
   miningRange: 2.5
 --- !u!114 &-6013303305256591093
@@ -202,6 +175,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 259898136176bca45b8c33cd064c041a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   attackRange: 1
 --- !u!114 &6117657285119295478
 MonoBehaviour:
@@ -215,6 +190,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0636b71fdf8bac4448a0ed2ee2432660, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
 --- !u!114 &685215190925115216
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -227,6 +204,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 001c8c53883b9c347a0734fcd468737d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   networkId: {fileID: 0}
 --- !u!114 &4591360807848000098
 MonoBehaviour:
@@ -240,6 +219,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aaf245d6e807dad4191ea544d5880378, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-5360753531687437745
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4301772548717874683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 0
+  serverOnly: 0
+  m_AssetId: 
+  hasSpawned: 0
 --- !u!1001 &2992798886879872880
 PrefabInstance:
   m_ObjectHideFlags: 0

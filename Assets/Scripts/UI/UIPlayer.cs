@@ -48,7 +48,7 @@ public class UIPlayer : MonoBehaviour
         //Get the team of the player
         playerTeam = playerStats.team;
         //Check if the team is neutral (no resource manager for the neutral team) 
-        if( playerTeam != Teams.Neutral)
+        if(playerTeam != Teams.Neutral)
         {
             //Get the relevant resource manager's inventory (the team's resource inventory)
             teamResourceInv = GameManager.GetResourceManager(playerTeam).GetComponent<ResourceInventory>();
@@ -77,8 +77,11 @@ public class UIPlayer : MonoBehaviour
     //Toggles the building UI active / inactive
     private void ToggleBuildingUI(GameObject source, KeyCode kc)
     {
+        //Check for the correct hotkey
+        if(kc == KeyCode.B)
+        {
+            playerBuildingUI.SetActive(!playerBuildingUI.activeSelf);
 
-        playerBuildingUI.SetActive(!playerBuildingUI.activeSelf);
-
+        }
     }
 }

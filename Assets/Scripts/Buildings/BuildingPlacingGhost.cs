@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Networking;
+using Mirror;
 
 /// <summary>
 /// GameObject that tracks mouse pointer and checks for correct placement of a building. Gets destroyed once the player actually places the building
