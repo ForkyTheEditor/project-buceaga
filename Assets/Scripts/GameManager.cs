@@ -10,6 +10,11 @@ public class GameManager : MonoBehaviour
     private static GameObject _localPlayerInstance = null;
     //Reference to the local player
     public static GameObject localPlayerInstance { get { return _localPlayerInstance; } }
+
+    private static GameObject _localPlayerNetworkInstance = null;
+    //Reference to the local player network object
+    public static GameObject localPlayerNetworkInstance { get { return _localPlayerNetworkInstance; } }
+
     //The dictionary containing all the resource managers, sorted by their team
     private static Dictionary<Teams, GameObject> _resourceManagersInstances = new Dictionary<Teams, GameObject>();
     
@@ -39,6 +44,14 @@ public class GameManager : MonoBehaviour
         _localPlayerInstance = newPlayer;
     }
     /// <summary>
+    /// Set the local player network object. This should only be called at the start by the instance itself.
+    /// </summary>
+    /// <param name="networkObject"></param>
+    public static void SetLocalPlayerNetworkObject(GameObject networkObject)
+    {
+        _localPlayerNetworkInstance = networkObject;
+    }
+    /// <summary>
     /// Returns the resource manager for the specified team
     /// </summary>
     /// <param name="team">The team the manager belongs to</param>
@@ -52,4 +65,5 @@ public class GameManager : MonoBehaviour
         _resourceManagersInstances[team] = newManager;
     }
 
+    
 }

@@ -1,26 +1,41 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 /// <summary>
 /// GameObject that tracks mouse pointer and checks for correct placement of a building. Gets destroyed once the player actually places the building
 /// </summary>
-public class BuildingPlacingGhost : MonoBehaviour
+public class BuildingPlacingGhost : NetworkBehaviour
 {
 
     private Camera mainCamera;
-    private MeshRenderer renderer;
+    private MeshRenderer renderComponent;
 
     [SerializeField] private Material correctLocationMat;   //Material for when the ghost is in an correct place
     [SerializeField] private Material incorrectLocationMat; //Material for when the ghost is in a incorrect place
-    [SerializeField] private bool canBePlaced = true; //Can this object be placed in its current location?
+    [SerializeField] private bool canBePlaced = true;       //Can this object be placed in its current location?
+    [SerializeField] private GameObject actualBuildingObject; //The actual building this object represents
 
     void Awake()
     {
-        renderer = gameObject.GetComponent<MeshRenderer>();
+        renderComponent = gameObject.GetComponent<MeshRenderer>();
         mainCamera = Camera.main;
 
-        renderer.material = correctLocationMat;
+        renderComponent.material = correctLocationMat;
+    }
+
+    private void Update()
+    {
+        //If the user left clicks and the building can be placed, it will spawn the actual building and destroy this ghost
+        if (canBePlaced && Input.GetMouseButtonDown(0))
+        {
+            //Spawn the object from the server
+            SpawnBuilding();
+
+            Destroy(this.gameObject);
+
+        }
     }
 
     void FixedUpdate()
@@ -41,11 +56,29 @@ public class BuildingPlacingGhost : MonoBehaviour
 
     }
 
+    private void SpawnBuilding()
+    {
+        //Take position, rotation and scale from ghost object
+        Transform buildingTransform = this.transform;
+
+        PlayerNetworkObject networkObj = GameManager.localPlayerNetworkInstance.GetComponent<PlayerNetworkObject>();
+
+        if (networkObj == null)
+        {
+            Debug.LogError("Player Network Object couldn't be found!");
+
+        }
+
+        //Send a command to the player network object to spawn my prefab
+        networkObj.SpawnObjectNoAuthority(actualBuildingObject, buildingTransform.position, buildingTransform.rotation);
+
+    }
+
     //If a collider enters the ghost, then it can't be placed
     private void OnTriggerEnter(Collider other)
     {
         //Change material to the incorrect place
-        renderer.material = incorrectLocationMat;
+        renderComponent.material = incorrectLocationMat;
 
         canBePlaced = false;
 
@@ -55,7 +88,7 @@ public class BuildingPlacingGhost : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         //Change material to the correct place
-        renderer.material = correctLocationMat;
+        renderComponent.material = correctLocationMat;
 
         canBePlaced = true;
     }
