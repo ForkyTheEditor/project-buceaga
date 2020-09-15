@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.Networking;
+using Mirror;
 
 [RequireComponent(typeof(NetworkIdentity))]
 //The component of all interactable objects in the game

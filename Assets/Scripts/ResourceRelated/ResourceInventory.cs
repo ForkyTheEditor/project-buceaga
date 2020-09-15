@@ -2,8 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Networking;
-
+using Mirror;
 
 [RequireComponent(typeof(NetworkIdentity))]
 public class ResourceInventory : NetworkBehaviour
@@ -15,6 +14,12 @@ public class ResourceInventory : NetworkBehaviour
 
     private void Start()
     {
+        //This should only be managed by the server
+        if (!isServer)
+        {
+            return;
+        }
+
         //Initialize the resource list
         ResourcesEnum.InitializeResourceList(resourceAmounts);
 

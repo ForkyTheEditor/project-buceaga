@@ -1,16 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Networking;
+using Mirror;
 
 [RequireComponent(typeof(NetworkIdentity))]
 public class PlayerNetworkObject : NetworkBehaviour
 {
 
     [SerializeField] private GameObject playerPrefab;
-
-
-    private static int temporaryTeamSelect = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -48,7 +45,7 @@ public class PlayerNetworkObject : NetworkBehaviour
         go.GetComponent<CharacterStats>().team = Teams.Modernists;
         //----/TEMPORARY-----
 
-        NetworkServer.SpawnWithClientAuthority(go, connectionToClient);
+        NetworkServer.Spawn(go, connectionToClient);
     
     }
 

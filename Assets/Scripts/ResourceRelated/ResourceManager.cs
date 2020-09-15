@@ -2,8 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Networking;
-using UnityEngine.Networking.Types;
+using Mirror;
 
 [RequireComponent(typeof(ResourceInventory))]
 [RequireComponent(typeof(NetworkIdentity))]
@@ -11,7 +10,7 @@ public class ResourceManager : NetworkBehaviour
 {
     [SerializeField]
     //The team this object belongs to 
-    private Teams team;
+    private Teams team = Teams.Neutral;
     
     ResourceInventory resourceInventory;
 

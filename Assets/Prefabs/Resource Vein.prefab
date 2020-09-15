@@ -47,6 +47,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -71,6 +72,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &5928305277564302031
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -91,7 +93,7 @@ GameObject:
   - component: {fileID: 6995573030984548897}
   - component: {fileID: 6995573030984548900}
   - component: {fileID: 6995573030984548901}
-  - component: {fileID: 8718220418402163658}
+  - component: {fileID: -4453005733138398706}
   m_Layer: 8
   m_Name: Resource Vein
   m_TagString: Resource
@@ -140,8 +142,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 442ddc224e38e244e8066358e4c2d280, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   _resourceType: 0
   maxInteractingObjects: 1
+  miningTick: 1
+  miningAmount: 10
 --- !u!114 &6995573030984548901
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -154,10 +160,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e4acfaa5acb7d54da5e1148efda6ffa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  networkId: {fileID: 0}
   isAvailable: 1
   interactingObjects: []
   maxInteractingObjects: 1
---- !u!114 &8718220418402163658
+--- !u!114 &-4453005733138398706
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -166,30 +175,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 6995573030984548911}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8258ea15b8f74c4889ce485d21cbbb1, type: 3}
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 0
-    i1: 0
-    i2: 0
-    i3: 0
-    i4: 0
-    i5: 0
-    i6: 0
-    i7: 0
-    i8: 0
-    i9: 0
-    i10: 0
-    i11: 0
-    i12: 0
-    i13: 0
-    i14: 0
-    i15: 0
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 0
+  sceneId: 0
+  serverOnly: 0
+  m_AssetId: 
+  hasSpawned: 0
 --- !u!1001 &7595660861373038369
 PrefabInstance:
   m_ObjectHideFlags: 0

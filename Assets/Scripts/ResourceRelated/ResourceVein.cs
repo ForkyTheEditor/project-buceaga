@@ -2,9 +2,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Networking;
+using Mirror;
 
 [RequireComponent(typeof(Interactable))]
+[RequireComponent(typeof(NetworkIdentity))]
 public class ResourceVein : NetworkBehaviour
 {
 
