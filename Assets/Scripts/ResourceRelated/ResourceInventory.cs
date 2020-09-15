@@ -14,6 +14,12 @@ public class ResourceInventory : NetworkBehaviour
 
     private void Start()
     {
+        //This should only be managed by the server
+        if (!isServer)
+        {
+            return;
+        }
+
         //Initialize the resource list
         ResourcesEnum.InitializeResourceList(resourceAmounts);
 

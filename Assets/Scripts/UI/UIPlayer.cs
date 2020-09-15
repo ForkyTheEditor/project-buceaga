@@ -52,6 +52,11 @@ public class UIPlayer : MonoBehaviour
         {
             //Get the relevant resource manager's inventory (the team's resource inventory)
             teamResourceInv = GameManager.GetResourceManager(playerTeam).GetComponent<ResourceInventory>();
+
+            if(teamResourceInv == null)
+            {
+                Debug.LogError("Team Resource Inventory not found!");
+            }
         }
 
         //Subscribe to a player event so that when the player pushes the hotkey for the Building UI this UI toggles (possibly based on proximity to base)
