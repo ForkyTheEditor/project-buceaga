@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Mirror;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -17,7 +18,10 @@ public class GameManager : MonoBehaviour
 
     //The dictionary containing all the resource managers, sorted by their team
     private static Dictionary<Teams, GameObject> _resourceManagersInstances = new Dictionary<Teams, GameObject>();
-    
+
+    private static NetworkManager _localNetworkManager = null;
+    //Reference to the network manager
+    public static NetworkManager localNetworkManager { get { return _localNetworkManager; } }
 
     //INSTANTIATE THE OBJECT
     private void Awake()
@@ -33,6 +37,13 @@ public class GameManager : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(this);
         }
+        //Set the reference to the network manager
+        SetNetworkManager(GameObject.FindGameObjectWithTag("NetworkManager").GetComponent<NetworkManager>());
+        if(localNetworkManager == null)
+        {
+            Debug.LogError("Network Manager not found!");
+        }
+
     }
 
     /// <summary>
@@ -65,5 +76,10 @@ public class GameManager : MonoBehaviour
         _resourceManagersInstances[team] = newManager;
     }
 
-    
+
+    private void SetNetworkManager(NetworkManager networkMan)
+    {
+        _localNetworkManager = networkMan;
+    }
+
 }

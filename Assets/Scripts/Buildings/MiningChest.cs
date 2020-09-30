@@ -8,6 +8,7 @@ using Mirror;
 [RequireComponent(typeof(NetworkIdentity))]
 public class MiningChest : NetworkBehaviour
 {
+   
     //The resources in the chest
     private ResourceInventory chestInventory;
 

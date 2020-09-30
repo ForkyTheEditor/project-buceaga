@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
+using UnityEditor;
+using System;
 
 [RequireComponent(typeof(NetworkIdentity))]
 public class PlayerNetworkObject : NetworkBehaviour
@@ -61,14 +63,15 @@ public class PlayerNetworkObject : NetworkBehaviour
     [Command]
     void CmdSpawnObjectNoAuthority(GameObject registeredPrefab, Vector3 newPosition, Quaternion newRotation)
     {
-
         GameObject go = Instantiate(registeredPrefab);
+        
         //Use the correct Transform
         go.transform.position = newPosition;
         go.transform.rotation = newRotation;
         //Spawn the object without authority
         NetworkServer.Spawn(go);
 
+        
     }
    
 }

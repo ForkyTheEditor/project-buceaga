@@ -15,6 +15,7 @@ public class GhostInstantiator : MonoBehaviour
         {
             Instantiate(prefab, Input.mousePosition, prefab.transform.rotation);
 
+            //Deactivate this canvas
             this.gameObject.SetActive(false);
         }
     }
