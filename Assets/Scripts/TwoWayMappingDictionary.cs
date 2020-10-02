@@ -28,6 +28,17 @@ public class TwoWayMappingDictionary<T, K>
         _secondDict = new Dictionary<K, T>();
     }
 
+    /// <summary>
+    /// Add two mapped values to the dictionary. For instance: 1 - DoorObject; "Map" - MapObject;
+    /// </summary>
+    /// <param name="first"></param>
+    /// <param name="second"></param>
+    public void Add(T first, K second)
+    {
+        _firstDict.Add(first, second);
+        _secondDict.Add(second, first);
+    }
+
     //Indexers
     public K this[T index]
     {

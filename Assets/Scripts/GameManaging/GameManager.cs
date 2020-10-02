@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(SpawnablesIDMap))]
 public class GameManager : MonoBehaviour
 {
     //This is a singleton object, check for other instances and DESTROY them
@@ -22,6 +23,9 @@ public class GameManager : MonoBehaviour
     private static NetworkManager _localNetworkManager = null;
     //Reference to the network manager
     public static NetworkManager localNetworkManager { get { return _localNetworkManager; } }
+
+    public static SpawnablesIDMap spawnIDMap;
+    
 
     //INSTANTIATE THE OBJECT
     private void Awake()
@@ -43,6 +47,12 @@ public class GameManager : MonoBehaviour
         {
             Debug.LogError("Network Manager not found!");
         }
+
+        //Get a reference to the spawning look-up table
+        spawnIDMap = this.GetComponent<SpawnablesIDMap>();
+
+
+        
 
     }
 

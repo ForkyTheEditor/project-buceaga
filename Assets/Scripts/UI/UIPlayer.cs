@@ -64,7 +64,6 @@ public class UIPlayer : MonoBehaviour
 
     } 
 
-    // Update is called once per frame
     void LateUpdate()
     {
         //Check for errors

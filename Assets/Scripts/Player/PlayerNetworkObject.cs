@@ -55,15 +55,15 @@ public class PlayerNetworkObject : NetworkBehaviour
     /// Spawns the registered prefab at the given location and with the given rotation.
     /// </summary>
     /// <param name="registeredPrefab"></param>
-    public void SpawnObjectNoAuthority(GameObject registeredPrefab, Vector3 newPosition, Quaternion newRotation)
+    public void SpawnObjectNoAuthority(int prefabID, Vector3 newPosition, Quaternion newRotation)
     {
-        CmdSpawnObjectNoAuthority(registeredPrefab, newPosition, newRotation);
+        CmdSpawnObjectNoAuthority(prefabID, newPosition, newRotation);
     }
 
     [Command]
-    void CmdSpawnObjectNoAuthority(GameObject registeredPrefab, Vector3 newPosition, Quaternion newRotation)
+    void CmdSpawnObjectNoAuthority(int prefabID, Vector3 newPosition, Quaternion newRotation)
     {
-        GameObject go = Instantiate(registeredPrefab);
+        GameObject go = Instantiate(GameManager.spawnIDMap.GetPrefab(prefabID));
         
         //Use the correct Transform
         go.transform.position = newPosition;
