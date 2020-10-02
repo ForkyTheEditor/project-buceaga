@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Resource
   - Ground
+  - NetworkManager
   layers:
   - Default
   - TransparentFX
@@ -16,7 +17,7 @@ TagManager:
   - 
   - 
   - Resources
-  - 
+  - Ground
   - 
   - 
   - 
