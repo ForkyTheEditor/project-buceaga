@@ -34,7 +34,7 @@ public class UIPlayer : MonoBehaviour
 
     IEnumerator InitializeComponents()
     {
-        
+
         //Wait until the local player instance is set
         yield return new WaitUntil(() => GameManager.localPlayerInstance != null);
         //Get instance of the local player for starters!
@@ -48,27 +48,27 @@ public class UIPlayer : MonoBehaviour
         //Get the team of the player
         playerTeam = playerStats.team;
         //Check if the team is neutral (no resource manager for the neutral team) 
-        if(playerTeam != Teams.Neutral)
+        if (playerTeam != Teams.Neutral)
         {
             //Get the relevant resource manager's inventory (the team's resource inventory)
             teamResourceInv = GameManager.GetResourceManager(playerTeam).GetComponent<ResourceInventory>();
 
-            if(teamResourceInv == null)
+            if (teamResourceInv == null)
             {
                 Debug.LogError("Team Resource Inventory not found!");
             }
         }
-
-        //Subscribe to a player event so that when the player pushes the hotkey for the Building UI this UI toggles (possibly based on proximity to base)
-        playerController.HotkeyPressed += ToggleBuildingUI;
-
+            //Subscribe to a player event so that when the player pushes the hotkey for the Building UI this UI toggles (possibly based on proximity to base)
+            playerController.HotkeyPressed += ToggleBuildingUI;
     } 
 
     void LateUpdate()
     {
         //Check for errors
+        //If this is the case you might have to reinitialize components 
         if (playerEnergyResourceText == null || playerResourceInv == null || teamResourceInv == null)
         {
+            StartCoroutine(InitializeComponents());
             return;
         }
 
@@ -88,4 +88,7 @@ public class UIPlayer : MonoBehaviour
 
         }
     }
+
+    
+
 }

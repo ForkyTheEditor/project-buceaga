@@ -12,7 +12,8 @@ public class ResourceInventory : NetworkBehaviour
     //ALWAYS INITIALIZE THESE WITH THE VALUES NEEDED
     private SyncListInt resourceAmounts = new SyncListInt();
 
-    private void Start()
+    
+    public override void OnStartClient()
     {
         //This should only be managed by the server
         if (!isServer)

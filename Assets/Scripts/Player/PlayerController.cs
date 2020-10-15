@@ -108,7 +108,10 @@ public class PlayerController : NetworkBehaviour
         //I couldn't figure out a better way to do this for now and it doesn't really matter for the prototype; So for now enjoy this ugliness
         if (Input.GetKeyDown(KeyCode.B))
         {
-            HotkeyPressed(this.gameObject, KeyCode.B);
+            if(HotkeyPressed != null)
+            {
+                HotkeyPressed(this.gameObject, KeyCode.B);
+            }
         }
 
         
