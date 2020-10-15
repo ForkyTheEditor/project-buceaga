@@ -108,13 +108,17 @@ public class PlayerController : NetworkBehaviour
         //I couldn't figure out a better way to do this for now and it doesn't really matter for the prototype; So for now enjoy this ugliness
         if (Input.GetKeyDown(KeyCode.B))
         {
-            HotkeyPressed(this.gameObject, KeyCode.B);
+            if(HotkeyPressed != null)
+            {
+                HotkeyPressed(this.gameObject, KeyCode.B);
+            }
+            
         }
 
         
 
     }
-
+    
     private void LateUpdate()
     {  
         //Update the player's current state, before checking for authority, as you want to update the state across ALL clients (for animations, syncing etc.)
@@ -128,6 +132,15 @@ public class PlayerController : NetworkBehaviour
         }
 
         FollowNavTarget();
+    }
+
+    //Disconnected from server; Unload any data to prevent memory leaks
+    public override void OnStopClient()
+    {
+        base.OnStopClient();
+
+        //Clear the hotkey event handler, as the UI classes are not networked thus have no idea when the client is connected or disconnected
+        HotkeyPressed = null;
     }
 
     /// <summary>
