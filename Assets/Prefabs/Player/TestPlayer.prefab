@@ -219,6 +219,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aaf245d6e807dad4191ea544d5880378, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dustPoofGroundClick: {fileID: 5342227091204394779, guid: 0c477c7d2a6fadc4182d9723ff67be0b,
+    type: 3}
 --- !u!114 &-5360753531687437745
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -447,6 +449,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Health Bar
+      objectReference: {fileID: 0}
+    - target: {fileID: 6199810885807382971, guid: 91bc770927c28d04387dc835c630623d,
+        type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6199810885807382971, guid: 91bc770927c28d04387dc835c630623d,
+        type: 3}
+      propertyPath: m_VerticalAlignment
+      value: 512
+      objectReference: {fileID: 0}
+    - target: {fileID: 6199810885807382971, guid: 91bc770927c28d04387dc835c630623d,
+        type: 3}
+      propertyPath: m_textAlignment
+      value: 65535
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 91bc770927c28d04387dc835c630623d, type: 3}

@@ -134,7 +134,7 @@ public class PlayerController : NetworkBehaviour
         FollowNavTarget();
     }
 
-    //Disconnected from server; Unload any data to prevent memory leaks
+    //Disconnected from server; Unload any data to prevent memory leaks; Treat this as a destructor
     public override void OnStopClient()
     {
         base.OnStopClient();
@@ -183,7 +183,6 @@ public class PlayerController : NetworkBehaviour
                             //Check if we didn't click ourselves
                             if(!GameObject.ReferenceEquals(hitInfo.transform.gameObject, this.gameObject))
                             {
-
                                 //We've clicked a player. Attack him!
                                 //...but only if he's on the other team! (or maybe if we implement a deny mechanic or something)
                                 if(hitInfo.transform.GetComponent<CharacterStats>().team != charStats.team)
@@ -202,6 +201,7 @@ public class PlayerController : NetworkBehaviour
                         }
                     default:
                         {
+                            
                             RemoveAllFocus();
                             break;
                         }

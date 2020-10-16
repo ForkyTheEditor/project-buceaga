@@ -10,6 +10,7 @@ public class PlayerAnimationMotor : MonoBehaviour
     //Reference to the player controller of this object; used to figure out what the player is doing (to know which animation to play) 
     private PlayerController playerController;
 
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -21,6 +22,9 @@ public class PlayerAnimationMotor : MonoBehaviour
             Debug.LogError("Player animator not found in children!");
         }
         playerController = gameObject.GetComponent<PlayerController>();
+
+
+
     }
 
     private void LateUpdate()
@@ -28,5 +32,7 @@ public class PlayerAnimationMotor : MonoBehaviour
         //Update the running state to the state of the controller
         playerAnimator.SetBool("isRunning", playerController.isRunning);
     }
+
+
 
 }
