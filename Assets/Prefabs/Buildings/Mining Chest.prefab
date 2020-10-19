@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8052091576998353163}
   - component: {fileID: 311864793389226080}
   - component: {fileID: -5981727290641209181}
+  - component: {fileID: 8147296122494676205}
   m_Layer: 0
   m_Name: Mining Chest
   m_TagString: Untagged
@@ -127,3 +128,19 @@ MonoBehaviour:
   serverOnly: 0
   m_AssetId: 
   hasSpawned: 0
+--- !u!208 &8147296122494676205
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5953749746369675148}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
