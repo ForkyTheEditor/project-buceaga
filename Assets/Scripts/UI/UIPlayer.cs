@@ -18,11 +18,11 @@ public class UIPlayer : MonoBehaviour
     private PlayerController playerController;
 
     private ResourceInventory playerResourceInv;
-    [SerializeField] private TextMeshProUGUI playerEnergyResourceText;
+    [SerializeField] private TextMeshProUGUI playerEnergyResourceText = null;
     private ResourceInventory teamResourceInv;
-    [SerializeField] private TextMeshProUGUI teamEnergyResourceText;
+    [SerializeField] private TextMeshProUGUI teamEnergyResourceText = null;
     //Reference to the UI for buildings and constructions
-    [SerializeField] private GameObject playerBuildingUI;
+    [SerializeField] private GameObject playerBuildingUI = null;
 
 
     // Start is called before the first frame update

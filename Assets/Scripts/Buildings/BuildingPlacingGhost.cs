@@ -13,10 +13,10 @@ public class BuildingPlacingGhost : NetworkBehaviour
     private Camera mainCamera;
     private MeshRenderer renderComponent;
 
-    [SerializeField] private Material correctLocationMat;   //Material for when the ghost is in an correct place
-    [SerializeField] private Material incorrectLocationMat; //Material for when the ghost is in a incorrect place
+    [SerializeField] private Material correctLocationMat = null;   //Material for when the ghost is in an correct place
+    [SerializeField] private Material incorrectLocationMat = null; //Material for when the ghost is in a incorrect place
     [SerializeField] private bool canBePlaced = true;       //Can this object be placed in its current location?
-    [SerializeField] private GameObject actualBuildingObject; //The actual building this object represents
+    [SerializeField] private GameObject actualBuildingObject = null; //The actual building this object represents
 
     void Awake()
     {

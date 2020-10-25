@@ -112,11 +112,7 @@ public class PlayerController : NetworkBehaviour
             {
                 HotkeyPressed(this.gameObject, KeyCode.B);
             }
-            
         }
-
-        
-
     }
     
     private void LateUpdate()
