@@ -9,7 +9,7 @@ using System;
 public class PlayerNetworkObject : NetworkBehaviour
 {
 
-    [SerializeField] private GameObject playerPrefab;
+    [SerializeField] private GameObject playerPrefab = null;
 
     // Start is called before the first frame update
     void Start()

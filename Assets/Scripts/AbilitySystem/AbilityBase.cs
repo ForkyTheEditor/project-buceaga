@@ -6,7 +6,7 @@ using UnityEngine;
 /// SYSTEM IN DEVELOPMENT. SUBJECT TO CHANGE.
 /// </summary>
 [CreateAssetMenu(menuName ="Abilities/Base Ability", fileName = "New Base Ability")]
-public class AbilityBase : ScriptableObject
+public abstract class AbilityBase : ScriptableObject
 {
     public new string name;
     [TextArea]
@@ -14,17 +14,10 @@ public class AbilityBase : ScriptableObject
     public Sprite icon;
     public float baseCooldown;
     public float baseCost;
-
+     
     public GameObject abiltyGameObject;
     public AbilityBehaviour abilityBehaviour;
 
-    private void Awake()
-    {
-        if(abilityBehaviour != null)
-        {
-            //Set the ability data instance to this object
-            abilityBehaviour.abilityData = this;
-        }
-    }
+    public abstract void InitializeAbility();
 
 }

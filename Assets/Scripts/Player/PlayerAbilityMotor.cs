@@ -7,7 +7,12 @@ using UnityEngine;
 public class PlayerAbilityMotor : MonoBehaviour
 {
 
-    //public AbilityBase[] abilities;
+    public AbilityBase[] abilities;
+
+    void Awake()
+    {
+
+    }
 
     // Update is called once per frame
     void Update()
