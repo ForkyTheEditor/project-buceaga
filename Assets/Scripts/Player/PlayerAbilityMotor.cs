@@ -7,7 +7,6 @@ using UnityEngine;
 public class PlayerAbilityMotor : MonoBehaviour
 {
 
-    public AbilityBase[] abilities;
 
     void Awake()
     {

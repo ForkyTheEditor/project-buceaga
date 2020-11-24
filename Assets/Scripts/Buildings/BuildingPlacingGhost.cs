@@ -1,22 +1,29 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using Mirror;
+using System.Collections;
 using UnityEngine;
-using Mirror;
-using UnityEditor;
 
 /// <summary>
-/// GameObject that tracks mouse pointer and checks for correct placement of a building. Gets destroyed once the player actually places the building
+/// GameObject that tracks mouse pointer and checks for correct placement of a building. Gets placed on the ground once player starts building the building.
+/// At the end of the build cycle the proper building gets placed
 /// </summary>
+[RequireComponent(typeof(BuildingGridSnapper))]
 public class BuildingPlacingGhost : NetworkBehaviour
 {
 
     private Camera mainCamera;
     private MeshRenderer renderComponent;
+    private GameObject playerObject;
+    private ResourceInventory playerInventory; //The inventory of the player building this building
 
     [SerializeField] private Material correctLocationMat = null;   //Material for when the ghost is in an correct place
     [SerializeField] private Material incorrectLocationMat = null; //Material for when the ghost is in a incorrect place
     [SerializeField] private bool canBePlaced = true;       //Can this object be placed in its current location?
+    private bool placed = false; //Is the ghost actually placed?
     [SerializeField] private GameObject actualBuildingObject = null; //The actual building this object represents
+    
+    [SerializeField] private float buildingTime; //The time necessary for this building to be done
+    [SerializeField] private ResourceAmount[] amounts; //The resources needed for building to be built
+
 
     void Awake()
     {
@@ -24,23 +31,39 @@ public class BuildingPlacingGhost : NetworkBehaviour
         mainCamera = Camera.main;
 
         renderComponent.material = correctLocationMat;
+
+        //Get the local player instance and their inventory
+        playerObject = GameManager.localPlayerInstance;
+        playerInventory = playerObject.GetComponent<ResourceInventory>();
     }
 
     private void Update()
     {
-        //If the user left clicks and the building can be placed, it will spawn the actual building and destroy this ghost
-        if (canBePlaced && Input.GetMouseButtonDown(0))
+        //If the ghost is already placed, count down the timer
+        if (placed)
         {
-            //Spawn the object from the server
-            SpawnBuilding();
+            return;
+        }
 
-            Destroy(this.gameObject);
+        //If the user left clicks and the building can be placed, it will spawn the actual building and destroy this ghost
+        if (canBePlaced && Input.GetMouseButtonDown(0) && CheckEnoughResources())
+        {
+            placed = true;
 
+            //Start building the actual building
+            StartCoroutine(StartBuilding());
         }
     }
 
     void FixedUpdate()
     {
+        //Check if the ghost has already been placed on the ground
+        if (placed)
+        {
+            return;
+        }
+
+
         //Track the position of the mouse pointer, but don't go out of bounds and always stay above the ground
         Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
         RaycastHit hitInfo = new RaycastHit();
@@ -57,6 +80,50 @@ public class BuildingPlacingGhost : NetworkBehaviour
 
     }
 
+    private bool CheckEnoughResources()
+    {
+        //Check if the player has the required amounts for every resource
+        foreach(ResourceAmount amount in amounts)
+        {
+            if(playerInventory.GetResource(amount.type) < amount.amount)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /// <summary>
+    /// Start building the building (you can cancel it OR be interrupted, the proper building only gets spawned at the end)
+    /// </summary>
+    private IEnumerator StartBuilding()
+    {
+        //Start playing the building animation
+        //Use the animation to figure out when to spawn the actual building?
+
+        //For now just start the timer until the building gets spawned
+        //The entire resource amount gets pulled when the building gets built
+        yield return new WaitForSeconds(buildingTime);
+
+        foreach(ResourceAmount amount in amounts)
+        {
+            playerInventory.TakeResource(amount.type, amount.amount);
+        }
+
+        SpawnBuilding();
+    }
+    
+    /// <summary>
+    /// Cancels the building. Destroys the building ghost.
+    /// </summary>
+    private void CancelBuilding()
+    {
+        Destroy(this.gameObject);
+    }
+
+    /// <summary>
+    /// Spawns the actual building and destroys the ghost.
+    /// </summary>
     private void SpawnBuilding()
     {
         //Take position, rotation and scale from ghost object
@@ -72,8 +139,8 @@ public class BuildingPlacingGhost : NetworkBehaviour
 
         //Send a command to the player network object to spawn my prefab
         networkObj.SpawnObjectNoAuthority(GameManager.spawnIDMap.GetID(actualBuildingObject), buildingTransform.position, buildingTransform.rotation);
-        
 
+        Destroy(this.gameObject);
     }
 
     //If a collider enters the ghost, then it can't be placed

@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System.Collections;
 using TMPro;
+using UnityEngine;
 
 public class UIPlayer : MonoBehaviour
 {
@@ -26,7 +24,7 @@ public class UIPlayer : MonoBehaviour
 
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {   
         //Initialize the UI components
         StartCoroutine(InitializeComponents());
