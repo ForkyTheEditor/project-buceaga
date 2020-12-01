@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GhostInstantiator : MonoBehaviour
+public class UIBuildingMode : MonoBehaviour
 {
+
+    private GameObject spawnedGhost = null;
 
     /// <summary>
     /// Simply instantiates (not spawns) the given building and disables the building canvas. This script is supposed to sit on the canvas with the building UI.
@@ -13,7 +15,13 @@ public class GhostInstantiator : MonoBehaviour
     {
         if(prefab != null)
         {
-            Instantiate(prefab, Input.mousePosition, prefab.transform.rotation);
+            //If the player has opened the UI twice, destroy the old object so you don't have two of them
+            if(spawnedGhost != null)
+            {
+                Destroy(spawnedGhost);
+            }
+
+            spawnedGhost = Instantiate(prefab, Input.mousePosition, prefab.transform.rotation);
 
             //Deactivate this canvas
             this.gameObject.SetActive(false);

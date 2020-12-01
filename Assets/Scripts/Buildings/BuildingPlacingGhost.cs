@@ -24,7 +24,8 @@ public class BuildingPlacingGhost : NetworkBehaviour
     [SerializeField] private float buildingTime; //The time necessary for this building to be done
     [SerializeField] private ResourceAmount[] amounts; //The resources needed for building to be built
 
-
+    private Coroutine buildingCoroutine; //The coroutine responsible for the animation and building of the actual building; cache this to be able to cancel it
+    
     void Awake()
     {
         renderComponent = gameObject.GetComponent<MeshRenderer>();
@@ -51,7 +52,7 @@ public class BuildingPlacingGhost : NetworkBehaviour
             placed = true;
 
             //Start building the actual building
-            StartCoroutine(StartBuilding());
+            buildingCoroutine = StartCoroutine(StartBuilding());
         }
     }
 
@@ -118,6 +119,7 @@ public class BuildingPlacingGhost : NetworkBehaviour
     /// </summary>
     private void CancelBuilding()
     {
+        StopCoroutine(buildingCoroutine);
         Destroy(this.gameObject);
     }
 
