@@ -70,8 +70,5 @@ public class PlayerNetworkObject : NetworkBehaviour
         go.transform.rotation = newRotation;
         //Spawn the object without authority
         NetworkServer.Spawn(go);
-
-        
     }
-   
 }
