@@ -15,6 +15,12 @@ public class UIPlayer : MonoBehaviour
     //(nice comment)
     private PlayerController playerController;
 
+    //NOTE: In the future when (not if) we will create our own NetworkManager class and implement our own callbacks of OnClientStart and OnClientStop
+    //which we will use to initialize / deinitialize / reinitialize the UI. Until then just use this
+    private bool gameStarted = false;
+
+     
+
     private ResourceInventory playerResourceInv;
     [SerializeField] private TextMeshProUGUI playerEnergyResourceText = null;
     private ResourceInventory teamResourceInv;
@@ -56,16 +62,27 @@ public class UIPlayer : MonoBehaviour
                 Debug.LogError("Team Resource Inventory not found!");
             }
         }
-            //Subscribe to a player event so that when the player pushes the hotkey for the Building UI this UI toggles (possibly based on proximity to base)
-            playerController.HotkeyPressed += ToggleBuildingUI;
+        //Subscribe to a player event so that when the player pushes the hotkey for the Building UI this UI toggles (possibly based on proximity to base)
+        playerController.HotkeyPressed += ToggleBuildingUI;
+
+        gameStarted = true;
+       
     } 
 
     void LateUpdate()
     {
+        //Check if the game is started, otherwise the components aren't initialized yet
+        if(gameStarted == false)
+        {
+            return;
+        }
+
         //Check for errors
         //If this is the case you might have to reinitialize components 
         if (playerEnergyResourceText == null || playerResourceInv == null || teamResourceInv == null)
         {
+
+            gameStarted = false;
             StartCoroutine(InitializeComponents());
             return;
         }

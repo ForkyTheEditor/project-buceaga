@@ -35,7 +35,7 @@ public class PlayerNetworkObject : NetworkBehaviour
         
     }
 
-
+    
     //This command (a function that runs on the server) spawns the actual physical player object
     [Command]
     void CmdSpawnPlayer() 
@@ -58,6 +58,7 @@ public class PlayerNetworkObject : NetworkBehaviour
     public void SpawnObjectNoAuthority(int prefabID, Vector3 newPosition, Quaternion newRotation)
     {
         CmdSpawnObjectNoAuthority(prefabID, newPosition, newRotation);
+         
     }
 
     [Command]
@@ -71,4 +72,6 @@ public class PlayerNetworkObject : NetworkBehaviour
         //Spawn the object without authority
         NetworkServer.Spawn(go);
     }
+
+  
 }

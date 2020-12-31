@@ -1,8 +1,6 @@
-﻿using System.Linq.Expressions;
-using System.Reflection;
+﻿using Mirror;
 using UnityEngine;
 using UnityEngine.AI;
-using Mirror;
 
 [RequireComponent(typeof(NetworkIdentity))]
 [RequireComponent(typeof(NavMeshAgent))]
@@ -190,15 +188,10 @@ public class PlayerController : NetworkBehaviour
                             }
                             break;
                         }
-                    case "Resource":
-                        {
-                            interactionMotor.SetInteractingFocus(hitInfo.collider.GetComponent<Interactable>());
-                            break;
-                        }
                     default:
                         {
-                            
-                            RemoveAllFocus();
+                            //By default, try to interact with the thing you hit
+                            interactionMotor.SetInteractingFocus(hitInfo.collider.GetComponent<Interactable>());
                             break;
                         }
 

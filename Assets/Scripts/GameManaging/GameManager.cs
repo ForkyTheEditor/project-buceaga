@@ -51,9 +51,6 @@ public class GameManager : MonoBehaviour
         //Get a reference to the spawning look-up table
         spawnIDMap = this.GetComponent<SpawnablesIDMap>();
 
-
-        
-
     }
 
     /// <summary>
