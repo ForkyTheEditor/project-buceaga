@@ -34,8 +34,8 @@ public class PlayerAttackingMotor : NetworkBehaviour
             return;
         }
 
-        
-
+        //A check if the focus is null is done in the function, don't do one here as the function also handles attack speed. (attack refresh time doesn't change
+        //when the focus is changed)
         ActOnAttackingFocus();
     }
 
@@ -58,6 +58,7 @@ public class PlayerAttackingMotor : NetworkBehaviour
             canAttack = true;
         }
 
+        //Check a target actually exists
         if (attackingFocus != null)
         {
 

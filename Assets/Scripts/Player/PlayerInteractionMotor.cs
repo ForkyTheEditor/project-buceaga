@@ -19,6 +19,9 @@ public class PlayerInteractionMotor : NetworkBehaviour
     [SerializeField]
     //The range the player needs to be in to be able to mine the resource
     private float miningRange = 1f;
+    [SerializeField]
+    private float defaultRange = 1f;
+
 
     //A LayerMask that ignores everything besides the current interaction focus
     private LayerMask currentInteractionMask;
@@ -53,13 +56,19 @@ public class PlayerInteractionMotor : NetworkBehaviour
             Ray ray = new Ray(transform.position, currentInteractFocus.gameObject.transform.position - transform.position);
             RaycastHit hitInfo;
             currentInteractionMask = LayerMask.GetMask(LayerMask.LayerToName(currentInteractFocus.gameObject.layer));
-            
-            //TODO: Change this to a switch statement with a default "default action range" range
+
             //Check which is the current relevant range
-            if (currentInteractFocus.gameObject.tag == "Resource")
+            switch (currentInteractFocus.gameObject.tag)
             {
-                relevantRange = miningRange;
+                case "Resource":
+                    relevantRange = miningRange;
+                    break;
+                default:
+                    relevantRange = defaultRange;
+                    break;
+                     
             }
+     
             
             //Check if the player is within relevant range
             if (Physics.Raycast(ray, out hitInfo, relevantRange, currentInteractionMask.value))

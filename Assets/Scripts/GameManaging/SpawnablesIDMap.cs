@@ -10,7 +10,7 @@ public class SpawnablesIDMap : MonoBehaviour
 {
 
     private TwoWayMappingDictionary<int, GameObject> spawnablesIDMapper = new TwoWayMappingDictionary<int, GameObject>();
-    [SerializeField] private GameObject[] spawnables;
+    [SerializeField] private GameObject[] spawnables = null;
 
     private void Awake()
     {

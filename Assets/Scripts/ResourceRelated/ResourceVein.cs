@@ -9,7 +9,7 @@ using Mirror;
 public class ResourceVein : NetworkBehaviour
 {
 
-    [SerializeField] private ResourceTypes _resourceType;
+    [SerializeField] private ResourceTypes _resourceType = ResourceTypes.Energy;
 
     public ResourceTypes resourceType { get { return _resourceType; } }
 

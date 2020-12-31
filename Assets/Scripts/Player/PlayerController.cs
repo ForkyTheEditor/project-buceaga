@@ -1,8 +1,6 @@
-﻿using System.Linq.Expressions;
-using System.Reflection;
+﻿using Mirror;
 using UnityEngine;
 using UnityEngine.AI;
-using Mirror;
 
 [RequireComponent(typeof(NetworkIdentity))]
 [RequireComponent(typeof(NavMeshAgent))]
@@ -112,11 +110,7 @@ public class PlayerController : NetworkBehaviour
             {
                 HotkeyPressed(this.gameObject, KeyCode.B);
             }
-            
         }
-
-        
-
     }
     
     private void LateUpdate()
@@ -134,7 +128,7 @@ public class PlayerController : NetworkBehaviour
         FollowNavTarget();
     }
 
-    //Disconnected from server; Unload any data to prevent memory leaks
+    //Disconnected from server; Unload any data to prevent memory leaks; Treat this as a destructor
     public override void OnStopClient()
     {
         base.OnStopClient();
@@ -183,7 +177,6 @@ public class PlayerController : NetworkBehaviour
                             //Check if we didn't click ourselves
                             if(!GameObject.ReferenceEquals(hitInfo.transform.gameObject, this.gameObject))
                             {
-
                                 //We've clicked a player. Attack him!
                                 //...but only if he's on the other team! (or maybe if we implement a deny mechanic or something)
                                 if(hitInfo.transform.GetComponent<CharacterStats>().team != charStats.team)
@@ -195,14 +188,10 @@ public class PlayerController : NetworkBehaviour
                             }
                             break;
                         }
-                    case "Resource":
-                        {
-                            interactionMotor.SetInteractingFocus(hitInfo.collider.GetComponent<Interactable>());
-                            break;
-                        }
                     default:
                         {
-                            RemoveAllFocus();
+                            //By default, try to interact with the thing you hit
+                            interactionMotor.SetInteractingFocus(hitInfo.collider.GetComponent<Interactable>());
                             break;
                         }
 
