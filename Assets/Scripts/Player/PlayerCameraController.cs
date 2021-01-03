@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerCameraController : MonoBehaviour
 {
@@ -20,19 +21,19 @@ public class PlayerCameraController : MonoBehaviour
         if (Application.isFocused)
         {
             //Move the actual position of the camera if the player touches the edges of the screen
-            if (Input.mousePosition.y >= Screen.height - borderThickness)
+            if (Mouse.current.position.ReadValue().y >= Screen.height - borderThickness)
             {
                 transform.Translate(Vector3.forward * Time.deltaTime * moveSpeed, Space.World);
             }
-            if (Input.mousePosition.y <= 0 + borderThickness)
+            if (Mouse.current.position.ReadValue().y <= 0 + borderThickness)
             {
                 transform.Translate(Vector3.back * Time.deltaTime * moveSpeed, Space.World);
             }
-            if (Input.mousePosition.x >= Screen.width - borderThickness)
+            if (Mouse.current.position.ReadValue().x >= Screen.width - borderThickness)
             {
                 transform.Translate(Vector3.right * Time.deltaTime * moveSpeed, Space.World);
             }
-            if (Input.mousePosition.x <= 0 + borderThickness)
+            if (Mouse.current.position.ReadValue().x <= 0 + borderThickness)
             {
                 transform.Translate(Vector3.left * Time.deltaTime * moveSpeed, Space.World);
             }

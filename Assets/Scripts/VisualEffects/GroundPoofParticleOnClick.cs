@@ -35,7 +35,7 @@ public class GroundPoofParticleOnClick : MonoBehaviour
 
             if (Physics.Raycast(ray, out hitInfo))
             {
-                if(hitInfo.transform.tag == "Ground")
+                if (hitInfo.transform.tag == "Ground")
                 {
                     poofParticleGO.transform.position = hitInfo.point;
                     poofParticle.Play();
