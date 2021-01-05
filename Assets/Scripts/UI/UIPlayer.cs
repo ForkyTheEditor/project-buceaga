@@ -63,7 +63,7 @@ public class UIPlayer : MonoBehaviour
             }
         }
         //Subscribe to a player event so that when the player pushes the hotkey for the Building UI this UI toggles (possibly based on proximity to base)
-        playerController.HotkeyPressed += ToggleBuildingUI;
+        playerController.BuildingUIToggle += ToggleBuildingUI;
 
         gameStarted = true;
        
@@ -94,16 +94,11 @@ public class UIPlayer : MonoBehaviour
     }
 
     //Toggles the building UI active / inactive
-    private void ToggleBuildingUI(GameObject source, KeyCode kc)
+    private void ToggleBuildingUI(GameObject source)
     {
-        //Check for the correct hotkey
-        if(kc == KeyCode.B)
-        {
-            playerBuildingUI.SetActive(!playerBuildingUI.activeSelf);
-
-        }
+        //Toggle the UI
+        playerBuildingUI.SetActive(!playerBuildingUI.activeSelf);
+   
     }
-
-    
 
 }

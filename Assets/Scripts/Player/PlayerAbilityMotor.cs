@@ -16,14 +16,7 @@ public class PlayerAbilityMotor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //ONLY FOR TESTING PURPOSES 
-        //INPUT WILL BE MOVED TO PLAYERCONTROLLER FOR LATER UPDATES
-
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-           // abilities[0].CastAbility(this.gameObject ,null);
-        }
-
+        
 
     }
 }

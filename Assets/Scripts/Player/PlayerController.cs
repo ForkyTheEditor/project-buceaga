@@ -1,6 +1,7 @@
 ﻿using Mirror;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(NetworkIdentity))]
 [RequireComponent(typeof(NavMeshAgent))]
@@ -43,11 +44,10 @@ public class PlayerController : NetworkBehaviour
     private bool _isRunning = false;
     public bool isRunning { get { return _isRunning; } }
 
-    //Delegate to handle hotkey presses by the player; For now it only takes in the keycode of the key pressed, but in the future we may have to add more complex behaviour
-    //for instance taking in macros such as CTRL + ALT + W 
-    public delegate void HotkeyHandler (GameObject source, KeyCode kc);
+    //Delegate to handle hotkey presses by the player;
+    public delegate void HotkeyHandler (GameObject source);
     //Event raised when a certain hotkey is pressed
-    public event HotkeyHandler HotkeyPressed;
+    public event HotkeyHandler BuildingUIToggle;
     
 
     //Initialize components in awake so that they're ready if other gameobjects might need them (not the case, just good practice)
@@ -90,7 +90,7 @@ public class PlayerController : NetworkBehaviour
 
         //Check if the player pressed the right mouse button 
         //The right mouse button is the "Default Interaction" button
-        CheckRightMouseClick();
+        //CheckRightMouseClick();
 
         //Timer for the sync update
         updateInterval += Time.deltaTime;
@@ -103,14 +103,7 @@ public class PlayerController : NetworkBehaviour
             updateInterval = 0;
         }
 
-        //I couldn't figure out a better way to do this for now and it doesn't really matter for the prototype; So for now enjoy this ugliness
-        if (Input.GetKeyDown(KeyCode.B))
-        {
-            if(HotkeyPressed != null)
-            {
-                HotkeyPressed(this.gameObject, KeyCode.B);
-            }
-        }
+        
     }
     
     private void LateUpdate()
@@ -134,7 +127,7 @@ public class PlayerController : NetworkBehaviour
         base.OnStopClient();
 
         //Clear the hotkey event handler, as the UI classes are not networked thus have no idea when the client is connected or disconnected
-        HotkeyPressed = null;
+        BuildingUIToggle = null;
     }
 
     /// <summary>
@@ -149,56 +142,64 @@ public class PlayerController : NetworkBehaviour
         syncedRotation = rotation;
     }
 
-    void CheckRightMouseClick()
+    public void OnToggleBuildingUI()
+    {
+        //Send the hotkeypressed event
+        if (BuildingUIToggle != null)
+        {
+            BuildingUIToggle(this.gameObject);
+        }
+    }
+
+    public void OnSimpleRightclick()
     {
         //If the player right clicks somewhere on the map, start moving towards that point
-        if (Input.GetMouseButtonDown(1))
+       
+        //Shoot a ray through the screen at the position of the cursor
+        Ray ray = cam.ScreenPointToRay(Mouse.current.position.ReadValue());
+        RaycastHit hitInfo;
+
+        if (Physics.Raycast(ray, out hitInfo))
         {
-            //Shoot a ray through the screen at the position of the cursor
-            Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hitInfo;
+            //Move towards the click either way
+            navAgent.SetDestination(hitInfo.point);
+            //Delete the previous follow target
+            SetNavTarget(null);
+            //Override any stopped movement done by the motors
+            ResumePlayerMovement();
+            //Clear the player's focuses so that no weird interaction happens (and so the Great Bug of May doesn't happen again)
+            RemoveAllFocus();
 
-            if (Physics.Raycast(ray, out hitInfo))
+            //Switch to determine which type of object was hit
+            switch (hitInfo.transform.tag)
             {
-                //Move towards the click either way
-                navAgent.SetDestination(hitInfo.point);
-                //Delete the previous follow target
-                SetNavTarget(null);
-                //Override any stopped movement done by the motors
-                ResumePlayerMovement();
-                //Clear the player's focuses so that no weird interaction happens (and so the Great Bug of May doesn't happen again)
-                RemoveAllFocus();
-
-                //Switch to determine which type of object was hit
-                switch (hitInfo.transform.tag)
-                {
-                    case "Player":
+                case "Player":
+                    {
+                        //Check if we didn't click ourselves
+                        if(!GameObject.ReferenceEquals(hitInfo.transform.gameObject, this.gameObject))
                         {
-                            //Check if we didn't click ourselves
-                            if(!GameObject.ReferenceEquals(hitInfo.transform.gameObject, this.gameObject))
+                            //We've clicked a player. Attack him!
+                            //...but only if he's on the other team! (or maybe if we implement a deny mechanic or something)
+                            if(hitInfo.transform.GetComponent<CharacterStats>().team != charStats.team)
                             {
-                                //We've clicked a player. Attack him!
-                                //...but only if he's on the other team! (or maybe if we implement a deny mechanic or something)
-                                if(hitInfo.transform.GetComponent<CharacterStats>().team != charStats.team)
-                                {
-                                    attackingMotor.SetAttackingFocus(hitInfo.collider.GetComponent<Attackable>());
-                                }
-                                //Follow if its a player (or other unit, but that will be later)
-                                SetNavTarget(hitInfo.transform);
+                                attackingMotor.SetAttackingFocus(hitInfo.collider.GetComponent<Attackable>());
                             }
-                            break;
+                            //Follow if its a player (or other unit, but that will be later)
+                            SetNavTarget(hitInfo.transform);
                         }
-                    default:
-                        {
-                            //By default, try to interact with the thing you hit
-                            interactionMotor.SetInteractingFocus(hitInfo.collider.GetComponent<Interactable>());
-                            break;
-                        }
+                        break;
+                    }
+                default:
+                    {
+                        //By default, try to interact with the thing you hit
+                        interactionMotor.SetInteractingFocus(hitInfo.collider.GetComponent<Interactable>());
+                        break;
+                    }
 
 
-                }
             }
         }
+        
     }
 
     /// <summary>
