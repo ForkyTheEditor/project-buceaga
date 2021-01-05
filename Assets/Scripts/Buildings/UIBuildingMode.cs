@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class UIBuildingMode : MonoBehaviour
 {
@@ -21,7 +22,7 @@ public class UIBuildingMode : MonoBehaviour
                 Destroy(spawnedGhost);
             }
 
-            spawnedGhost = Instantiate(prefab, Input.mousePosition, prefab.transform.rotation);
+            spawnedGhost = Instantiate(prefab, Mouse.current.position.ReadValue(), prefab.transform.rotation);
 
             //Deactivate this canvas
             this.gameObject.SetActive(false);

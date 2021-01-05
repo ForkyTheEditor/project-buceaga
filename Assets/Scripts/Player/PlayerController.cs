@@ -44,11 +44,10 @@ public class PlayerController : NetworkBehaviour
     private bool _isRunning = false;
     public bool isRunning { get { return _isRunning; } }
 
-    //Delegate to handle hotkey presses by the player; For now it only takes in the keycode of the key pressed, but in the future we may have to add more complex behaviour
-    //for instance taking in macros such as CTRL + ALT + W 
-    public delegate void HotkeyHandler (GameObject source, KeyCode kc);
+    //Delegate to handle hotkey presses by the player;
+    public delegate void HotkeyHandler (GameObject source);
     //Event raised when a certain hotkey is pressed
-    public event HotkeyHandler HotkeyPressed;
+    public event HotkeyHandler BuildingUIToggle;
     
 
     //Initialize components in awake so that they're ready if other gameobjects might need them (not the case, just good practice)
@@ -104,14 +103,7 @@ public class PlayerController : NetworkBehaviour
             updateInterval = 0;
         }
 
-        //I couldn't figure out a better way to do this for now and it doesn't really matter for the prototype; So for now enjoy this ugliness
-        //if (Input.GetKeyDown(KeyCode.B))
-        //{
-        //    if(HotkeyPressed != null)
-        //    {
-        //        HotkeyPressed(this.gameObject, KeyCode.B);
-        //    }
-        //}
+        
     }
     
     private void LateUpdate()
@@ -135,7 +127,7 @@ public class PlayerController : NetworkBehaviour
         base.OnStopClient();
 
         //Clear the hotkey event handler, as the UI classes are not networked thus have no idea when the client is connected or disconnected
-        HotkeyPressed = null;
+        BuildingUIToggle = null;
     }
 
     /// <summary>
@@ -148,6 +140,15 @@ public class PlayerController : NetworkBehaviour
     {
         syncedPosition = position;
         syncedRotation = rotation;
+    }
+
+    public void OnToggleBuildingUI()
+    {
+        //Send the hotkeypressed event
+        if (BuildingUIToggle != null)
+        {
+            BuildingUIToggle(this.gameObject);
+        }
     }
 
     public void OnSimpleRightclick()

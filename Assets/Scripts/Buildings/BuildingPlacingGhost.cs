@@ -1,6 +1,7 @@
 ﻿using Mirror;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 /// <summary>
 /// GameObject that tracks mouse pointer and checks for correct placement of a building. Gets placed on the ground once player starts building the building.
@@ -47,7 +48,7 @@ public class BuildingPlacingGhost : NetworkBehaviour
         }
 
         //If the user left clicks and the building can be placed, it will spawn the actual building and destroy this ghost
-        if (canBePlaced && Input.GetMouseButtonDown(0) && CheckEnoughResources())
+        if (canBePlaced && Mouse.current.leftButton.wasPressedThisFrame && CheckEnoughResources())
         {
             placed = true;
 
@@ -66,7 +67,7 @@ public class BuildingPlacingGhost : NetworkBehaviour
 
 
         //Track the position of the mouse pointer, but don't go out of bounds and always stay above the ground
-        Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+        Ray ray = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
         RaycastHit hitInfo = new RaycastHit();
 
         ///TODO
