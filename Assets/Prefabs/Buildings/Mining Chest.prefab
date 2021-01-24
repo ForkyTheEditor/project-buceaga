@@ -119,7 +119,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3194874756008009966}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 311864793389226080}
+        m_TargetAssemblyTypeName: MiningChest, Assembly-CSharp
+        m_MethodName: TakeHalfResourcesInt
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &3470014080332888729
 GameObject:
   m_ObjectHideFlags: 0
@@ -480,7 +492,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1820156388468632781}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 311864793389226080}
+        m_TargetAssemblyTypeName: MiningChest, Assembly-CSharp
+        m_MethodName: PlaceHalfResourcesInt
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &5031030705670268443
 GameObject:
   m_ObjectHideFlags: 0
@@ -868,7 +892,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6406834760188658382}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 311864793389226080}
+        m_TargetAssemblyTypeName: MiningChest, Assembly-CSharp
+        m_MethodName: TakeAllResourcesInt
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &5670102115727667140
 GameObject:
   m_ObjectHideFlags: 0
@@ -1153,6 +1189,7 @@ GameObject:
   - component: {fileID: -5981727290641209181}
   - component: {fileID: 8147296122494676205}
   - component: {fileID: 726976639276420183}
+  - component: {fileID: 6257108727598156120}
   m_Layer: 0
   m_Name: Mining Chest
   m_TagString: Untagged
@@ -1302,6 +1339,20 @@ MonoBehaviour:
   isAvailable: 1
   interactingObjects: []
   maxInteractingObjects: 1
+--- !u!114 &6257108727598156120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5953749746369675148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0636b71fdf8bac4448a0ed2ee2432660, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
 --- !u!1 &5958409560326997971
 GameObject:
   m_ObjectHideFlags: 0
@@ -1689,7 +1740,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5921257431750835698}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 311864793389226080}
+        m_TargetAssemblyTypeName: MiningChest, Assembly-CSharp
+        m_MethodName: PlaceAllResourcesInt
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &8536606489185786860
 GameObject:
   m_ObjectHideFlags: 0
