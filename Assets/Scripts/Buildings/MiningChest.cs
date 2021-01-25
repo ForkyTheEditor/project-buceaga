@@ -19,7 +19,7 @@ public class MiningChest : NetworkBehaviour
     //The inventory of the player interacting with the chest
     private ResourceInventory interactingInventory = null;
 
-    [SerializeField] private GameObject textUIGameobject;
+    [SerializeField] private GameObject textUIGameobject = null;
 
     void Awake()
     {

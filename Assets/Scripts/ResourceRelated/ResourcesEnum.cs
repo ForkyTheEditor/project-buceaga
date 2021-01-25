@@ -11,7 +11,7 @@ public class ResourcesEnum
     /// <summary>
     /// Initializes the given resources list.
     /// Resources lists store the amount of each specific resource.
-    /// Note: ALWAYS call this on a new resources list
+    /// Note: ALWAYS call this on a new resources list. ALWAYS call from the server.
     /// </summary>
     /// <param name="invStruct">The list given to initialize</param>
     public static void InitializeResourceList(SyncListInt invList)

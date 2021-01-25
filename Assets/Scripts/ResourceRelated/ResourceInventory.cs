@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 
+/// <summary>
+/// TODO: COMPLETE REFACTORING. SYNCLIST ONLY SYNCS FROM SERVER TO CLIENT, NOT VICE VERSA!!!!!!!!!!!!
+/// </summary>
 [RequireComponent(typeof(NetworkIdentity))]
 public class ResourceInventory : NetworkBehaviour
 {
@@ -12,8 +15,9 @@ public class ResourceInventory : NetworkBehaviour
     //ALWAYS INITIALIZE THESE WITH THE VALUES NEEDED
     private SyncListInt resourceAmounts = new SyncListInt();
 
-    
-    public override void OnStartClient()
+
+
+    public override void OnStartServer()
     {
         //This should only be managed by the server
         if (!isServer)
@@ -46,6 +50,7 @@ public class ResourceInventory : NetworkBehaviour
             print(this.name + ": Quantity added was negative!");
         }
     }
+
 
     /// <summary>
     /// Takes an amount of the specified resource and returns it
