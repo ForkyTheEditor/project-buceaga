@@ -25,4 +25,16 @@ public class ResourcesEnum
         }
 
     }
+
+    public static void InitializeResourceList(List<int> invList)
+    {
+        //Initialize the dictionary with 0 for each resource type
+        foreach (ResourceTypes rt in Enum.GetValues(typeof(ResourceTypes)))
+        {
+            //Add an entry for each resource type
+            //The index represents the resource type
+            invList.Add(0);
+        }
+
+    }
 }

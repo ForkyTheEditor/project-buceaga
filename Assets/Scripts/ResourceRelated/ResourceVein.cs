@@ -18,6 +18,7 @@ public class ResourceVein : NetworkBehaviour
     //A reference to the Interactable component of this GameObject
     private Interactable interactComponent;
 
+    //This is here so you can set it from the inspector
     public int maxInteractingObjects = 1;
 
     private ParticleSystem miningEffect;

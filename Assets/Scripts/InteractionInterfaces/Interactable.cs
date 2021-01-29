@@ -23,10 +23,15 @@ public class Interactable : NetworkBehaviour
     //behaviours regarding availability)
     public bool isAvailable = true;
 
-    //A reference to the interacting objects
-    public List<GameObject> interactingObjects;
+    //A reference to the local interacting objects (the objects which are interacting with this entity on this client)
+    //There may be entities interacting with this object on other clients => don't let any client interact with this object, but let each client handle its own interactions)
+    private List<GameObject> localInteractingObjects = new List<GameObject>();
+
+    [SyncVar]
+    private int networkCurrentInteractingObjects = 0; //The amount of entities interacting with this object on the network
 
     public int maxInteractingObjects = 1;
+
 
     private void Awake()
     {
@@ -45,7 +50,7 @@ public class Interactable : NetworkBehaviour
 
         if (isAvailable)
         {
-            foreach(GameObject go in interactingObjects)
+            foreach(GameObject go in localInteractingObjects)
             {   
                 if(Interacted != null)
                 {
@@ -62,21 +67,23 @@ public class Interactable : NetworkBehaviour
     /// </summary>
     public virtual void StartDefaultInteract(GameObject source)
     {
-       
         if (isAvailable)
         {
             Predicate<GameObject> compareInstanceID = (go) => go.GetInstanceID() == source.GetInstanceID();
     
-            if(interactingObjects.Count < maxInteractingObjects)
+            if(networkCurrentInteractingObjects < maxInteractingObjects)
             {
                 //There's still place for people to interact
+                //Update the network number of objects
+                CmdSetNetworkInteractingObjects(networkCurrentInteractingObjects + 1);
+
 
                 //Check if the source of the interaction is in the interacting list
-                if (!interactingObjects.Exists(compareInstanceID)) //did i mention i goddamn love c#
+                if (!localInteractingObjects.Exists(compareInstanceID)) //did i mention i goddamn love c#
                 {
                     //The player isn't registered in the interactingObjects list
                     //Register it
-                    interactingObjects.Add(source);
+                    localInteractingObjects.Add(source);
 
                 }
             }
@@ -84,7 +91,7 @@ public class Interactable : NetworkBehaviour
             {
                 //The maximum limit has been reached
                 //Check if the source is not registered
-                if (!interactingObjects.Exists(compareInstanceID))
+                if (!localInteractingObjects.Exists(compareInstanceID))
                 {
                     return;
                 }
@@ -106,10 +113,14 @@ public class Interactable : NetworkBehaviour
         Predicate<GameObject> compareInstanceID = (go) => go.GetInstanceID() == source.GetInstanceID();
 
         //Remove the object that stopped interacting
-        int index = interactingObjects.FindIndex(compareInstanceID);
+        int index = localInteractingObjects.FindIndex(compareInstanceID);
         if(index >= 0)
         {
-            interactingObjects.RemoveAt(index);
+            //Update the network interacting objects
+            CmdSetNetworkInteractingObjects(networkCurrentInteractingObjects - 1);
+
+
+            localInteractingObjects.RemoveAt(index);
 
             if(StopInteracted != null)
             {
@@ -117,6 +128,35 @@ public class Interactable : NetworkBehaviour
             }
         }
     }
+
+    /// <summary>
+    /// Set the current number of interacting objects (anywhere in the network).
+    /// </summary>
+    /// <param name="nr"></param>
+    [Command(ignoreAuthority = true)]
+    public void CmdSetNetworkInteractingObjects(int nr)
+    {
+        //Check if the current interacting objects are not already maxxed out.
+        if(networkCurrentInteractingObjects >= maxInteractingObjects)
+        {
+            return;
+        }
+
+        if(nr > 0 && nr <= maxInteractingObjects)
+        {
+            networkCurrentInteractingObjects = nr;
+        }
+    }
+
+    /// <summary>
+    /// Returns the current number of interacting objects (anywhere in the network). 
+    /// </summary>
+    /// <returns></returns>
+    public int GetNetworkInteractingObjects()
+    {
+        return networkCurrentInteractingObjects;
+    }
+
 
     //TODO: Add other kinds of interacts: for instance DestructiveInteract for when players Attack click something etc.
 

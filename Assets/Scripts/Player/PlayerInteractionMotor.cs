@@ -85,7 +85,7 @@ public class PlayerInteractionMotor : NetworkBehaviour
                         controller.StopPlayerMovement();
 
                         //Start interacting with it
-                        CmdStartDefaultInteract(currentInteractFocus.networkId);
+                        StartDefaultInteract(currentInteractFocus.networkId);
 
                         isInteracting = true;
                     }
@@ -113,29 +113,34 @@ public class PlayerInteractionMotor : NetworkBehaviour
 
         if (previousInteractFocus != null)
         {
-            //Stop the interaction with the previous focus
+            //Stop the interaction with the previous focus. There are multiple conditions for this, hence the else if.
             if (currentInteractFocus == null)
             {
-                CmdStopInteract(previousInteractFocus.networkId);
+                StopInteract(previousInteractFocus.networkId);
             }
             else if (!GameObject.ReferenceEquals(previousInteractFocus, currentInteractFocus))
             {
-                CmdStopInteract(previousInteractFocus.networkId);
+                StopInteract(previousInteractFocus.networkId);
             }
 
             isInteracting = false;
         }
     }
 
-    [Command]
-    void CmdStartDefaultInteract(NetworkIdentity netId)
+    /// <summary>
+    /// All interactions should happen on the server, so that the server can keep count of which / how many entities are interacting with the object => Command.
+    /// </summary>
+    /// <param name="netId"></param>
+    void StartDefaultInteract(NetworkIdentity netId)
     {
-
         netId.gameObject.GetComponent<Interactable>().StartDefaultInteract(this.gameObject);
     }
 
-    [Command]
-    void CmdStopInteract(NetworkIdentity netId)
+    /// <summary>
+    /// All interactions should happen on the server, so that the server can keep count of which / how many entities are interacting with the object => Command.
+    /// </summary>
+    /// <param name="netId"></param>
+    void StopInteract(NetworkIdentity netId)
     {
         netId.gameObject.GetComponent<Interactable>().StopInteract(this.gameObject);
 

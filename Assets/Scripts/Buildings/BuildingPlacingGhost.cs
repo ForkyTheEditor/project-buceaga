@@ -142,7 +142,7 @@ public class BuildingPlacingGhost : NetworkBehaviour
         }
 
         //Send a command to the player network object to spawn my prefab
-        networkObj.SpawnObjectWithAuthority(GameManager.spawnIDMap.GetID(actualBuildingObject), buildingTransform.position, buildingTransform.rotation);
+        networkObj.SpawnObjectWithNoAuthority(GameManager.spawnIDMap.GetID(actualBuildingObject), buildingTransform.position, buildingTransform.rotation);
 
         Destroy(this.gameObject);
     }
