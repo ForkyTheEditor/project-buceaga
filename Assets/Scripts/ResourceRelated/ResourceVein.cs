@@ -41,10 +41,13 @@ public class ResourceVein : NetworkBehaviour
 
         if(interactComponent != null)
         {
+            //This is a tick based interaction object
+            interactComponent.interactionType = Interactable.InteractionType.Tick;
+
             //Subscribe to the Interacted event
-            interactComponent.Interacted += OnDefaultInteract;
+            interactComponent.TickInteracted += OnDefaultInteract;
             //Subscribe to the StopInteracted event
-            interactComponent.StopInteracted += OnStopInteract;
+            interactComponent.StopTickInteracted += OnStopInteract;
 
             interactComponent.maxInteractingObjects = this.maxInteractingObjects;
         }

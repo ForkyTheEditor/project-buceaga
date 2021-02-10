@@ -38,9 +38,11 @@ public class MiningChest : NetworkBehaviour
             Debug.LogError("Couldn't find the interactable component on " + gameObject.name + "!");
         }
 
+        //Set the interaction type to UI
+        interactComponent.interactionType = Interactable.InteractionType.UI;
         //Subscribe to the interacting events
-        interactComponent.Interacted += EnableChest;
-        interactComponent.StopInteracted += DisableChest;
+        interactComponent.UIInteracted += EnableChest;
+        interactComponent.StopUIInteracted += DisableChest;
 
         //Cache the resource inventory 
         chestInventory = gameObject.GetComponent<ResourceInventory>();

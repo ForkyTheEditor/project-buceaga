@@ -4,8 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 
+
 /// <summary>
-/// TODO: COMPLETE REFACTORING. SYNCLIST ONLY SYNCS FROM SERVER TO CLIENT, NOT VICE VERSA!!!!!!!!!!!!
+/// Inventory for each type of resources. Does its own syncing and networking, so you can locally interact with it and it will sync itself with the host.
 /// </summary>
 [RequireComponent(typeof(NetworkIdentity))]
 public class ResourceInventory : NetworkBehaviour
