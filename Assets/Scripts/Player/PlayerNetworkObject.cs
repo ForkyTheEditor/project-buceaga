@@ -52,17 +52,17 @@ public class PlayerNetworkObject : NetworkBehaviour
     }
 
     /// <summary>
-    /// Spawns the registered prefab at the given location and with the given rotation.
+    /// Spawns the registered prefab with no authority at the given location and with the given rotation.
     /// </summary>
     /// <param name="registeredPrefab"></param>
-    public void SpawnObjectNoAuthority(int prefabID, Vector3 newPosition, Quaternion newRotation)
+    public void SpawnObjectWithNoAuthority(int prefabID, Vector3 newPosition, Quaternion newRotation)
     {
-        CmdSpawnObjectNoAuthority(prefabID, newPosition, newRotation);
+        CmdSpawnObjectWithNoAuthority(prefabID, newPosition, newRotation);
          
     }
 
     [Command]
-    void CmdSpawnObjectNoAuthority(int prefabID, Vector3 newPosition, Quaternion newRotation)
+    void CmdSpawnObjectWithNoAuthority(int prefabID, Vector3 newPosition, Quaternion newRotation)
     {
         GameObject go = Instantiate(GameManager.spawnIDMap.GetPrefab(prefabID));
         
@@ -73,5 +73,6 @@ public class PlayerNetworkObject : NetworkBehaviour
         NetworkServer.Spawn(go);
     }
 
+   
   
 }

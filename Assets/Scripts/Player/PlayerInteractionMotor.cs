@@ -34,7 +34,7 @@ public class PlayerInteractionMotor : NetworkBehaviour
     {
         controller = gameObject.GetComponent<PlayerController>();
     }
-   
+
     void Update()
     {
         if (!hasAuthority)
@@ -66,10 +66,10 @@ public class PlayerInteractionMotor : NetworkBehaviour
                 default:
                     relevantRange = defaultRange;
                     break;
-                     
+
             }
-     
-            
+
+
             //Check if the player is within relevant range
             if (Physics.Raycast(ray, out hitInfo, relevantRange, currentInteractionMask.value))
             {
@@ -83,14 +83,16 @@ public class PlayerInteractionMotor : NetworkBehaviour
                         //The player is in interaction range with the current focus
                         //Stop the player from moving towards the target (it's already within interaction range)
                         controller.StopPlayerMovement();
+                        
+                        isInteracting = true;
+
 
                         //Start interacting with it
-                        CmdStartDefaultInteract(currentInteractFocus.networkId);
+                        CmdStartDefaultInteract(currentInteractFocus.gameObject);
 
-                        isInteracting = true;
                     }
                 }
-            }   
+            }
         }
         else
         {
@@ -99,7 +101,7 @@ public class PlayerInteractionMotor : NetworkBehaviour
             relevantRange = 0;
             //The current layer mask should be cleared
             currentInteractionMask = 0;
-           
+
         }
     }
     /// <summary>
@@ -113,31 +115,66 @@ public class PlayerInteractionMotor : NetworkBehaviour
 
         if (previousInteractFocus != null)
         {
-            //Stop the interaction with the previous focus
+            //Stop the interaction with the previous focus. There are multiple conditions for this, hence the else if.
             if (currentInteractFocus == null)
             {
-                CmdStopInteract(previousInteractFocus.networkId);
+                CmdStopDefaultInteract(previousInteractFocus.gameObject);
             }
             else if (!GameObject.ReferenceEquals(previousInteractFocus, currentInteractFocus))
             {
-                CmdStopInteract(previousInteractFocus.networkId);
+                CmdStopDefaultInteract(previousInteractFocus.gameObject);
             }
 
             isInteracting = false;
         }
     }
 
-    [Command]
-    void CmdStartDefaultInteract(NetworkIdentity netId)
+    /// <summary>
+    /// Starts the default type of interaction with the object (i.e. tick, single etc.).
+    /// All interactions should happen on the server, so that the server can keep count of which / how many entities are interacting with the object => Command.
+    /// No matter the type of interaction, the interaction should always be stopped after it was started (because you can only interact with one object at once).
+    /// </summary>
+    /// <param name="netId"></param>
+    
+    void CmdStartDefaultInteract(GameObject go)
     {
+        go.GetComponent<Interactable>().StartDefaultInteract(this.gameObject);
 
-        netId.gameObject.GetComponent<Interactable>().StartDefaultInteract(this.gameObject);
     }
 
-    [Command]
-    void CmdStopInteract(NetworkIdentity netId)
+    /// <summary>
+    /// Stops the default type of interaction with the interaction focus
+    /// </summary>
+    /// <param name="netId"></param>
+    
+    void CmdStopDefaultInteract(GameObject go)
     {
-        netId.gameObject.GetComponent<Interactable>().StopInteract(this.gameObject);
+        go.GetComponent<Interactable>().StopDefaultInteract(this.gameObject);
+    }
 
+    
+    void CmdStartTickInteract(GameObject go)
+    {
+        go.GetComponent<Interactable>().CmdStartTickInteract(this.gameObject);
+
+    }
+  
+  
+    void CmdStopTickInteract(GameObject go)
+    {
+        go.GetComponent<Interactable>().CmdStopTickInteract(this.gameObject);
+
+    }
+
+ 
+    void CmdStartSingleInteract(GameObject go)
+    {
+        go.GetComponent<Interactable>().CmdStartSingleInteract(this.gameObject);
+    }
+
+  
+    void CmdStopSingleInteract(GameObject go)
+    {
+        go.GetComponent<Interactable>().CmdStopSingleInteract(this.gameObject);
     }
 }

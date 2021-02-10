@@ -22,8 +22,8 @@ public class BuildingPlacingGhost : NetworkBehaviour
     private bool placed = false; //Is the ghost actually placed?
     [SerializeField] private GameObject actualBuildingObject = null; //The actual building this object represents
     
-    [SerializeField] private float buildingTime; //The time necessary for this building to be done
-    [SerializeField] private ResourceAmount[] amounts; //The resources needed for building to be built
+    [SerializeField] private float buildingTime = 0; //The time necessary for this building to be done
+    [SerializeField] private ResourceAmount[] amounts = null; //The resources needed for building to be built
 
     private Coroutine buildingCoroutine; //The coroutine responsible for the animation and building of the actual building; cache this to be able to cancel it
     
@@ -107,11 +107,6 @@ public class BuildingPlacingGhost : NetworkBehaviour
         //The entire resource amount gets pulled when the building gets built
         yield return new WaitForSeconds(buildingTime);
 
-        foreach(ResourceAmount amount in amounts)
-        {
-            playerInventory.TakeResource(amount.type, amount.amount);
-        }
-
         SpawnBuilding();
     }
     
@@ -129,6 +124,12 @@ public class BuildingPlacingGhost : NetworkBehaviour
     /// </summary>
     private void SpawnBuilding()
     {
+        //Take the resources from the inventory
+        foreach (ResourceAmount amount in amounts)
+        {
+            playerInventory.TakeResource(amount.type, amount.amount);
+        }
+
         //Take position, rotation and scale from ghost object
         Transform buildingTransform = this.transform;
 
@@ -141,7 +142,7 @@ public class BuildingPlacingGhost : NetworkBehaviour
         }
 
         //Send a command to the player network object to spawn my prefab
-        networkObj.SpawnObjectNoAuthority(GameManager.spawnIDMap.GetID(actualBuildingObject), buildingTransform.position, buildingTransform.rotation);
+        networkObj.SpawnObjectWithNoAuthority(GameManager.spawnIDMap.GetID(actualBuildingObject), buildingTransform.position, buildingTransform.rotation);
 
         Destroy(this.gameObject);
     }
