@@ -153,8 +153,16 @@ public class PlayerController : NetworkBehaviour
 
     public void OnSimpleRightclick()
     {
+        //Check if the object running this code has authority over this gameobject
+        //As this function is not called in Update but rather from the InputSystem, it bypasses the update check for authority
+        if (!hasAuthority)
+        {
+            //You do not have authority. Get the hell out of here
+            return;
+        }
+
         //If the player right clicks somewhere on the map, start moving towards that point
-       
+
         //Shoot a ray through the screen at the position of the cursor
         Ray ray = cam.ScreenPointToRay(Mouse.current.position.ReadValue());
         RaycastHit hitInfo;
