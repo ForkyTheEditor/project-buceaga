@@ -5,22 +5,21 @@ using UnityEngine;
 using Mirror;
 
 [RequireComponent(typeof(NetworkIdentity))]
-[RequireComponent(typeof(CharacterStats))]
+[RequireComponent(typeof(CharacterStatsComponent))]
 public class Attackable : NetworkBehaviour
 {
+    public NetworkIdentity networkId { get; private set; }
 
-    public NetworkIdentity networkId;
-
-    public delegate void AttackEventHandler(GameObject source, float dmgAmount, EventArgs args);
+    public delegate void AttackEventHandler(GameObject source, int dmgAmount, EventArgs args);
 
     public event AttackEventHandler Attacked;
 
-    private void Start()
+    private void Awake()
     {
-        networkId = gameObject.GetComponent<NetworkIdentity>();
+        networkId = GetComponent<NetworkIdentity>();
     }
 
-    public virtual void DefaultAttack(GameObject source, float dmgAmount)
+    public virtual void DefaultAttack(GameObject source, int dmgAmount)
     {
         if(Attacked != null)
         {

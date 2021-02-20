@@ -19,8 +19,6 @@ public class Interactable : NetworkBehaviour
 
     public InteractionType interactionType = InteractionType.Tick;
 
-    public NetworkIdentity networkId;
-
     public delegate void InteractionEventHandler(GameObject source, EventArgs args);
 
     //The event function that notifies that the player started interacting each tick / frame.
@@ -47,11 +45,6 @@ public class Interactable : NetworkBehaviour
     public List<GameObject> interactingObjects;
 
     public int maxInteractingObjects = 1;
-
-    private void Awake()
-    {
-        networkId = gameObject.GetComponent<NetworkIdentity>();
-    }
 
     private void Update()
     {

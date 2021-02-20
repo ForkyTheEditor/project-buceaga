@@ -7,7 +7,7 @@ public class UIPlayer : MonoBehaviour
     //The stats of the player to use (not necessarily the local player, for instance
     //in the future we might want the player to be able to click on other units and see their inventory
     // like in DOTA for instance)
-    private CharacterStats playerStats;
+    private CharacterStatsComponent playerStats;
     //The team of the player
     //This is relevant because perhaps you do not want to display the enemy's inventories, even though the player clicks on them
     private Teams playerTeam;
@@ -42,7 +42,7 @@ public class UIPlayer : MonoBehaviour
         //Wait until the local player instance is set
         yield return new WaitUntil(() => GameManager.localPlayerInstance != null);
         //Get instance of the local player for starters!
-        playerStats = GameManager.localPlayerInstance.GetComponent<CharacterStats>();
+        playerStats = GameManager.localPlayerInstance.GetComponent<CharacterStatsComponent>();
         playerController = GameManager.localPlayerInstance.GetComponent<PlayerController>();
         if (playerStats == null || playerController == null)
         {

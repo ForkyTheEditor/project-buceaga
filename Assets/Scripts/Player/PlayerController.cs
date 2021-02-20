@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(NetworkIdentity))]
 [RequireComponent(typeof(NavMeshAgent))]
-[RequireComponent(typeof(CharacterStats))]
+[RequireComponent(typeof(PlayerStatsComponent))]
 [RequireComponent(typeof(PlayerInteractionMotor))]
 [RequireComponent(typeof(PlayerAttackingMotor))]
 [RequireComponent(typeof(ResourceInventory))]
@@ -19,8 +19,8 @@ public class PlayerController : NetworkBehaviour
     NavMeshAgent navAgent;
     //Reference to the rigidbody attached to this gameobject
     private Rigidbody rb;
-    //A reference to the character's stats
-    private CharacterStats charStats;
+    //A reference to the character's stat component
+    private PlayerStatsComponent charStats;
     //A reference to the component that handles all the interaction with interactables (buildings etc.)
     private PlayerInteractionMotor interactionMotor;
     private PlayerAttackingMotor attackingMotor;
@@ -55,7 +55,7 @@ public class PlayerController : NetworkBehaviour
     { 
         cam = Camera.main;
         navAgent = gameObject.GetComponent<NavMeshAgent>();
-        charStats = gameObject.GetComponent<CharacterStats>();
+        charStats = gameObject.GetComponent<PlayerStatsComponent>();
         interactionMotor = gameObject.GetComponent<PlayerInteractionMotor>();
         attackingMotor = gameObject.GetComponent<PlayerAttackingMotor>();
         animationMotor = gameObject.GetComponent<PlayerAnimationMotor>();
@@ -188,7 +188,7 @@ public class PlayerController : NetworkBehaviour
                         {
                             //We've clicked a player. Attack him!
                             //...but only if he's on the other team! (or maybe if we implement a deny mechanic or something)
-                            if(hitInfo.transform.GetComponent<CharacterStats>().team != charStats.team)
+                            if(hitInfo.transform.GetComponent<CharacterStatsComponent>().team != charStats.team)
                             {
                                 attackingMotor.SetAttackingFocus(hitInfo.collider.GetComponent<Attackable>());
                             }

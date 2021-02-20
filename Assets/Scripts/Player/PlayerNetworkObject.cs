@@ -10,6 +10,7 @@ public class PlayerNetworkObject : NetworkBehaviour
 {
 
     [SerializeField] private GameObject playerPrefab = null;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -30,22 +31,27 @@ public class PlayerNetworkObject : NetworkBehaviour
             Debug.LogError("Player Network Object couldn't be set!");
         }
 
+        
+
         //Spawn the ACTUAL PlayerObject on the server
         CmdSpawnPlayer();
         
     }
 
     
-    //This command (a function that runs on the server) spawns the actual physical player object
+    //This command spawns the actual physical player object
     [Command]
     void CmdSpawnPlayer() 
     {
         //First instantiate the prefab, do any modifications/settings to it and then SPAWN it on the server
         GameObject go = Instantiate(playerPrefab);
 
+        CharacterStatsComponent statsComponent = go.GetComponent<CharacterStatsComponent>();
+        
         //----TEMPORARY-----
-        go.GetComponent<CharacterStats>().team = Teams.Modernists;
+        statsComponent.team = Teams.Modernists;
         //----/TEMPORARY-----
+
 
         NetworkServer.Spawn(go, connectionToClient);
     
