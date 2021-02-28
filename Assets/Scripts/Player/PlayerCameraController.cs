@@ -12,11 +12,32 @@ public class PlayerCameraController : MonoBehaviour
     [SerializeField]
     private int borderThickness = 1;
 
+    private GameObject localPlayer = null;
+
+    private void Awake()
+    {
+        //Find the player object
+        StartCoroutine(InitializePlayer());
+    }
+
+    IEnumerator InitializePlayer()
+    {
+        //Wait until the player object has spawned
+        yield return new WaitUntil(() => GameManager.localPlayerInstance != null);
+    }
+
     // Update is called once per frame
     void Update()
     {
         //MOBA style camera
+        FreeCameraMove();
+       
+    }
 
+    
+
+    void FreeCameraMove()
+    {
         //Check if the application is actually focused, so you can't Alt+Tab and still move the camera 
         if (Application.isFocused)
         {

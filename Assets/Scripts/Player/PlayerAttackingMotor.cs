@@ -7,7 +7,7 @@ using Mirror;
 public class PlayerAttackingMotor : NetworkBehaviour
 {
     private PlayerController controller;
-    private CharacterStats characterStats;
+    private PlayerStatsComponent characterStats;
 
     private Attackable attackingFocus;
 
@@ -16,14 +16,15 @@ public class PlayerAttackingMotor : NetworkBehaviour
     [SerializeField]
     private float attackRange = 0.6f;
 
-    private float attackTimer = 0f;
+    
+    private float attackTime = 0f;
 
     // Start is called before the first frame update
     void Start()
     {
         controller = gameObject.GetComponent<PlayerController>();
-        characterStats = gameObject.GetComponent<CharacterStats>();
-        attackTimer = characterStats.attackTime;
+        characterStats = gameObject.GetComponent<PlayerStatsComponent>();
+        attackTime = characterStats.attackTime.GetFinalValue();
     }
 
     // Update is called once per frame
@@ -49,12 +50,12 @@ public class PlayerAttackingMotor : NetworkBehaviour
         //Attack timer
         if (!canAttack)
         {
-            attackTimer -= Time.deltaTime;
+            attackTime -= Time.deltaTime;
 
         }
-        if(attackTimer <= 0)
+        if(attackTime <= 0)
         {
-            attackTimer = characterStats.attackTime;
+            attackTime = characterStats.attackTime.GetFinalValue();
             canAttack = true;
         }
 
@@ -94,7 +95,7 @@ public class PlayerAttackingMotor : NetworkBehaviour
     [Command]
     private void CmdAttack(NetworkIdentity netId)
     {
-        netId.gameObject.GetComponent<Attackable>().DefaultAttack(this.gameObject, characterStats.attackDamage);
+        netId.gameObject.GetComponent<Attackable>().DefaultAttack(this.gameObject, characterStats.attackDamage.GetFinalValue());
         
     }
 

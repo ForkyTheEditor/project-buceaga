@@ -6,14 +6,14 @@ using TMPro;
 public class UIHealthBar : MonoBehaviour
 {
 
-    private CharacterStats characterStats;
+    private CharacterStatsComponent characterStats;
     private TextMeshProUGUI hpText;
 
     // Start is called before the first frame update
     void Start()
     {
         hpText = gameObject.GetComponent<TextMeshProUGUI>();
-        characterStats = gameObject.GetComponentInParent<CharacterStats>();
+        characterStats = gameObject.GetComponentInParent<CharacterStatsComponent>();
     }
 
     // Update is called once per frame
@@ -25,8 +25,8 @@ public class UIHealthBar : MonoBehaviour
             return;
         }
 
-        int truncatedCurrentHealth = Mathf.FloorToInt(characterStats.currentHealth);
-        int truncatedMaxHealth = Mathf.FloorToInt(characterStats.maxHealth);
+        int truncatedCurrentHealth = characterStats.currentHealth.GetFinalValue();
+        int truncatedMaxHealth = characterStats.maxHealth.GetFinalValue();
         hpText.text = truncatedCurrentHealth.ToString() + "/" + truncatedMaxHealth.ToString();
     }
 }

@@ -34,7 +34,7 @@ public class ResourceManager : NetworkBehaviour
             return;
         }
         //Check if player at all & if the player is on this team
-        if (other.tag == "Player" && other.GetComponent<CharacterStats>().team == this.team)
+        if (other.tag == "Player" && other.GetComponent<CharacterStatsComponent>().team == this.team)
         {
 
             ResourceInventory playerInventory = other.GetComponent<ResourceInventory>();
