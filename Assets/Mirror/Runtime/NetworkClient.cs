@@ -56,6 +56,13 @@ namespace Mirror
         /// </summary>
         public static bool isLocalClient => connection is ULocalConnectionToServer;
 
+        // OnConnected / OnDisconnected used to be NetworkMessages that were
+        // invoked. this introduced a bug where external clients could send
+        // Connected/Disconnected messages over the network causing undefined
+        // behaviour.
+        internal static Action<NetworkConnection> OnConnectedEvent;
+        internal static Action<NetworkConnection> OnDisconnectedEvent;
+
         /// <summary>
         /// Connect client to a NetworkServer instance.
         /// </summary>
@@ -67,7 +74,7 @@ namespace Mirror
 
             RegisterSystemHandlers(false);
             Transport.activeTransport.enabled = true;
-            InitializeTransportHandlers();
+            AddTransportHandlers();
 
             connectState = ConnectState.Connecting;
             Transport.activeTransport.ClientConnect(address);
@@ -88,7 +95,7 @@ namespace Mirror
 
             RegisterSystemHandlers(false);
             Transport.activeTransport.enabled = true;
-            InitializeTransportHandlers();
+            AddTransportHandlers();
 
             connectState = ConnectState.Connecting;
             Transport.activeTransport.ClientConnect(uri);
@@ -124,8 +131,18 @@ namespace Mirror
         /// </summary>
         public static void ConnectLocalServer()
         {
+            // call server OnConnected with server's connection to client
             NetworkServer.OnConnected(NetworkServer.localConnection);
-            NetworkServer.localConnection.Send(new ConnectMessage());
+
+            // call client OnConnected with client's connection to server
+            // => previously we used to send a ConnectMessage to
+            //    NetworkServer.localConnection. this would queue the message
+            //    until NetworkClient.Update processes it.
+            // => invoking the client's OnConnected event directly here makes
+            //    tests fail. so let's do it exactly the same order as before by
+            //    queueing the event for next Update!
+            //OnConnectedEvent?.Invoke(connection);
+            ((ULocalConnectionToServer)connection).QueueConnectedEvent();
         }
 
         /// <summary>
@@ -145,12 +162,12 @@ namespace Mirror
             }
         }
 
-        static void InitializeTransportHandlers()
+        static void AddTransportHandlers()
         {
-            Transport.activeTransport.OnClientConnected.AddListener(OnConnected);
-            Transport.activeTransport.OnClientDataReceived.AddListener(OnDataReceived);
-            Transport.activeTransport.OnClientDisconnected.AddListener(OnDisconnected);
-            Transport.activeTransport.OnClientError.AddListener(OnError);
+            Transport.activeTransport.OnClientConnected = OnConnected;
+            Transport.activeTransport.OnClientDataReceived = OnDataReceived;
+            Transport.activeTransport.OnClientDisconnected = OnDisconnected;
+            Transport.activeTransport.OnClientError = OnError;
         }
 
         static void OnError(Exception exception)
@@ -164,7 +181,7 @@ namespace Mirror
 
             ClientScene.HandleClientDisconnect(connection);
 
-            connection?.InvokeHandler(new DisconnectMessage(), -1);
+            if (connection != null) OnDisconnectedEvent?.Invoke(connection);
         }
 
         internal static void OnDataReceived(ArraySegment<byte> data, int channelId)
@@ -187,7 +204,7 @@ namespace Mirror
                 // thus we should set the connected state before calling the handler
                 connectState = ConnectState.Connected;
                 NetworkTime.UpdateClient();
-                connection.InvokeHandler(new ConnectMessage(), -1);
+                OnConnectedEvent?.Invoke(connection);
             }
             else logger.LogError("Skipped Connect message handling because connection is null.");
         }
@@ -206,7 +223,15 @@ namespace Mirror
             {
                 if (isConnected)
                 {
-                    NetworkServer.localConnection.Send(new DisconnectMessage());
+                    // call client OnDisconnected with connection to server
+                    // => previously we used to send a DisconnectMessage to
+                    //    NetworkServer.localConnection. this would queue the
+                    //    message until NetworkClient.Update processes it.
+                    // => invoking the client's OnDisconnected event directly
+                    //    here makes tests fail. so let's do it exactly the same
+                    //    order as before by queueing the event for next Update!
+                    //OnDisconnectedEvent?.Invoke(connection);
+                    ((ULocalConnectionToServer)connection).QueueDisconnectedEvent();
                 }
                 NetworkServer.RemoveLocalConnection();
             }
@@ -215,20 +240,9 @@ namespace Mirror
                 if (connection != null)
                 {
                     connection.Disconnect();
-                    connection.Dispose();
                     connection = null;
-                    RemoveTransportHandlers();
                 }
             }
-        }
-
-        static void RemoveTransportHandlers()
-        {
-            // so that we don't register them more than once
-            Transport.activeTransport.OnClientConnected.RemoveListener(OnConnected);
-            Transport.activeTransport.OnClientDataReceived.RemoveListener(OnDataReceived);
-            Transport.activeTransport.OnClientDisconnected.RemoveListener(OnDisconnected);
-            Transport.activeTransport.OnClientError.RemoveListener(OnError);
         }
 
         /// <summary>
@@ -239,20 +253,18 @@ namespace Mirror
         /// <typeparam name="T">The message type to unregister.</typeparam>
         /// <param name="message"></param>
         /// <param name="channelId"></param>
-        /// <returns>True if message was sent.</returns>
-        public static bool Send<T>(T message, int channelId = Channels.DefaultReliable) where T : IMessageBase
+        public static void Send<T>(T message, int channelId = Channels.DefaultReliable)
+            where T : struct, NetworkMessage
         {
             if (connection != null)
             {
-                if (connectState != ConnectState.Connected)
+                if (connectState == ConnectState.Connected)
                 {
-                    logger.LogError("NetworkClient Send when not connected to a server");
-                    return false;
+                    connection.Send(message, channelId);
                 }
-                return connection.Send(message, channelId);
+                else logger.LogError("NetworkClient Send when not connected to a server");
             }
-            logger.LogError("NetworkClient Send with no connection");
-            return false;
+            else logger.LogError("NetworkClient Send with no connection");
         }
 
         public static void Update()
@@ -288,6 +300,7 @@ namespace Mirror
                 RegisterHandler<ObjectSpawnStartedMessage>((conn, msg) => { });
                 // host mode doesn't need spawning
                 RegisterHandler<ObjectSpawnFinishedMessage>((conn, msg) => { });
+                // host mode doesn't need state updates
                 RegisterHandler<UpdateVarsMessage>((conn, msg) => { });
             }
             else
@@ -301,7 +314,6 @@ namespace Mirror
                 RegisterHandler<UpdateVarsMessage>(ClientScene.OnUpdateVarsMessage);
             }
             RegisterHandler<RpcMessage>(ClientScene.OnRPCMessage);
-            RegisterHandler<SyncEventMessage>(ClientScene.OnSyncEventMessage);
         }
 
         /// <summary>
@@ -311,14 +323,15 @@ namespace Mirror
         /// <typeparam name="T">Message type</typeparam>
         /// <param name="handler">Function handler which will be invoked when this message type is received.</param>
         /// <param name="requireAuthentication">True if the message requires an authenticated connection</param>
-        public static void RegisterHandler<T>(Action<NetworkConnection, T> handler, bool requireAuthentication = true) where T : IMessageBase, new()
+        public static void RegisterHandler<T>(Action<NetworkConnection, T> handler, bool requireAuthentication = true)
+            where T : struct, NetworkMessage
         {
             int msgType = MessagePacker.GetId<T>();
             if (handlers.ContainsKey(msgType))
             {
                 logger.LogWarning($"NetworkClient.RegisterHandler replacing handler for {typeof(T).FullName}, id={msgType}. If replacement is intentional, use ReplaceHandler instead to avoid this warning.");
             }
-            handlers[msgType] = MessagePacker.MessageHandler(handler, requireAuthentication);
+            handlers[msgType] = MessagePacker.WrapHandler(handler, requireAuthentication);
         }
 
         /// <summary>
@@ -328,7 +341,8 @@ namespace Mirror
         /// <typeparam name="T">Message type</typeparam>
         /// <param name="handler">Function handler which will be invoked when this message type is received.</param>
         /// <param name="requireAuthentication">True if the message requires an authenticated connection</param>
-        public static void RegisterHandler<T>(Action<T> handler, bool requireAuthentication = true) where T : IMessageBase, new()
+        public static void RegisterHandler<T>(Action<T> handler, bool requireAuthentication = true)
+            where T : struct, NetworkMessage
         {
             RegisterHandler((NetworkConnection _, T value) => { handler(value); }, requireAuthentication);
         }
@@ -340,10 +354,11 @@ namespace Mirror
         /// <typeparam name="T">Message type</typeparam>
         /// <param name="handler">Function handler which will be invoked when this message type is received.</param>
         /// <param name="requireAuthentication">True if the message requires an authenticated connection</param>
-        public static void ReplaceHandler<T>(Action<NetworkConnection, T> handler, bool requireAuthentication = true) where T : IMessageBase, new()
+        public static void ReplaceHandler<T>(Action<NetworkConnection, T> handler, bool requireAuthentication = true)
+            where T : struct, NetworkMessage
         {
             int msgType = MessagePacker.GetId<T>();
-            handlers[msgType] = MessagePacker.MessageHandler(handler, requireAuthentication);
+            handlers[msgType] = MessagePacker.WrapHandler(handler, requireAuthentication);
         }
 
         /// <summary>
@@ -353,7 +368,8 @@ namespace Mirror
         /// <typeparam name="T">Message type</typeparam>
         /// <param name="handler">Function handler which will be invoked when this message type is received.</param>
         /// <param name="requireAuthentication">True if the message requires an authenticated connection</param>
-        public static void ReplaceHandler<T>(Action<T> handler, bool requireAuthentication = true) where T : IMessageBase, new()
+        public static void ReplaceHandler<T>(Action<T> handler, bool requireAuthentication = true)
+            where T : struct, NetworkMessage
         {
             ReplaceHandler((NetworkConnection _, T value) => { handler(value); }, requireAuthentication);
         }
@@ -362,7 +378,8 @@ namespace Mirror
         /// Unregisters a network message handler.
         /// </summary>
         /// <typeparam name="T">The message type to unregister.</typeparam>
-        public static bool UnregisterHandler<T>() where T : IMessageBase
+        public static bool UnregisterHandler<T>()
+            where T : struct, NetworkMessage
         {
             // use int to minimize collisions
             int msgType = MessagePacker.GetId<T>();

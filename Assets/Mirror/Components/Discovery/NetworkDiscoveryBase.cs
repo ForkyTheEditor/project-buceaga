@@ -16,10 +16,10 @@ namespace Mirror.Discovery
     /// <see cref="NetworkDiscovery">NetworkDiscovery</see> for a sample implementation
     /// </summary>
     [DisallowMultipleComponent]
-    [HelpURL("https://mirror-networking.com/docs/Components/NetworkDiscovery.html")]
+    [HelpURL("https://mirror-networking.com/docs/Articles/Components/NetworkDiscovery.html")]
     public abstract class NetworkDiscoveryBase<Request, Response> : MonoBehaviour
-        where Request : IMessageBase, new()
-        where Response : IMessageBase, new()
+        where Request : NetworkMessage
+        where Response : NetworkMessage
     {
         public static bool SupportedOnThisPlatform { get { return Application.platform != RuntimePlatform.WebGLPlayer; } }
 
@@ -165,8 +165,7 @@ namespace Mirror.Discovery
                     throw new ProtocolViolationException("Invalid handshake");
                 }
 
-                Request request = new Request();
-                request.Deserialize(networkReader);
+                Request request = networkReader.Read<Request>();
 
                 ProcessClientRequest(request, udpReceiveResult.RemoteEndPoint);
             }
@@ -179,7 +178,7 @@ namespace Mirror.Discovery
         /// Override if you wish to ignore server requests based on
         /// custom criteria such as language, full server game mode or difficulty
         /// </remarks>
-        /// <param name="request">Request comming from client</param>
+        /// <param name="request">Request coming from client</param>
         /// <param name="endpoint">Address of the client that sent the request</param>
         protected virtual void ProcessClientRequest(Request request, IPEndPoint endpoint)
         {
@@ -194,7 +193,7 @@ namespace Mirror.Discovery
                 {
                     writer.WriteInt64(secretHandshake);
 
-                    info.Serialize(writer);
+                    writer.Write(info);
 
                     ArraySegment<byte> data = writer.ToArraySegment();
                     // signature matches
@@ -215,7 +214,7 @@ namespace Mirror.Discovery
         /// Override if you wish to provide more information to the clients
         /// such as the name of the host player
         /// </remarks>
-        /// <param name="request">Request comming from client</param>
+        /// <param name="request">Request coming from client</param>
         /// <param name="endpoint">Address of the client that sent the request</param>
         /// <returns>The message to be sent back to the client or null</returns>
         protected abstract Response ProcessRequest(Request request, IPEndPoint endpoint);
@@ -305,7 +304,7 @@ namespace Mirror.Discovery
                 {
                     Request request = GetRequest();
 
-                    request.Serialize(writer);
+                    writer.Write(request);
 
                     ArraySegment<byte> data = writer.ToArraySegment();
 
@@ -325,7 +324,7 @@ namespace Mirror.Discovery
         /// Override if you wish to include additional data in the discovery message
         /// such as desired game mode, language, difficulty, etc... </remarks>
         /// <returns>An instance of ServerRequest with data to be broadcasted</returns>
-        protected virtual Request GetRequest() => new Request();
+        protected virtual Request GetRequest() => default;
 
         async Task ReceiveGameBroadcastAsync(UdpClient udpClient)
         {
@@ -339,8 +338,7 @@ namespace Mirror.Discovery
                 if (networkReader.ReadInt64() != secretHandshake)
                     return;
 
-                Response response = new Response();
-                response.Deserialize(networkReader);
+                Response response = networkReader.Read<Response>();
 
                 ProcessResponse(response, udpReceiveResult.RemoteEndPoint);
             }
