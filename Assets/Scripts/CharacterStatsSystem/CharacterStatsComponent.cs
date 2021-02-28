@@ -13,15 +13,15 @@ using Mirror;
 /// Works just fine for minor NPCs.
 /// </summary>
 [RequireComponent(typeof(Attackable))]
-[RequireComponent(typeof(NetworkIdentity))]
 public class CharacterStatsComponent : NetworkBehaviour
 {
-   
+    private bool isAlive = true;
+
     [SerializeField]
     //Data container for this character's stats. They get loaded from the scriptable object onto this script
-    protected CharacterStats characterStats;
+    protected CharacterStatsDefaultValues _characterStats;
 
-    [SyncVar]
+    [SyncVar(hook = nameof(OnCurrentHealthChanged))]
     protected Stat _currentHealth = new Stat(1, 0);
     [SyncVar]
     protected Stat _maxHealth = new Stat(1, 0);
@@ -36,7 +36,16 @@ public class CharacterStatsComponent : NetworkBehaviour
     protected Attackable attackableComponent;
 
     //Because SyncVar can't handle properties and because of accessibility issues, these have to stay here. While inside the class, work with the underscore fields.
-    public Stat currentHealth { get { return _currentHealth; } }
+    public CharacterStatsDefaultValues characterStats
+    {
+        get { return _characterStats; }
+        set
+        {
+            _characterStats = value;
+            LoadStatsFromScriptableObject();
+        }
+    }
+    public Stat currentHealth { get { return _currentHealth; } set { _currentHealth = value; } }
     public Stat maxHealth { get { return _maxHealth; } set { _maxHealth = value; } }
     public Stat attackTime { get { return _attackTime; } }
     public Stat attackDamage { get { return _attackDamage; } }
@@ -52,14 +61,30 @@ public class CharacterStatsComponent : NetworkBehaviour
         OnLateUpdate();
     }
 
+    protected virtual void OnCurrentHealthChanged(Stat oldHealth, Stat newHealth)
+    {
+        if(newHealth.GetFinalValue() <= 0)
+        {
+            LocalCharacterDied();
+        }
+    }
+
+    public override void OnStartServer()
+    {
+        base.OnStartServer();
+
+        //Load the stats into the local fields.
+        LoadStatsFromScriptableObject();
+
+        //Set the current health as the max health when starting
+        _currentHealth = new Stat(_maxHealth.GetFinalValue(), 0);
+    }
+
     /// <summary>
     /// Method to be called in the Awake function, containing default behaviour. Initializes values.
     /// </summary>
     protected void OnAwake()
     {
-        //Load the stats into the local fields.
-        LoadStatsFromScriptableObject();
-
         attackableComponent = GetComponent<Attackable>();
         attackableComponent.Attacked += OnAttacked;
     }
@@ -69,43 +94,52 @@ public class CharacterStatsComponent : NetworkBehaviour
     /// </summary>
     protected void OnLateUpdate()
     {
+        HandleCurrentHealthUpdate();
+    }
+
+    protected void HandleCurrentHealthUpdate()
+    {
         //Let only the server handle character deaths (it's important and it prevents cheating + handles updating of clients)
         if (!isServer)
         {
             return;
         }
 
-        HandleCurrentHealthUpdate();
-    }
-
-    protected void HandleCurrentHealthUpdate()
-    {
         //The base health value of a character can't go passed the max value's final value
         //This means however that the final value of the current health CAN go up, but only because of modifiers when already at full HP
-        _currentHealth = new Stat( Mathf.Clamp(_currentHealth.baseValue, int.MinValue, _maxHealth.GetFinalValue() ), _currentHealth.additiveModifier );
+        _currentHealth = new Stat(Mathf.Clamp(_currentHealth.baseValue, int.MinValue, _maxHealth.GetFinalValue()), _currentHealth.additiveModifier);
 
-        if (currentHealth.GetFinalValue() <= 0)
+        if (currentHealth.GetFinalValue() <= 0 && isAlive)
         {
-            KillCharacter();
+            ServerKillCharacter();
+            isAlive = false;
         }
     }
 
     //Called when this character is attacked
-    protected void OnAttacked(GameObject source , int amount, EventArgs args)
+    protected void OnAttacked(GameObject source, int amount, EventArgs args)
     {
         _currentHealth = new Stat(_currentHealth.baseValue - amount, _currentHealth.additiveModifier);
+
+    }
+    
+    protected virtual void LocalCharacterDied()
+    {
         
     }
 
     /// <summary>
     /// Method for destruction of this character. Can be overwritten for more specific functionality (such as for the player).
     /// </summary>
-    protected virtual void KillCharacter()
+    protected virtual void ServerKillCharacter()
     {
+        if (!isServer)
+        {
+            return;
+        }
         //Probably will include death animation call as that is something every character (presumably) has.
 
-        print("I died!");
-        Destroy(this.gameObject);
+        NetworkServer.Destroy(this.gameObject);
 
     }
 
@@ -114,12 +148,13 @@ public class CharacterStatsComponent : NetworkBehaviour
     /// </summary>
     protected virtual void LoadStatsFromScriptableObject()
     {
-        if(characterStats != null)
+        if (_characterStats != null)
         {
-            _currentHealth = characterStats.currentHealth;
-            _maxHealth = characterStats.maxHealth;
-            _attackDamage = characterStats.attackDamage;
-            _attackTime = characterStats.attackTime;
+            
+            _currentHealth = _characterStats.currentHealth;
+            _maxHealth = _characterStats.maxHealth;
+            _attackDamage = _characterStats.attackDamage;
+            _attackTime = _characterStats.attackTime;
         }
     }
 

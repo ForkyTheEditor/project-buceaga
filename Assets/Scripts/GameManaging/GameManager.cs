@@ -13,16 +13,12 @@ public class GameManager : MonoBehaviour
     //Reference to the local player
     public static GameObject localPlayerInstance { get { return _localPlayerInstance; } }
 
-    private static GameObject _localPlayerNetworkInstance = null;
+    private static PlayerNetworkObject _localPlayerNetworkInstance = null;
     //Reference to the local player network object
-    public static GameObject localPlayerNetworkInstance { get { return _localPlayerNetworkInstance; } }
+    public static PlayerNetworkObject localPlayerNetworkInstance { get { return _localPlayerNetworkInstance; } }
 
     //The dictionary containing all the resource managers, sorted by their team
     private static Dictionary<Teams, GameObject> _resourceManagersInstances = new Dictionary<Teams, GameObject>();
-
-    private static NetworkManager _localNetworkManager = null;
-    //Reference to the network manager
-    public static NetworkManager localNetworkManager { get { return _localNetworkManager; } }
 
     public static SpawnablesIDMap spawnIDMap;
     
@@ -41,12 +37,7 @@ public class GameManager : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(this);
         }
-        //Set the reference to the network manager
-        SetNetworkManager(GameObject.FindGameObjectWithTag("NetworkManager").GetComponent<NetworkManager>());
-        if(localNetworkManager == null)
-        {
-            Debug.LogError("Network Manager not found!");
-        }
+
 
         //Get a reference to the spawning look-up table
         spawnIDMap = this.GetComponent<SpawnablesIDMap>();
@@ -65,7 +56,7 @@ public class GameManager : MonoBehaviour
     /// Set the local player network object. This should only be called at the start by the instance itself.
     /// </summary>
     /// <param name="networkObject"></param>
-    public static void SetLocalPlayerNetworkObject(GameObject networkObject)
+    public static void SetLocalPlayerNetworkObject(PlayerNetworkObject networkObject)
     {
         _localPlayerNetworkInstance = networkObject;
     }
@@ -81,12 +72,6 @@ public class GameManager : MonoBehaviour
     public static void SetResourceManager(Teams team, GameObject newManager)
     {
         _resourceManagersInstances[team] = newManager;
-    }
-
-
-    private void SetNetworkManager(NetworkManager networkMan)
-    {
-        _localNetworkManager = networkMan;
     }
 
 }

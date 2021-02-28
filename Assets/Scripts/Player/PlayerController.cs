@@ -88,10 +88,6 @@ public class PlayerController : NetworkBehaviour
             return;
         }
 
-        //Check if the player pressed the right mouse button 
-        //The right mouse button is the "Default Interaction" button
-        //CheckRightMouseClick();
-
         //Timer for the sync update
         updateInterval += Time.deltaTime;
         if (updateInterval >= updatePeriod)
@@ -117,6 +113,8 @@ public class PlayerController : NetworkBehaviour
             //You do not have authority. Get the hell out of here
             return;
         }
+
+      
 
         FollowNavTarget();
     }

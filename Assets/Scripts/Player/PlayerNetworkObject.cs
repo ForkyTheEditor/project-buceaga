@@ -5,56 +5,115 @@ using Mirror;
 using UnityEditor;
 using System;
 
-[RequireComponent(typeof(NetworkIdentity))]
+
 public class PlayerNetworkObject : NetworkBehaviour
 {
+    [SyncVar]
+    private bool isAlive = false; //Is the player character alive?
+
+    private CharacterStatsDefaultValues playerCharacterStats = null;
 
     [SerializeField] private GameObject playerPrefab = null;
-    
+    [SerializeField] private GameObject respawnUI = null;
+    private GameObject playerCharacterInstance = null;
 
-    // Start is called before the first frame update
-    void Start()
+    public delegate void PlayerDeathHandler();
+    public event PlayerDeathHandler OnLocalPlayerDeath;
+
+    //In this method go things that initialize the LOCAL versions of PlayerNetworkObject (so that each client has its own PlayerNetworkObject inside the GameManager for instance)
+    public override void OnStartAuthority()
     {
+        base.OnStartAuthority();
+    
         //Check if this client has authority over this newly spawned PlayerNetworkObject
-        if (!isLocalPlayer) 
+        if (!isLocalPlayer)
         {
             //It does not have authority. Get the hell outta here
             return;
         }
 
         //Set the local instance of the network object to this
-        GameManager.SetLocalPlayerNetworkObject(this.gameObject);
+        GameManager.SetLocalPlayerNetworkObject(this);
 
         //Error check
-        if(GameManager.localPlayerNetworkInstance == null)
+        if (GameManager.localPlayerNetworkInstance == null)
         {
             Debug.LogError("Player Network Object couldn't be set!");
         }
 
-        
+        OnLocalPlayerDeath += ActivateRespawnUI;
+        playerCharacterStats = playerPrefab.GetComponent<CharacterStatsComponent>().characterStats;
 
         //Spawn the ACTUAL PlayerObject on the server
         CmdSpawnPlayer();
         
     }
 
-    
-    //This command spawns the actual physical player object
-    [Command]
-    void CmdSpawnPlayer() 
-    {
-        //First instantiate the prefab, do any modifications/settings to it and then SPAWN it on the server
-        GameObject go = Instantiate(playerPrefab);
 
-        CharacterStatsComponent statsComponent = go.GetComponent<CharacterStatsComponent>();
+    //This command spawns the player character
+    [Command]
+    public void CmdSpawnPlayer()
+    {
+        //Only spawn character if it's dead
+        if(isAlive == true)
+        {
+            return;
+        }    
+
+        //First instantiate the prefab, do any modifications/settings to it and then SPAWN it on the server
+        playerCharacterInstance = Instantiate(playerPrefab);
         
+        
+        CharacterStatsComponent statsComponent = playerCharacterInstance.GetComponent<CharacterStatsComponent>();
+
         //----TEMPORARY-----
         statsComponent.team = Teams.Modernists;
         //----/TEMPORARY-----
 
 
-        NetworkServer.Spawn(go, connectionToClient);
-    
+        NetworkServer.Spawn(playerCharacterInstance, connectionToClient);
+
+        
+        isAlive = true;
+
+    }
+
+    public void LocalPlayerDied()
+    {
+        if (!isLocalPlayer)
+        {
+            return;
+        }
+
+        OnLocalPlayerDeath();
+
+    }
+
+
+    public void ServerPlayerDied()
+    {
+        if (!isServer)
+        {
+            return;
+        }
+
+        //Update the current stats, so you can spawn the character with the new stats next time
+        SaveCharacterStats();
+       
+        isAlive = false;
+        
+        NetworkServer.Destroy(playerCharacterInstance);
+    }
+
+    private void SaveCharacterStats()
+    {
+        //Save all the stats in the CharacterStats ScriptableObject so that it respawns with the new stats next time
+        var charStatsComponent = playerCharacterInstance.GetComponent<CharacterStatsComponent>();
+        charStatsComponent.characterStats.maxHealth = charStatsComponent.maxHealth;
+        charStatsComponent.characterStats.attackDamage = charStatsComponent.attackDamage;
+        charStatsComponent.characterStats.attackTime = charStatsComponent.attackTime;
+        charStatsComponent.characterStats.currentHealth = charStatsComponent.currentHealth;
+
     }
 
     /// <summary>
@@ -79,6 +138,20 @@ public class PlayerNetworkObject : NetworkBehaviour
         NetworkServer.Spawn(go);
     }
 
-   
-  
+
+    public void ActivateRespawnUI()
+    {
+        if (respawnUI != null)
+        {
+            respawnUI.SetActive(true);
+        }
+    }
+    public void DeactivateRespawnUI()
+    {
+        if (respawnUI != null)
+        {
+            respawnUI.SetActive(false);
+        }
+    }
+
 }

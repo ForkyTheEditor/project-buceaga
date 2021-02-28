@@ -31,7 +31,6 @@ public readonly struct Stat : System.IEquatable<Stat>
 
     public int GetFinalValue()
     {
-        Debug.Log(additiveModifier);
         return baseValue + additiveModifier;
     }
 

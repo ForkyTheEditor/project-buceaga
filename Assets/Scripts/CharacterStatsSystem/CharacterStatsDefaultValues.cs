@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 /// <summary>
-/// A data container for the character stats.
+/// A data container for the default character stats. You can use this to create character stats in the editor, which will then be initialized. 
 /// </summary>
 [CreateAssetMenu(fileName = "NewCharacterStats", menuName = "CharacterStats")]
-public class CharacterStats : ScriptableObject
+public class CharacterStatsDefaultValues : ScriptableObject
 {
     /// <summary>
     /// Minor class meant for editor interaction with the readonly Stat structs.
@@ -22,17 +23,21 @@ public class CharacterStats : ScriptableObject
     [SerializeField] private StatClass _maxHealth = new StatClass();
     [SerializeField] private StatClass _attackTime = new StatClass();
     [SerializeField] private StatClass _attackDamage = new StatClass();
-
+    
     public Stat currentHealth = new Stat(0,0);
     public Stat maxHealth = new Stat(0, 0);
     public Stat attackTime = new Stat(0, 0);
     public Stat attackDamage = new Stat(0, 0);
 
+    private void Awake()
+    {
+        UpdateStatValues();
+    }
+
     //Function called when a value changed inside the editor
     private void OnValidate()
     {
         UpdateStatValues();
-
     }
 
     /// <summary>
@@ -48,3 +53,5 @@ public class CharacterStats : ScriptableObject
     }
 
 }
+
+

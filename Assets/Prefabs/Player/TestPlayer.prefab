@@ -144,7 +144,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  characterStats: {fileID: 11400000, guid: 8706aa3d5aaefb5499a9be4021e281a5, type: 2}
+  _characterStats: {fileID: 11400000, guid: 8706aa3d5aaefb5499a9be4021e281a5, type: 2}
 --- !u!114 &-6814727659059340808
 MonoBehaviour:
   m_ObjectHideFlags: 0
