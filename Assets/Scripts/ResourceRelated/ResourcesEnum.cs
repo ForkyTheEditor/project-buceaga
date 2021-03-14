@@ -14,7 +14,7 @@ public class ResourcesEnum
     /// Note: ALWAYS call this on a new resources list. ALWAYS call from the server.
     /// </summary>
     /// <param name="invStruct">The list given to initialize</param>
-    public static void InitializeResourceList(SyncListInt invList)
+    public static void InitializeResourceList(SyncList<int> invList)
     {
         //Initialize the dictionary with 0 for each resource type
         foreach (ResourceTypes rt in Enum.GetValues(typeof(ResourceTypes)))

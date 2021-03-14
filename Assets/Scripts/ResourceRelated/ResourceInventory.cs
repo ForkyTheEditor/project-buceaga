@@ -14,7 +14,7 @@ public class ResourceInventory : NetworkBehaviour
     //The implementation of the resource inventory
     //Holds the amounts of each resource at the respective index of ResourceTypes
     //ALWAYS INITIALIZE THESE WITH THE VALUES NEEDED
-    private SyncListInt resourceAmounts = new SyncListInt();
+    private SyncList<int> resourceAmounts = new SyncList<int>();
     private List<int> localResourceAmounts = new List<int>();
 
     private void Awake()
