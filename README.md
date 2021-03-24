@@ -1,6 +1,6 @@
 # Project Buceaga 
 
-WORK IN PROGRESS.
+# THIS IS A PROJECT VERY EARLY IN DEVELOPMENT.
 
 A cool project by even cooler beer.
 
