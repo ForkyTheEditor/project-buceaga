@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 
-public enum ResourceTypes { Energy }
+public enum ResourceTypes { Axioms }
 
 public class ResourcesEnum
 {

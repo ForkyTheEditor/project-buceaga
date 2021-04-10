@@ -17,9 +17,6 @@ public class PlayerStatsComponent : CharacterStatsComponent
     public override void OnStartAuthority()
     {
         base.OnStartAuthority();
-        
-        //TEMPORARY
-        ClientScene.localPlayer.GetComponent<PlayerNetworkObject>().DeactivateRespawnUI();
     }
 
     public override void OnStartServer()

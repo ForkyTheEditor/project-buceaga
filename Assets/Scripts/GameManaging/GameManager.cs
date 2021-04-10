@@ -6,11 +6,18 @@ using UnityEngine;
 [RequireComponent(typeof(SpawnablesIDMap))]
 public class GameManager : MonoBehaviour
 {
+    //TODO(Possibly): Create a callback for when the PlayerNetworkObject spawns so that you can avoid
+    //rewriting that WaitUntil(playerNetwork != null) every time.
+
+
     //This is a singleton object, check for other instances and DESTROY them
     private static GameManager instance;
 
     private static GameObject _localPlayerInstance = null;
-    //Reference to the local player
+    
+    /// <summary>
+    /// DEPRECATED: USE PlayerNetworkObject OnPlayerSpawned() instead. Reference to the local player instance.
+    /// </summary>
     public static GameObject localPlayerInstance { get { return _localPlayerInstance; } }
 
     private static PlayerNetworkObject _localPlayerNetworkInstance = null;

@@ -17,14 +17,16 @@ public class PlayerNetworkObject : NetworkBehaviour
     [SerializeField] private GameObject respawnUI = null;
     private GameObject playerCharacterInstance = null;
 
-    public delegate void PlayerDeathHandler();
-    public event PlayerDeathHandler OnLocalPlayerDeath;
+    public delegate void PlayerEventHandler(GameObject player);
+
+    public event PlayerEventHandler OnLocalPlayerSpawn;
+    public event PlayerEventHandler OnLocalPlayerDeath;
 
     //In this method go things that initialize the LOCAL versions of PlayerNetworkObject (so that each client has its own PlayerNetworkObject inside the GameManager for instance)
     public override void OnStartAuthority()
     {
         base.OnStartAuthority();
-    
+        
         //Check if this client has authority over this newly spawned PlayerNetworkObject
         if (!isLocalPlayer)
         {
@@ -41,14 +43,28 @@ public class PlayerNetworkObject : NetworkBehaviour
             Debug.LogError("Player Network Object couldn't be set!");
         }
 
+        OnLocalPlayerSpawn += DeactivateRespawnUI;
         OnLocalPlayerDeath += ActivateRespawnUI;
         playerCharacterStats = playerPrefab.GetComponent<CharacterStatsComponent>().characterStats;
-
-        //Spawn the ACTUAL PlayerObject on the server
-        CmdSpawnPlayer();
         
+       
+       
     }
 
+    private void Start()
+    {
+        if (!isLocalPlayer)
+        {
+            //It does not have authority. Get the hell outta here
+            return;
+        }
+
+        //Spawn the ACTUAL PlayerObject on the server
+        //Only spawn the player in Start() so that each object has time to subscribe to the events OnPlayerSpawned etc. AND 
+        //so they actually receive the first event
+        CmdSpawnPlayer();
+
+    }
 
     //This command spawns the player character
     [Command]
@@ -73,11 +89,28 @@ public class PlayerNetworkObject : NetworkBehaviour
 
         NetworkServer.Spawn(playerCharacterInstance, connectionToClient);
 
-        
+        //Notify the client that the player object has been spawned, as well as send a reference to it for convenience
+        TargetPlayerHasSpawned(connectionToClient, playerCharacterInstance.GetComponent<NetworkIdentity>());
+
         isAlive = true;
 
     }
 
+
+    /// <summary>
+    ///TargetRPC that triggers the PlayerSpawned event. You can only do this here because 1. the OnStartAuthority
+    ///doesn't know what the player object is or 2. when it actually spawns
+    /// </summary>
+    [TargetRpc]
+    void TargetPlayerHasSpawned(NetworkConnection conn, NetworkIdentity player)
+    {
+        OnLocalPlayerSpawn(player.gameObject);
+    }
+
+
+    /// <summary>
+    /// Function gets called LOCALLY when the player dies. For handling things like UI, local variables etc.
+    /// </summary>
     public void LocalPlayerDied()
     {
         if (!isLocalPlayer)
@@ -85,11 +118,13 @@ public class PlayerNetworkObject : NetworkBehaviour
             return;
         }
 
-        OnLocalPlayerDeath();
+        OnLocalPlayerDeath(this.gameObject);
 
     }
 
-
+    /// <summary>
+    /// Function gets called ON THE SERVER when the player dies. For handling the actual death despawn, character stats etc.
+    /// </summary>
     public void ServerPlayerDied()
     {
         if (!isServer)
@@ -139,14 +174,14 @@ public class PlayerNetworkObject : NetworkBehaviour
     }
 
 
-    public void ActivateRespawnUI()
+    public void ActivateRespawnUI(GameObject player)
     {
         if (respawnUI != null)
         {
             respawnUI.SetActive(true);
         }
     }
-    public void DeactivateRespawnUI()
+    public void DeactivateRespawnUI(GameObject player)
     {
         if (respawnUI != null)
         {
