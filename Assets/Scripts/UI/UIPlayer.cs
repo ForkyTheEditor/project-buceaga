@@ -22,9 +22,9 @@ public class UIPlayer : MonoBehaviour
      
 
     private ResourceInventory playerResourceInv;
-    [SerializeField] private TextMeshProUGUI playerEnergyResourceText = null;
+    [SerializeField] private TextMeshProUGUI playerAxiomsResourceText = null;
     private ResourceInventory teamResourceInv;
-    [SerializeField] private TextMeshProUGUI teamEnergyResourceText = null;
+    [SerializeField] private TextMeshProUGUI teamAxiomsResourceText = null;
     //Reference to the UI for buildings and constructions
     [SerializeField] private GameObject playerBuildingUI = null;
 
@@ -79,7 +79,7 @@ public class UIPlayer : MonoBehaviour
 
         //Check for errors
         //If this is the case you might have to reinitialize components 
-        if (playerEnergyResourceText == null || playerResourceInv == null || teamResourceInv == null)
+        if (playerAxiomsResourceText == null || playerResourceInv == null || teamResourceInv == null)
         {
 
             gameStarted = false;
@@ -88,8 +88,8 @@ public class UIPlayer : MonoBehaviour
         }
 
         //Load the energy resource
-        playerEnergyResourceText.text = playerResourceInv.GetResource(ResourceTypes.Energy).ToString();
-        teamEnergyResourceText.text = teamResourceInv.GetResource(ResourceTypes.Energy).ToString();
+        playerAxiomsResourceText.text = playerResourceInv.GetResource(ResourceTypes.Axioms).ToString();
+        teamAxiomsResourceText.text = teamResourceInv.GetResource(ResourceTypes.Axioms).ToString();
 
     }
 

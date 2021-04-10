@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Cinemachine;
 
-public class PlayerCameraController : MonoBehaviour
+public class FreeCameraController : MonoBehaviour
 {
     //TODO: Add zoom function
 
@@ -17,9 +17,7 @@ public class PlayerCameraController : MonoBehaviour
 
    [SerializeField]
     private int borderThickness = 1;
-   
-
-    private GameObject localPlayer = null;
+  
 
     private CinemachineInputProvider inputProvider = null;
     private CinemachineVirtualCamera freeCamera = null;
@@ -34,14 +32,6 @@ public class PlayerCameraController : MonoBehaviour
         freeCamera = GetComponent<CinemachineVirtualCamera>();
         camTransform = freeCamera.VirtualCameraGameObject.transform;
 
-        //Find the player object
-        StartCoroutine(InitializePlayer());
-    }
-
-    IEnumerator InitializePlayer()
-    {
-        //Wait until the player object has spawned
-        yield return new WaitUntil(() => GameManager.localPlayerInstance != null);
     }
 
     // Update is called once per frame
@@ -94,5 +84,7 @@ public class PlayerCameraController : MonoBehaviour
         camTransform.position = Vector3.MoveTowards(camTransform.position, camTransform.position + new Vector3(dir.x, 0, dir.y), panSpeed * Time.deltaTime);
         
     }
+
+   
 
 }
